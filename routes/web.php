@@ -52,9 +52,27 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/departments/intro/{slug}', 'departmentShow')->name('departments.intro');
         Route::get('/programs', 'programs')->name('programs');
         Route::get('/programs/{slug}', 'programShow')->name('programs.show');
-        Route::get('/faculties', 'faculties')->name('faculties');
-        Route::get('/faculties/{slug}', 'facultyShow')->name('faculties.show');
-        Route::get('/faculties/intro/{slug}', 'facultyIntro')->name('faculties.intro');
+        
+        
+
+        Route::get('/faculties', 'faculties')->name('faculties.all');
+
+        Route::group(['prefix'=>'faculty','as'=>'faculties.'], function() {
+            
+            Route::get('/{slug}', 'facultyShow')->name('show');
+            Route::get('/intro/{slug}', 'facultyIntro')->name('intro');
+
+        });
+
+        Route::group(['prefix'=>'department','as'=>'departments.'], function() {
+            
+            Route::get('/{slug}', 'departmentShow')->name('show');
+            Route::get('/intro/{slug}', 'departmentShow')->name('intro');
+
+        });
+
+
+
         Route::get('/about/historical-outline', 'outlineHistoric')->name('historic.outline');
         Route::get('/about/university-glance', 'universityGlance')->name('university.glance');
         Route::get('/honoris-causa', 'honorisCausas')->name('honoris.causa');

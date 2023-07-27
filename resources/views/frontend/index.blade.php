@@ -300,7 +300,7 @@
                                     </h4>
                                     <ul>
                                     <li> <a href="{{ route('front.programs') }}">Programs</a> </li>
-                                    <li> <a href="{{ route('front.faculties') }}">Faculties</a> </li>
+                                    <li> <a href="{{ route('front.faculties.all') }}">Faculties</a> </li>
                                     <li> <a href="{{ route('front.departments') }}">Departments</a> </li>
 
                                     </ul>

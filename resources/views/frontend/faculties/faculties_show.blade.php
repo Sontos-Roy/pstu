@@ -1,4 +1,5 @@
-@extends('frontend.faculties.partials.app')
+@extends('frontend.partials.app')
+
 @section('content')
 <div class="banner-area">
     <div id="bootcarousel" class="carousel text-center content-less text-light top-pad-30 text-dark slide animate_text" data-ride="carousel">
