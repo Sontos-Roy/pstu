@@ -63,7 +63,6 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/programs/{slug}', 'programShow')->name('programs.show');
         Route::get('/faculties', 'faculties')->name('faculties.all');
         Route::get('/institutes', 'institutes')->name('institutes.all');
-        Route::get('/institute/{slug}', 'institutesShow')->name('institutes.show');
         Route::get('/about/historical-outline', 'outlineHistoric')->name('historic.outline');
         Route::get('/about/university-glance', 'universityGlance')->name('university.glance');
         Route::get('/honoris-causa', 'honorisCausas')->name('honoris.causa');
@@ -79,6 +78,8 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/university-ordinances', 'universityOrdinances')->name('university.ordinances');
         Route::get('/p/{slug}', 'PageSlug')->name('page.show');
         Route::get('/students/{slug}', 'studentPage')->name('student.page');
+        Route::get('/academic-calender/{faculty?}/{department?}', 'academicCalendar')->name('academic.calendar');
+        Route::get('get-calendars', 'CalendarsHtml')->name('get.calendars');
     });
 
     Route::controller(FacultiesController::class)->group(function(){
@@ -88,7 +89,8 @@ Route::group(['as'=>'front.'], function(){
         });
     });
     Route::controller(InstituteController::class)->group(function(){
-        Route::group(['prefix' => 'institue', 'as' => 'institutes.'], function(){
+        Route::group(['prefix' => 'institute', 'as' => 'institutes.'], function(){
+            Route::get('/directors', 'directors')->name('directors');
             Route::get('/{slug}', 'instituteShow')->name('show');
             Route::get('/intro/{slug}', 'instituteShowIntro')->name('intro');
         });

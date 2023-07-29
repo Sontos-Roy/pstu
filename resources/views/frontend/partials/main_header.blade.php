@@ -213,7 +213,7 @@
                                                 </li>
                                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Academic Calendar</a>
                                                 </li>
-                                                <li><a href="https://www.du.ac.bd/libraries"><i class="fas fa-angle-double-right"></i>
+                                                <li><a href="{{ route('front.libraries') }}"><i class="fas fa-angle-double-right"></i>
                                                         Libraries </a></li>
 
                                             </ul>
@@ -278,7 +278,7 @@
                                                     <li><a href="{{ route('front.get.heads') }}"><i class="fas fa-angle-double-right"></i> Chairman of
                                                     Departments</a>
                                                     </li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/director"><i class="fas fa-angle-double-right"></i> Directors of
+                                                <li><a href="{{ route('front.institutes.directors') }}"><i class="fas fa-angle-double-right"></i> Directors of
                                                         Institutes</a></li>
                                             </ul>
                                         </div>
