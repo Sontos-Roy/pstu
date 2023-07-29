@@ -201,7 +201,7 @@ class HomeController extends Controller
     function CalendarsHtml($id){
         $data = AcademicCalendar::where('department_id', $id)->get();
 
-        $html = view('frontend.calendars.partials', compact($data))->rander();
+        $html = view('frontend.calendars.partials', compact($data))->render();
 
         return response()->json(['status'=>true, 'html' => $html]);
     }
