@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicCalendar;
 use App\Models\Department;
 use App\Models\Event;
 use App\Models\Faculty;
@@ -10,6 +11,7 @@ use App\Models\HistoricalOutline;
 use App\Models\HonorisCausa;
 use App\Models\Institutes;
 use App\Models\LeaderShip;
+use App\Models\Library;
 use App\Models\News;
 use App\Models\Notice;
 use App\Models\Pages;
@@ -46,7 +48,6 @@ class HomeController extends Controller
     }
     function noticeShow($slug){
         $this->data['notice'] = Notice::where('slug', $slug)->first();
-
         $this->data['notices'] = Notice::orderBy('id', "DESC")->get();
 
         return view('frontend.notice-show', $this->data);
@@ -118,10 +119,7 @@ class HomeController extends Controller
         return view('frontend.institutes.index', $this->data);
     }
 
-    function institutesShow($slug){
-        $this->data['institute'] = Institutes::whereSlug($slug)->first();
-        return view('frontend.institutes.show', $this->data);
-    }
+
 
 
     function programs(Request $request){
@@ -188,6 +186,24 @@ class HomeController extends Controller
         $this->data['researchs'] = Research::take(10)->get();
 
         return view('frontend.research-show', $this->data);
+    }
+    function libraries(){
+        $this->data['libraries'] = Library::paginate(10);
+
+        return view('frontend.libraries', $this->data);
+    }
+
+    function academicCalendar($faculty = null, $department = null){
+        $this->data['faculties'] = Faculty::all();
+
+        return view('frontend.calendars.index', $this->data);
+    }
+    function CalendarsHtml($id){
+        $data = AcademicCalendar::where('department_id', $id)->get();
+
+        $html = view('frontend.calendars.partials', compact($data))->render();
+
+        return response()->json(['status'=>true, 'html' => $html]);
     }
 
 }

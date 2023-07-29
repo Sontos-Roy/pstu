@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <h2>{{ $notice->heading }}</h2>
+                    <h2>All Libraires</h2>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('front.home') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li class="active">{{ $notice->heading }}</li>
+                        <li class="active">All Libraires</li>
                     </ul>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <!-- Start Course Info -->
                 <div class="col-md-12">
                     <div class="event-items">
-                       @foreach ($libraries as $item)
+                       @forelse ($libraries as $item)
                        <div class="item col-sm-11" style="margin-bottom:30px">
                         <div style="border: 1px solid #eee;padding: 15px">
                            <div class="col-md-5 thumb">
@@ -44,8 +44,11 @@
                            <div class="clearfix"></div>
                         </div>
                      </div>
-
-                       @endforeach
+                        @empty
+                        <center>
+                            <h2>Empty</h2>
+                        </center>
+                       @endforelse
                     </div>
                  </div>
             </div>

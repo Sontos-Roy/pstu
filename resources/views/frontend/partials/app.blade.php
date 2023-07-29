@@ -177,7 +177,7 @@
     <script src="{{ asset('frontend/js/count-to.js') }}"></script>
     <script src="{{ asset('frontend/js/YTPlayer.min.js') }}"></script>
     <script src="{{ asset('frontend/js/loopcounter.js') }}"></script>
-    <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/bootsnav.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
