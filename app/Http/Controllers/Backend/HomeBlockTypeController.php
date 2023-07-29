@@ -7,6 +7,7 @@ use App\Models\HomeBlockType;
 use App\Models\HomeBlock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DB;
 
 class HomeBlockTypeController extends Controller
 {
@@ -39,14 +40,9 @@ class HomeBlockTypeController extends Controller
         ]);
         $data['slug'] = Str::slug($data['name']);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time().'_'.$image->getClientOriginalName();
-            $image->storeAs('public/images/home_blocks', $filename);
-            $data['image'] = $filename;
-        }
+    DB::beginTransaction();
 
-
+    try {
 
         if($request->hasFile('images')){
 
@@ -77,35 +73,44 @@ class HomeBlockTypeController extends Controller
             }
         }
 
-
-
-
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time().'_'.$image->getClientOriginalName();
+            $image->storeAs('public/images/home_blocks', $filename);
+            $data['image'] = $filename;
+        }
 
 
         $item=HomeBlockType::create($data);
 
         
         $titles=$request->titles;
-        $images=$request->images;
-        $pdf_files=$request->pdf_files;
+        $images=$request->images ??[];
+        $pdf_files=$request->pdf_files ??[];
 
         if(isset($titles)){
             $details_data=[];
             foreach ($titles as $key => $title) {
-                $image=$images[$key];
-                $filename='';
-                if($image){
-                    $filename = time().'_'.$image->getClientOriginalName();
-                    $image->storeAs('public/images/home_block_details', $filename);
 
+                $filename='';
+                if(array_key_exists($key,$images)){
+                    $image=$images[$key];
+                    if($image){
+                        $filename = time().'_'.$image->getClientOriginalName();
+                        $image->storeAs('public/images/home_block_details', $filename);
+
+                    }
                 }
 
-                $pdf_file=$pdf_files[$key];
                 $pdf_file_name='';
-                if($pdf_file){
-                    $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
-                    $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+                if(array_key_exists($key,$pdf_files)){
+                    $pdf_file=$pdf_files[$key];
+                    
+                    if($pdf_file){
+                        $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                        $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
 
+                    }
                 }
 
                 $details_data[]=[
@@ -123,7 +128,15 @@ class HomeBlockTypeController extends Controller
             $item->details()->createMany($details_data);
         }
 
+        DB::commit();
         return response()->json(['status' => true, 'msg' => 'Home Block Created Successfully','url'=>route('admin.home_block_types.index')]);
+
+    } catch (\Exception $e) {
+        DB::rollback();
+        return response()->json(['status' => false, 'msg' => $e->getMessage()]);
+    }
+
+
     }
 
     /**
@@ -156,6 +169,11 @@ class HomeBlockTypeController extends Controller
         ]);
         $data['slug'] = Str::slug($data['name']);
 
+        DB::beginTransaction();
+
+    try {
+
+
         if ($request->hasFile('image')) {
 
             deleteFile('home_blocks', $item->image);
@@ -170,15 +188,15 @@ class HomeBlockTypeController extends Controller
 
         $titles=$request->titles;
         $details_id=$request->details_id;
-        $images=$request->images;
-        $pdf_files=$request->pdf_files;
+        $images=$request->images ??[];
+        $pdf_files=$request->pdf_files ??[];
 
 
         if(isset($titles)){
             $details_data=[];
             foreach ($titles as $key => $title) {
 
-                if ($details_id[$key]) {
+                if (array_key_exists($key,$details_id) && $details_id[$key]) {
 
                     $home_block=HomeBlock::find($details_id[$key]);
 
@@ -189,41 +207,53 @@ class HomeBlockTypeController extends Controller
 
                     ];
 
-                    $image=$images[$key];
-                    $filename='';
-                    if($image){
-                        $filename = time().'_'.$image->getClientOriginalName();
-                        $image->storeAs('public/images/home_block_details', $filename);
-                        $existing_data['image']=$filename;
+                    if(array_key_exists($key,$images)){
+                        deleteImage('home_block_details',$home_block->image);
+                        $image=$images[$key];
+                        $filename='';
+                        if($image){
+                            $filename = time().'_'.$image->getClientOriginalName();
+                            $image->storeAs('public/images/home_block_details', $filename);
+                            $existing_data['image']=$filename;
+                        }
                     }
-
-                    $pdf_file=$pdf_files[$key];
-                    $pdf_file_name='';
-                    if($pdf_file){
-                        $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
-                        $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
-                        $existing_data['file']=$pdf_file_name;
+                    
+                    if(array_key_exists($key,$pdf_files)){
+                        deleteFile('home_block_details',$home_block->file);
+                        $pdf_file=$pdf_files[$key];
+                        $pdf_file_name='';
+                        if($pdf_file){
+                            $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                            $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+                            $existing_data['file']=$pdf_file_name;
+                        }
                     }
 
 
                     $home_block->update($existing_data);
                     # code...
                 }else{
-                    $image=$images[$key];
                     $filename='';
-                    if($image){
-                        $filename = time().'_'.$image->getClientOriginalName();
-                        $image->storeAs('public/images/home_block_details', $filename);
+                    if(array_key_exists($key,$images)){
+                        $image=$images[$key];
+                        if($image){
+                            $filename = time().'_'.$image->getClientOriginalName();
+                            $image->storeAs('public/images/home_block_details', $filename);
 
+                        }
                     }
 
-                    $pdf_file=$pdf_files[$key];
                     $pdf_file_name='';
-                    if($pdf_file){
-                        $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
-                        $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+                    if(array_key_exists($key,$pdf_files)){
+                        $pdf_file=$pdf_files[$key];
+                        
+                        if($pdf_file){
+                            $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                            $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
 
+                        }
                     }
+
 
                     $details_data[]=[
                         'name'=>$title,
@@ -240,19 +270,25 @@ class HomeBlockTypeController extends Controller
             }
         }
 
-        $delete_items=HomeBlock::whereNotIn('id',$details_id)->get();
+        $delete_items=$item->details()->whereNotIn('id',$details_id)->get();
 
         foreach ($delete_items as $key => $delete_item) {
-                deleteFile('home_block_details', $delete_item->image);
+                deleteImage('home_block_details', $delete_item->image);
                 deleteFile('home_block_details', $delete_item->file);
-                $delete_items->delete();
+                $delete_item->delete();
         }
 
         if (!empty($details_data)) {
             $item->details()->createMany($details_data);
         }
 
+        DB::commit();
         return response()->json(['status' => true, 'msg' => 'Home Block Updated Successfully','url'=>route('admin.home_block_types.index')]);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => false, 'msg' => $e->getMessage()]);
+        }
 
     }
 
