@@ -48,18 +48,14 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-left" data-in="#" data-out="#">
                     <li>
-                        <a href="https://www.du.ac.bd" class="dropdown-toggle" data-toggle="dropdown">DU Home</a>
-                    </li>
-                    <li>
-                        <a href="https://www.du.ac.bd/body/APMAT" class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                        <a href="{{ route('front.home') }}" class="dropdown-toggle" data-toggle="dropdown">Home</a>
                         <ul class="dropdown-menu animated #">
                             <li></li>
                         </ul>
                     </li>
                     <li class="dropdown on">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">About</a>
-                        <ul class="dropdown-menu animated #" style="display: block; opacity: 0;">
-                            <li><a href="https://www.du.ac.bd/body/History/APMAT">History</a></li>
+                        <ul class="dropdown-menu animated #">
                             <li><a href="https://www.du.ac.bd/body/MissionVision/APMAT">Mission &amp; Vision</a></li>
                         </ul>
                     </li>

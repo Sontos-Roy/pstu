@@ -211,7 +211,7 @@
                                                 <li><a href="{{ route('front.programs') }}"><i class="fas fa-angle-double-right"></i>
                                                         Academic Programs</a>
                                                 </li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Academic Calendar</a>
+                                                <li><a href="{{ route('front.academic.calendar') }}"><i class="fas fa-angle-double-right"></i> Academic Calendar</a>
                                                 </li>
                                                 <li><a href="{{ route('front.libraries') }}"><i class="fas fa-angle-double-right"></i>
                                                         Libraries </a></li>

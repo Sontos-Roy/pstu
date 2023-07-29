@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\Front\ViceChancellorController;
 use App\Http\Controllers\Backend\Front\VisionMissionController;
 use App\Http\Controllers\Backend\HomeBlockTypeController;
 use App\Http\Controllers\Backend\HomeController as BackendHomeController;
+use App\Http\Controllers\Backend\ImageController;
 use App\Http\Controllers\Backend\InsituteController;
 use App\Http\Controllers\Backend\LeaderShipController;
 use App\Http\Controllers\Backend\LibrariesController;
@@ -140,6 +141,7 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'
     Route::resource('/academic_calendars', AcademicCalendarController::class);
     Route::resource('/institutes', InsituteController::class);
     Route::resource('/programs', ProgramController::class);
+    Route::resource('/images', ImageController::class);
     Route::resource('/researchs', ResearchController::class);
     Route::post('/image-upload', [UploadController::class, 'index'])->name('ckeditor.upload');
 

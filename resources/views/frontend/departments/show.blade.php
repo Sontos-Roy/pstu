@@ -136,5 +136,147 @@
        </div>
     </div>
  </div>
+ <div class="weekly-top-items carousel-shadow default-padding" id="researchNewsDiv">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="top-courses">
+                    <div class="heading">
+                        <h4>Faculty Reseach Highlight</h4>
+                    </div>
+                    <div class="top-course-items letest-news top-courses-carousel-modified owl-carousel owl-theme ">
 
-@endsection
+                        @foreach ($researchs as $research)
+                        <div class="item">
+                            <div class="thumb">
+                                <img src="{{ getImage('researchs', $research->image) }}" alt="Thumb" class="card-img-height">
+                            </div>
+                            <div class="info">
+                                <h4>
+                                    <a href=""> {{ StrLimit($research->title, 80) }}</a>
+                                </h4>
+                                <p>
+                                    {{ StrLimit($research->short, 100) }}</p>
+                                <ul>
+                                    <strong> </strong><li><strong>Published on: </strong>{{ date('d M Y', strtotime($research->created_at)) }}</li>
+                                </ul>
+                                <div class="footer-meta">
+                                    <a class="btn btn-theme effect btn-block btn-sm" href="">Read More...</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="more-btn col-md-12 text-center" style="margin-top: 15px;">
+                    <a href="{{ route('front.researchs') }}" class="btn btn-theme effect btn-sm">View All Research News</a>
+                </div>
+            </div>
+            <div class="col-md-4" id="noticeBoardDiv">
+                <div class="top-author">
+                    <h4>Notice Board</h4>
+                    <div class="author-items">
+                        <!-- Single Item -->
+                        @foreach ($notices as $notice)
+                        <div class="item">
+                            <div class="text-justify">
+                                <h5><a href="{{ route('front.notices.show', $notice->slug) }}">{{ $notice->title }}</a></h5>
+                                <ul>
+                                    <strong> </strong>
+                                    <li><strong>Published on: </strong>{{ date('d M Y', strtotime($notice->created_at)) }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <!-- End Single Item -->
+                        <a href="{{ route('front.notices') }}">View All <i class="fas fa-angle-double-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="blog-area default-padding bottom-less">
+    <div class="container">
+       <div class="row">
+          <div class="site-heading text-center">
+             <div class="col-md-8 col-md-offset-2">
+                <h2>Latest News</h2>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="blog-items courses-carousel owl-theme owl-carousel">
+             <!-- Single Item -->
+             <!-- End Single Item -->
+             @foreach ($newses as $news)
+             <div data-aos="zoom-in" data-aos-delay="200" class="single-item aos-init">
+                <div class="item">
+                   <div class="thumb">
+                      <a href="{{route('front.news.show', $news->slug)}}">
+                      <img src="{{ getImage('news', $news->image) }}" style="height: 240px;width: 100%;" alt="{{ $news->heading }}">
+                      </a>
+                   </div>
+                   <div class="info">
+                      <div class="meta">
+                         <ul>
+                            <li style="text-transform: capitalize!important;">
+                               <i class="fas fa-calendar-alt"></i>
+                               {{ $news->created_at->diffForHumans()  }}
+                            </li>
+                         </ul>
+                      </div>
+                      <div class="content">
+                         <h4 class="text-left" style="height: 80px; word-spacing: 5px">
+                            <a href="{{route('front.news.show', $news->slug)}}" title="{{ $news->heading }}">{{ StrLimit($news->heading, 50) }}</a>
+                         </h4>
+                         <a href="{{route('front.news.show', $news->slug)}}"><i class="fas fa-plus"></i> Read More</a>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             @endforeach
+
+          </div>
+          <div class="more-btn col-md-12 text-center">
+             <a href="{{ route('front.news') }}" class="btn btn-theme effect btn-md"> View All News </a>
+          </div>
+       </div>
+    </div>
+</div>
+<div id="portfolio" class="portfolio-area default-padding">
+    <div class="container">
+        <div class="row">
+            <div class="site-heading text-center">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Photo Gallery</h2>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-items-area text-center">
+            <div class="row">
+                <div class="col-md-12 portfolio-content">
+                    <!-- End Mixitup Nav-->
+                    <div class="row magnific-mix-gallery masonary text-light">
+                        <div id="portfolio-grid" class="portfolio-items col-3" style="position: relative; height: 283.656px;">
+                            @foreach ($images as $image)
+                            <div class="pf-item other" style="position: absolute; left: 0%; top: 0px;">
+                                <div class="item-effect">
+                                    <img src="{{ getImage('images', $image->image) }}" alt="thumb">
+                                    <div class="overlay">
+                                        <a href="{{ getImage('images', $image->image) }}" class="item popup-link"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ @endsection
