@@ -129,7 +129,7 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'
     Route::resource('/events', EventController::class);
     Route::resource('/libraries', LibrariesController::class);
     Route::resource('/notices', NoticeController::class);
-    Route::resource('/home_block_types', HomeBlockTypeController::class);
+    Route::resource('/home-block-types', HomeBlockTypeController::class,['names'=>'home_block_types']);
     Route::resource('/offices', OfficeController::class);
     Route::resource('/academic_calendars', AcademicCalendarController::class);
     Route::resource('/institutes', InsituteController::class);
