@@ -39,7 +39,11 @@
                                         <td> {{ $detail->name}} </td>
                                         <td>  {{ $detail->published_date}}</td>
                                         <td> <img src="{{ getImage('home_block_details',$detail->image)}}" width="120"> </td>
-                                        <td><a target="_blank" href="{{ getPdf('home_block_details',$detail->file)}}"> pdf </a></td>
+                                        <td>
+                                            @if($detail->file)
+                                            <a target="_blank" href="{{ getPdf('home_block_details',$detail->file)}}"> pdf </a>
+                                            @endif
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
