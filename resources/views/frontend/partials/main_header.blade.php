@@ -207,7 +207,7 @@
                                                         Departments</a></li>
                                                 <li><a href="{{ route('front.institutes.all') }}"><i class="fas fa-angle-double-right"></i>
                                                         Institutes</a></li>
-                                                
+
                                             </ul>
                                         </div>
                                     </div>
@@ -297,30 +297,77 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown megamenu-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students
-                        <span></span></a>
-                        <ul class="dropdown-menu animated menuBody" role="menu">
+                            <span></span></a>
+                        <ul class="dropdown-menu megamenu-content animated menuBody fadeOutUp" role="menu" style="display: none; opacity: 1;">
                             <li>
                                 <div class="row">
-                                    <div class="content">
-                                        <ul class="menu-col">
 
-                                            @foreach (getStudentPage() as $item)
-                                            <li><a href="{{ route('front.student.page', $item->slug) }}" target="_blank"><i class="fas fa-angle-double-right"></i>
-                                                {{ $item->title }}
-                                                </a>
-                                                </li>
-                                            @endforeach
+                        <div class="col-menu col-md-4">
+                            <h6 class="title menuTitle">Student
+                                Facilities</h6>
+                            <div class="content">
+                                <ul class="menu-col">
+                                    <li><a href="https://www.du.ac.bd/scholarship_financial_aid"><i class="fas fa-angle-double-right"></i>
+                                            Scholarships &amp;
+                                            Financial Aids</a></li>
+                                    <li><a href="https://www.du.ac.bd/students/HallsResidence" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Halls of Residence
+                                        </a></li>
+                                    <li><a href="https://www.du.ac.bd/students/Transport"><i class="fas fa-angle-double-right"></i>
+                                            Transport
+                                            Facilities</a>
+                                    </li>
+                                    <li><a href="https://www.du.ac.bd/students/Insurance"><i class="fas fa-angle-double-right"></i>
+                                            Health Insurance </a>
+                                    </li>
 
-
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-menu col-md-4">
+                            <h6 class="title menuTitle">Online Services
+                            </h6>
+                            <div class="content">
+                                <ul class="menu-col">
+                                    <li><a href="https://service.du.ac.bd/home" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Apply for
+                                            Certificate/Marksheet</a>
+                                    </li>
+                                    <li><a href="https://studentscholarship.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Apply
+                                            for Govt. Scholarships</a>
+                                    </li>
+                                    <li><a href="http://result.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Examination
+                                            Results</a>
+                                    </li>
+                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Apply for
+                                            Transcript</a>
+                                    </li>
+                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                            Exam Form Fill-up</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-menu col-md-4">
+                            <h6 class="title menuTitle">Alumni</h6>
+                            <div class="content">
+                                <ul class="menu-col">
+                                        <li><a href="https://duaa-bd.org/"><i class="fas fa-angle-double-right"></i>
+                                            Alumni
+                                            Association</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                        </li>
                         </ul>
-                    </li>
+                        </li>
 
 
                 </ul>

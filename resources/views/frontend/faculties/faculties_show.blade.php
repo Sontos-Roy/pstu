@@ -137,78 +137,67 @@
     </div>
 </div>
 
-<div class="blog-area bottom-less">
-    <div class="weekly-top-items carousel-shadow default-padding-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="top-author">
-                        <h4 style="background: #3d5169; color: white">Notice</h4>
-                        <div class="author-items">
-                            <!-- Single Item -->
-                            @foreach ($notices as $notice)
-                            <div class="item">
-                                <div class="text-justify">
-                                    <h5><a href="{{ route('front.notices.show', $notice->slug) }}">{{ $notice->title }}</a></h5>
-                                    <ul>
-                                        <strong> </strong>
-                                        <li><strong>Published on: </strong>{{ date('d M Y', strtotime($notice->created_at)) }}</li>
-                                    </ul>
+<div class="weekly-top-items carousel-shadow default-padding" id="researchNewsDiv">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="top-courses">
+                    <div class="heading">
+                        <h4>Faculty Reseach Highlight</h4>
+                    </div>
+                    <div class="top-course-items letest-news top-courses-carousel-modified owl-carousel owl-theme ">
+
+                        @foreach ($researchs as $research)
+                        <div class="item">
+                            <div class="thumb">
+                                <img src="{{ getImage('researchs', $research->image) }}" alt="Thumb" class="card-img-height">
+                            </div>
+                            <div class="info">
+                                <h4>
+                                    <a href=""> {{ StrLimit($research->title, 80) }}</a>
+                                </h4>
+                                <p>
+                                    {{ StrLimit($research->short, 100) }}</p>
+                                <ul>
+                                    <strong> </strong><li><strong>Published on: </strong>{{ date('d M Y', strtotime($research->created_at)) }}</li>
+                                </ul>
+                                <div class="footer-meta">
+                                    <a class="btn btn-theme effect btn-block btn-sm" href="">Read More...</a>
                                 </div>
                             </div>
-                            @endforeach
-
-                            <!-- End Single Item -->
-                            <a href="{{ route('front.notices') }}">View All <i class="fas fa-angle-double-right"></i></a>
                         </div>
+                        @endforeach
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="top-courses">
-                        <div class="heading">
-                            <h4>Faculty Research Highlights</h4>
-                        </div>
-                        <div class="top-course-items top-courses-carousel-modified owl-carousel owl-theme owl-loaded owl-drag">
-                            <!-- Single Item -->
-                            <!-- End Item -->
-                            <div class="owl-stage-outer">
-                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 388px;">
-                                    <div class="owl-item active" style="width: 357.5px; margin-right: 30px;">
-                                        <div class="item">
-                                            <div class="thumb">
-                                                <img src="https://www.du.ac.bd/fontView/assets/img/default_logo.png" class="thumb">
-                                            </div>
-                                            <div class="info">
-                                                <h4 class="min-height-45px text-justify">
-                                                    <a href="#">Research Interest</a>
-                                                </h4>
-                                                <div class="min-height-130px text-justify">
-                                                </div>
-                                                <ul>
-                                                    <strong> </strong>
-                                                    <li><strong>Published on: </strong>January 18, 2023</li>
-                                                </ul>
-                                                <div class="footer-meta">
-                                                    <a class="btn btn-theme effect btn-block btn-sm" href="#">Read More...</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="more-btn col-md-12 text-center" style="margin-top: 15px;">
+                    <a href="{{ route('front.researchs') }}" class="btn btn-theme effect btn-sm">View All Research News</a>
+                </div>
+            </div>
+            <div class="col-md-4" id="noticeBoardDiv">
+                <div class="top-author">
+                    <h4>Notice Board</h4>
+                    <div class="author-items">
+                        <!-- Single Item -->
+                        @foreach ($notices as $notice)
+                        <div class="item">
+                            <div class="text-justify">
+                                <h5><a href="{{ route('front.notices.show', $notice->slug) }}">{{ $notice->title }}</a></h5>
+                                <ul>
+                                    <strong> </strong>
+                                    <li><strong>Published on: </strong>{{ date('d M Y', strtotime($notice->created_at)) }}</li>
+                                </ul>
                             </div>
-                            <div class="owl-nav disabled">
-                                <div class="owl-prev disabled"><i class="fa fa-angle-left"></i></div>
-                                <div class="owl-next disabled"><i class="fa fa-angle-right"></i></div>
-                            </div>
-                            <div class="owl-dots disabled"></div>
                         </div>
+                        @endforeach
+
+                        <!-- End Single Item -->
+                        <a href="{{ route('front.notices') }}">View All <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="blog-area default-padding bottom-less">
     <div class="container">
        <div class="row">

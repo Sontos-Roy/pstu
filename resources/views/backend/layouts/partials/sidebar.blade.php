@@ -147,6 +147,7 @@
                 $libraries = ['admin.libraries.index', 'admin.libraries.create'];
                 $academic_calendars = ['admin.academic_calendars.index', 'admin.academic_calendars.create'];
                 $offices = ['admin.offices.index', 'admin.offices.create'];
+                $researchs = ['admin.researchs.index', 'admin.researchs.create'];
             @endphp
             <li class="{{ in_array($currentUrl, $offices) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Offices</span> </a>
                 <ul class="ml-menu">
@@ -182,6 +183,12 @@
                 <ul class="ml-menu">
                     <li class="{{ in_array($currentUrl, ['admin.notices.index']) ? 'active' : '' }}"> <a href="{{ route('admin.notices.index') }}">Notice List</a></li>
                     <li class="{{ in_array($currentUrl, ['admin.notices.create']) ? 'active' : '' }}"> <a href="{{ route('admin.notices.create') }}">Add Notice</a></li>
+                </ul>
+            </li>
+            <li class="{{ in_array($currentUrl, $researchs) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Researches</span> </a>
+                <ul class="ml-menu">
+                    <li class="{{ in_array($currentUrl, ['admin.researchs.index']) ? 'active' : '' }}"> <a href="{{ route('admin.researchs.index') }}">Research List</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.researchs.create']) ? 'active' : '' }}"> <a href="{{ route('admin.researchs.create') }}">Add Research</a></li>
                 </ul>
             </li>
             @php
