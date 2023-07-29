@@ -14,6 +14,7 @@ use App\Models\News;
 use App\Models\Notice;
 use App\Models\Pages;
 use App\Models\Program;
+use App\Models\Research;
 use App\Models\Slider;
 use App\Models\StudentsPages;
 use App\Models\UniversityGlance;
@@ -169,6 +170,19 @@ class HomeController extends Controller
         $this->data['events'] = Event::orderBy('id', 'DESC')->paginate(10);
 
         return view('frontend.events', $this->data);
+    }
+
+    function researchs(){
+        $this->data['researchs'] = Research::paginate(10);
+
+        return view('frontend.researchs', $this->data);
+    }
+    function researchsShow($slug){
+
+        $this->data['research'] = Research::whereSlug($slug)->first();
+        $this->data['researchs'] = Research::take(10)->get();
+
+        return view('frontend.research-show', $this->data);
     }
 
 }
