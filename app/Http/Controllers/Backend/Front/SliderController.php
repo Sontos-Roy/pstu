@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +17,8 @@ class SliderController extends Controller
     public function index()
     {
         $this->data['sliders'] = Slider::all();
+        $this->data['faculties'] = Faculty::all();
+        $this->data['departments'] = Department::all();
         return view("backend.homeSlider.index", $this->data);
     }
 
@@ -38,9 +42,11 @@ class SliderController extends Controller
             'first_btn_link' => '',
             'second_btn_link' => '',
             'isActive' => '',
+            'select_for' => 'required',
+            'faculty_id' => '',
+            'department_id' => '',
             'image' => 'image|required',
         ]);
-
         $isChecked = $request->has('isActive');
 
         if($isChecked){
@@ -92,9 +98,13 @@ class SliderController extends Controller
             'second_btn' => '',
             'first_btn_link' => '',
             'second_btn_link' => '',
-            'isActive' => '',
+            'select_for' => 'required',
+            'faculty_id' => '',
+            'department_id' => '',
             'image' => 'image',
         ]);
+
+
         $slider = Slider::find($id);
 
         $isChecked = $request->has('isActive');

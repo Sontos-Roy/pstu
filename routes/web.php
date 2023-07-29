@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AcademicCalendarController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FacultyController;
@@ -10,10 +11,15 @@ use App\Http\Controllers\Backend\Front\SliderController;
 use App\Http\Controllers\Backend\Front\UniversityGlanceController;
 use App\Http\Controllers\Backend\Front\UniversityOrdinanceController;
 use App\Http\Controllers\Backend\Front\ViceChancellorController;
+use App\Http\Controllers\Backend\Front\VisionMissionController;
+use App\Http\Controllers\Backend\HomeBlockTypeController;
 use App\Http\Controllers\Backend\HomeController as BackendHomeController;
+use App\Http\Controllers\Backend\InsituteController;
 use App\Http\Controllers\Backend\LeaderShipController;
+use App\Http\Controllers\Backend\LibrariesController;
 use App\Http\Controllers\Backend\NewsController;
 use App\Http\Controllers\Backend\NoticeController;
+use App\Http\Controllers\Backend\OfficeController;
 use App\Http\Controllers\Backend\Permissions\RoleController;
 use App\Http\Controllers\Backend\ProgramController;
 use App\Http\Controllers\Backend\SettingController;
@@ -21,7 +27,10 @@ use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\TeacherController;
 use App\Http\Controllers\Backend\UploadController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\DepartmentController;
+use App\Http\Controllers\Frontend\FacultiesController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\InstituteController;
 use App\Http\Controllers\Frontend\TeacherController as FrontendTeacherController;
 use App\Models\UniversityOrdinance;
 use Illuminate\Support\Facades\Auth;
@@ -48,31 +57,11 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/', 'index')->name('home');
         Route::get('/notices', 'notices')->name('notices');
         Route::get('/departments', 'departments')->name('departments');
-        Route::get('/departments/{slug}', 'departmentShow')->name('departments.show');
-        Route::get('/departments/intro/{slug}', 'departmentShow')->name('departments.intro');
         Route::get('/programs', 'programs')->name('programs');
+        Route::get('/libraries', 'libraries')->name('libraries');
         Route::get('/programs/{slug}', 'programShow')->name('programs.show');
-        
-        
-
         Route::get('/faculties', 'faculties')->name('faculties.all');
-
-        Route::group(['prefix'=>'faculty','as'=>'faculties.'], function() {
-            
-            Route::get('/{slug}', 'facultyShow')->name('show');
-            Route::get('/intro/{slug}', 'facultyIntro')->name('intro');
-
-        });
-
-        Route::group(['prefix'=>'department','as'=>'departments.'], function() {
-            
-            Route::get('/{slug}', 'departmentShow')->name('show');
-            Route::get('/intro/{slug}', 'departmentShow')->name('intro');
-
-        });
-
-
-
+        Route::get('/institutes', 'institutes')->name('institutes.all');
         Route::get('/about/historical-outline', 'outlineHistoric')->name('historic.outline');
         Route::get('/about/university-glance', 'universityGlance')->name('university.glance');
         Route::get('/honoris-causa', 'honorisCausas')->name('honoris.causa');
@@ -87,6 +76,29 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/p/{slug}', 'PageSlug')->name('page.show');
         Route::get('/students/{slug}', 'studentPage')->name('student.page');
     });
+
+    Route::controller(FacultiesController::class)->group(function(){
+        Route::group(['prefix' => 'faculty', 'as' => 'faculties.'], function(){
+            Route::get('/{slug}', 'facultyShow')->name('show');
+            Route::get('/intro/{slug}', 'facultyIntro')->name('intro');
+        });
+    });
+    Route::controller(InstituteController::class)->group(function(){
+        Route::group(['prefix' => 'institue', 'as' => 'institutes.'], function(){
+            Route::get('/{slug}', 'instituteShow')->name('show');
+            Route::get('/intro/{slug}', 'instituteShowIntro')->name('intro');
+        });
+    });
+
+    Route::controller(DepartmentController::class)->group(function(){
+        Route::group(['prefix'=>'department','as'=>'departments.'], function() {
+
+            Route::get('/{slug}', 'departmentShow')->name('show');
+            Route::get('/intro/{slug}', 'departmentShow')->name('intro');
+
+        });
+    });
+
     Route::controller(FrontendTeacherController::class)->group(function(){
         Route::get('dean-or-faculties', 'getDeans')->name('get.deans');
         Route::get('head-of-departments', 'getHeads')->name('get.heads');
@@ -115,7 +127,12 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'
     Route::resource('/leadership', LeaderShipController::class);
     Route::resource('/news', NewsController::class);
     Route::resource('/events', EventController::class);
+    Route::resource('/libraries', LibrariesController::class);
     Route::resource('/notices', NoticeController::class);
+    Route::resource('/home_block_types', HomeBlockTypeController::class);
+    Route::resource('/offices', OfficeController::class);
+    Route::resource('/academic_calendars', AcademicCalendarController::class);
+    Route::resource('/institutes', InsituteController::class);
     Route::resource('/programs', ProgramController::class);
     Route::post('/image-upload', [UploadController::class, 'index'])->name('ckeditor.upload');
 
@@ -128,7 +145,9 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'
     Route::resource('/university-ordinances', UniversityOrdinanceController::class);
     Route::resource('/pages', PageController::class);
     Route::resource('/students-page', StudentController::class);
+    Route::resource('/missionvision', VisionMissionController::class);
     Route::post('change-page-status/{id}', [PageController::class, 'changeStatus'])->name('change.page.status');
+    Route::get('get-departments', [BackendHomeController::class, 'getDepartments'])->name('get.departments');
 });
 Auth::routes();
 

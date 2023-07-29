@@ -50,8 +50,8 @@
 <!-- #END# Overlay For Sidebars -->
 
 <!-- Morphing Search  -->
-<div id="morphsearch" class="morphsearch">
-    <form class="morphsearch-form">
+<div id="morphsearch" class="morphsearch" style="display: none;">
+    <form class="morphsearch-form" method="GET" action="{{ route('admin.users.index') }}">
         <div class="form-group m-0">
             <input value="" type="search" placeholder="Search..." class="form-control morphsearch-input" />
             <button class="morphsearch-submit" type="submit">Search</button>
@@ -138,7 +138,7 @@
         <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="{{ route('admin.home') }}">PSTU</a> </div>
         <ul class="nav navbar-nav navbar-right">
             <!-- Notifications -->
-            
+
             <!-- #END# Notifications -->
             <!-- Tasks -->
 
@@ -462,6 +462,19 @@ $(document).ready(function() {
 
     ClassicEditor
         .create( document.querySelector( '#editor' ),{
+            toolbar: {
+                    plugins: [ 'Image' ],
+                    toolbar: [ 'imageUpload', 'imageTextAlternative' ]
+                },
+                ckfinder: {
+                    uploadUrl: "{{route('admin.ckeditor.upload').'?_token='.csrf_token()}}",
+                }
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#editor2' ),{
             toolbar: {
                     plugins: [ 'Image' ],
                     toolbar: [ 'imageUpload', 'imageTextAlternative' ]

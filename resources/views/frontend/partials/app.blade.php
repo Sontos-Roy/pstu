@@ -30,6 +30,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800" rel="stylesheet">
     @stack('css')
+    <style>
+        .deptHeading{
+            font-size: 2vw;
+            font-weight: 600;
+        }
+    </style>
 
 </head>
 <body>

@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string("second_btn")->nullable();
             $table->text("first_btn_link")->nullable();
             $table->text("second_btn_link")->nullable();
-            $table->boolean("isAction")->nullable();
+            $table->boolean("isActive")->nullable();
             $table->text("image")->nullable();
+            $table->string("select_for")->nullable();
+            $table->foreignId("faculty_id")->nullable();
+            $table->foreignId("department_id")->nullable();
             $table->timestamps();
         });
     }

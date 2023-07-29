@@ -1,5 +1,7 @@
 @extends('frontend.partials.app')
-
+@push('faculty')
+{{ $faculty->title }}
+@endpush
 @section('content')
 <div class="banner-area">
     <div id="bootcarousel" class="carousel text-center content-less text-light top-pad-30 text-dark slide animate_text" data-ride="carousel">
@@ -53,9 +55,9 @@
                             <div style="height: 220px;" class="info">
 
                                 <p>
-                                    <img src="{{ getImage('teachers', $item->user->userDetails->image) }}" height="180" width="200" alt="{{ $item->title }}">
+                                    <img src="{{ getImage('teachers', $faculty->user->userDetails->image) }}" height="180" width="200" alt="{{ $faculty->title }}">
                                 </p>
-                                <p class="text-center" style="font-weight: bold; font-size: 14px;"> {{ $item->user->name }}</p>
+                                <p class="text-center" style="font-weight: bold; font-size: 14px;"> {{ $faculty->user->name }}</p>
                                 <p class="text-center"><strong>Dean of Faculty</strong></p>
                             </div>
                         </a>
@@ -63,10 +65,10 @@
                 </div>
                 <div data-aos="fade-up" class="equal-height col-md-9 col-sm-6" style="height: 320px;">
                     <div class="item brilliantrose">
-                        <a href="{{ route('front.faculties.intro', $item->slug) }}">
+                        <a href="{{ route('front.faculties.intro', $faculty->slug) }}">
                             <div style="height: 220px;" class="info">
                                 <h4>Introduction to the faculty</h4>
-                                {{ $item->short }}
+                                {{ $faculty->short }}
                                 <strong class="text-info">Read More</strong>
                             </div>
                         </a>
@@ -94,10 +96,10 @@
             <div data-aos="zoom-in-up" class="equal-height aos-init aos-animate" style="height: 550px;">
                 <div class="item">
                     <div class="thumb">
-                        @if ($item->image)
+                        @if ($department->image)
                         <img src="{{ getImage('departments', $department->image) }}" style="height:250px;" alt="{{ $department->name }}">
                         @else
-                        <img src="{{ getImage('faculties', $item->image) }}" style="height:250px;" alt="{{ $department->name }}">
+                        <img src="{{ getImage('faculties', $faculty->image) }}" style="height:250px;" alt="{{ $department->name }}">
 
                         @endif
 
@@ -144,17 +146,20 @@
                         <h4 style="background: #3d5169; color: white">Notice</h4>
                         <div class="author-items">
                             <!-- Single Item -->
+                            @foreach ($notices as $notice)
                             <div class="item">
                                 <div class="text-justify">
-                                    <h5><a href="https://www.du.ac.bd/web_faculty_post_details/64/17792">test 2</a></h5>
+                                    <h5><a href="{{ route('front.notices.show', $notice->slug) }}">{{ $notice->title }}</a></h5>
                                     <ul>
                                         <strong> </strong>
-                                        <li><strong>Published on: </strong>February 5, 2023</li>
+                                        <li><strong>Published on: </strong>{{ date('d M Y', strtotime($notice->created_at)) }}</li>
                                     </ul>
                                 </div>
                             </div>
+                            @endforeach
+
                             <!-- End Single Item -->
-                            <a href="https://www.du.ac.bd/all_post_faculty/64/Notice">View All <i class="fas fa-angle-double-right"></i></a>
+                            <a href="{{ route('front.notices') }}">View All <i class="fas fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>

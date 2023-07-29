@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="info">
                                     <h4 class="min-height-45px text-left" style="word-spacing: 3px;">
-                                        <a href="{{ route('front.departments.show', $department->slug) }}">Department of A{{ $department->name }}</a>
+                                        <a href="{{ route('front.departments.show', $department->slug) }}">Department of {{ $department->name }}</a>
                                     </h4>
                                     <div class="footer-meta">
                                         <a class="btn btn-theme effect btn-block btn-lg btnhome" href="{{ route('front.departments.show', $department->slug) }}">View

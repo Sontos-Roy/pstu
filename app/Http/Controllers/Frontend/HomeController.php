@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Faculty;
 use App\Models\HistoricalOutline;
 use App\Models\HonorisCausa;
+use App\Models\Institutes;
 use App\Models\LeaderShip;
 use App\Models\News;
 use App\Models\Notice;
@@ -94,21 +95,7 @@ class HomeController extends Controller
         return view('frontend.faculties.faculties', $this->data);
     }
 
-    function facultyShow($slug){
-        $faculty = Faculty::whereSlug($slug)->first();
-        $this->data['item'] = $faculty;
-        $this->data['departments'] = Department::where('faculty_id', $faculty->id)->get();
-        $this->data['newses'] = News::orderBy('id', 'DESC')->take(6)->get();
-        $this->data['sliders'] = Slider::where('isActive', 1)->get();
 
-        return view('frontend.faculties.faculties_show', $this->data);
-    }
-    function facultyIntro($slug){
-        $faculty = Faculty::whereSlug($slug)->first();
-        $this->data['data'] = $faculty;
-
-        return view('frontend.faculties.introduction', $this->data);
-    }
     function departments(Request $request){
         $input = $request->input('name');
         $select = $request->input('faculty');
@@ -125,13 +112,11 @@ class HomeController extends Controller
 
         return view('frontend.departments.departments', $this->data);
     }
-
-    function departmentShow($slug){
-        $department = Department::whereSlug($slug)->first();
-        $this->data['item'] = $department;
-        $this->data['programs'] = Program::where('department_id', $department->id)->get();
-        return view('frontend.departments.show', $this->data);
+    function institutes(){
+        $this->data['institutes'] = Institutes::all();
+        return view('frontend.institutes.index', $this->data);
     }
+
 
     function programs(Request $request){
         $input = $request->input('name');

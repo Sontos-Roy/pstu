@@ -32,4 +32,8 @@ class Department extends Model
         return $this->belongsTo(User::class);
     }
 
+    function notices(){
+        return $this->hasMany(Notice::class);
+    }
+
 }

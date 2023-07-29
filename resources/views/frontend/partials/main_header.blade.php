@@ -205,13 +205,9 @@
                                                 </li>
                                                 <li><a href="{{ route('front.departments') }}"><i class="fas fa-angle-double-right"></i>
                                                         Departments</a></li>
-                                                <li><a href="https://www.du.ac.bd/institutes"><i class="fas fa-angle-double-right"></i>
+                                                <li><a href="{{ route('front.institutes.all') }}"><i class="fas fa-angle-double-right"></i>
                                                         Institutes</a></li>
-                                                <li><a href="https://www.du.ac.bd/colleges/Constituent"><i class="fas fa-angle-double-right"></i> Constituent
-                                                        Colleges</a></li>
-                                                <li><a href="https://www.du.ac.bd/colleges/Affiliated"><i class="fas fa-angle-double-right"></i> Affiliated
-                                                        Colleges</a>
-                                                </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -243,70 +239,59 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="dropdown megamenu-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Faculties <span></span></a>
-                        <ul class="dropdown-menu megamenu-content animated menuBody" role="menu" style="display: none; opacity: 1;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <span></span></a>
+                        <ul class="dropdown-menu megamenu-content animated menuBody fadeOutUp" role="menu" style="display: none;">
                             <li>
-                                <div>
-                                    <div class="col-menu col-md-6">
-                                        <h6 class="title menuTitle">Faculties Heads</h6>
+                                <div class="row">
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title menuTitle">Academic Heads</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-
-                                                @foreach (getFaculties(0) as $item)
-                                                <li>
-                                                    <a href="{{ route('front.faculties.show', $item->slug) }}">
-                                                    <i class="fas fa-angle-double-right"></i> {{ $item->title }}
-                                                    </a>
-                                                </li>
-                                                @endforeach
-
+                                                <li><a href="{{ route('front.get.deans') }}"><i class="fas fa-angle-double-right"></i> Deans of
+                                                    Faculties</a>
+                                                    </li>
+                                                    <li><a href="{{ route('front.get.heads') }}"><i class="fas fa-angle-double-right"></i> Chairman of
+                                                    Departments</a>
+                                                    </li>
+                                                <li><a href="https://www.du.ac.bd/leadershipList/director"><i class="fas fa-angle-double-right"></i> Directors of
+                                                        Institutes</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <!-- end col-3 -->
-                                    <div class="col-menu col-md-6">
-                                        <h6 class="title menuTitle">Faculties Heads</h6>
+                                    <div class="col-menu col-md-4">
+                                        <h6 class="title menuTitle">Head of Administrative Offices</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                @foreach (getFaculties(1) as $item)
-                                                <li>
-                                                    <a href="{{ route('front.faculties.show', $item->slug) }}">
-                                                    <i class="fas fa-angle-double-right"></i> {{ $item->title }}
-                                                    </a>
-                                                </li>
-                                                @endforeach
+                                                <li><a href="https://www.du.ac.bd/leadershipList/director_research_center"><i class="fas fa-angle-double-right"></i> Directors
+                                                        of
+                                                        Research Centers &amp; Bureau</a></li>
+                                                <li><a href="https://www.du.ac.bd/leadershipList/provost"><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
+                                                        Halls and
+                                                        Hostel</a></li>
+                                                <li><a href="https://www.du.ac.bd/leadershipList/office_head"><i class="fas fa-angle-double-right"></i> Head of
+                                                        Offices</a></li>
 
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- end row -->
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown megamenu-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <span></span></a>
-                        <ul class="dropdown-menu megamenu-content animated menuBody" role="menu">
-                            <li>
-                                <div class="row">
-                                <div class="col-menu col-md-12">
-                                    <h6 class="title menuTitle">Academic Heads</h6>
-                                    <div class="content">
-                                        <ul class="menu-col">
-                                            <li><a href="{{ route('front.get.deans') }}"><i class="fas fa-angle-double-right"></i> Deans of
-                                            Faculties</a>
-                                            </li>
-                                            <li><a href="{{ route('front.get.heads') }}"><i class="fas fa-angle-double-right"></i> Chairman of
-                                            Departments</a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-menu col-md-4">
+                                        <h6 class="title menuTitle">Others</h6>
+                                        <div class="content">
+                                            <ul class="menu-col">
+                                                <li><a href="https://www.du.ac.bd/all_offices"><i class="fas fa-angle-double-right"></i> All
+                                                        Offices</a></li>
+                                                <li><a href="https://www.du.ac.bd/faculty_member"><i class="fas fa-angle-double-right"></i>
+                                                        Faculty Member
+                                                        Profile</a>
+                                                </li>
+                                                <li><a href="https://www.du.ac.bd/staff_information"><i class="fas fa-angle-double-right"></i> Officer Profile</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- end col-3 -->
-
-                                <!-- end col-3 -->
+                                    <!-- end col-3 -->
                                 </div>
                                 <!-- end row -->
                             </li>

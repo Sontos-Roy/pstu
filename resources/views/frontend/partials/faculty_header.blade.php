@@ -1,17 +1,28 @@
 <div class="top-bar-area bg-dark text-light">
+
     <div class="container">
         <div class="row">
             <div class="col-md-3 logo-box">
                 <a href="{{ route('front.home') }}"><img src="{{ getImage('settings', getSetting('logo')) }}" alt="Thumb" height="40"></a>
             </div>
             <div class="col-md-6">
-                <a href=""> <span class="deptHeading">Faculty of Science</span> </a>
+                <a href=""> <span class="deptHeading">@stack('faculty')</span> </a>
             </div>
             <div class="col-md-3 link text-right">
                 <ul>
+                    @auth()
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">logout</a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @else
                     <li>
                         <a href="{{ route('login') }}">Login</a>
                     </li>
+                    @endauth
                 </ul>
             </div>
         </div>

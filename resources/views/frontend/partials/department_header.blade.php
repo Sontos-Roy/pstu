@@ -5,7 +5,7 @@
                 <a href="{{ route('front.home') }}"><img src="{{ getImage('settings', getSetting('logo')) }}" alt="Thumb" height="40"></a>
             </div>
             <div class="col-md-6">
-                <a href=""> <span class="deptHeading">Department of </span> </a>
+                <a href=""> <span class="deptHeading">Department of @stack('department')</span> </a>
             </div>
             <div class="col-md-3 link text-right">
                 <ul>

@@ -11,5 +11,12 @@ class Slider extends Model
 
     protected $guarded = [];
 
+    function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+
+    function department(){
+        return $this->belongsTo(Department::class);
+    }
 
 }

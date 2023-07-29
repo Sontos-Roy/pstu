@@ -23,6 +23,9 @@
                             <tr>
                                 <th>no</th>
                                 <th>Heading</th>
+                                <th>For</th>
+                                <th>Faculty</th>
+                                <th>Department</th>
                                 <th>First Button</th>
                                 <th>Second Button</th>
                                 <th>Is Active</th>
@@ -35,6 +38,9 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->head }}</td>
+                                <td>{{ $item->select_for }}</td>
+                                <td>{{ $item->faculty ? $item->faculty->title: '' }}</td>
+                                <td>{{ $item->department ? $item->department->name: '' }}</td>
                                 <td>{{ $item->first_btn }}</td>
                                 <td>{{ $item->second_btn }}</td>
                                 <td>
@@ -115,6 +121,39 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
+                                <label for="" class="col-4 col-form-label">Select For</label>
+                                <div class="col-8">
+                                        <select class="form-control shadow-none" name="select_for" id="select_for">
+                                            <option selected>Select one</option>
+                                            <option value="main">Main Page</option>
+                                            <option value="faculty">Faculty Section</option>
+                                            <option value="department">Department Section</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row faculty">
+                                <label for="" class="col-4 col-form-label">Select Faculty</label>
+                                <div class="col-8">
+                                        <select class="form-control shadow-none" name="faculty_id" id="">
+                                            <option value="">Select one</option>
+                                            @foreach ($faculties as $faculty)
+                                            <option value="{{ $faculty->id }}">{{ $faculty->title }}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row department">
+                                <label for="" class="col-4 col-form-label">Select Department</label>
+                                <div class="col-8">
+                                        <select class="form-control shadow-none" name="department_id" id="">
+                                            <option value="">Select one</option>
+                                            @foreach ($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
                                 <label for="inputName" class="col-4 col-form-label">Slider Active Or Not</label>
                                 <div class="col-8">
                                     <div class="switch">
@@ -147,6 +186,26 @@
 @push('script')
 <script>
      $(document).ready(function() {
+        $('.faculty').hide();
+        $('.department').hide();
+        $('#select_for').on('change', function(){
+
+            var value = $(this).val();
+            if(value == 'main'){
+                $('.faculty').hide();
+                $('.faculty').val(null);
+                $('.department').hide();
+                $('.department').val(null);
+            }else if(value == 'faculty'){
+                $('.faculty').show();
+                $('.department').hide();
+                $('.department').val(null);
+            }else if(value == 'department'){
+                $('.faculty').hide();
+                $('.department').show();
+                $('.faculty').val(null);
+            }
+        });
         $('.isActiveCheckbox').on('change', function() {
             var isActive = $(this).is(':checked');
             var url = $(this).attr('data-url');

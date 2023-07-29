@@ -39,12 +39,13 @@
             @php
                 $teacher = ['admin.users.index', 'admin.users.create'];
             @endphp
-            <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Professors</span> </a>
+            <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Staff</span> </a>
                 <ul class="ml-menu">
-                    <li class="{{ in_array($currentUrl, ['admin.users.index']) ? 'active' : '' }}"><a href="{{ route('admin.users.index') }}">All Professors</a></li>
-                    <li class="{{ in_array($currentUrl, ['admin.users.create']) ? 'active' : '' }}"><a href="{{ route('admin.users.create') }}">Add professors</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.users.index']) ? 'active' : '' }}"><a href="{{ route('admin.users.index') }}">All Staffs</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.users.create']) ? 'active' : '' }}"><a href="{{ route('admin.users.create') }}">Add Staffs</a></li>
                 </ul>
             </li>
+
             @php
                 $leaders = ['admin.leadership.index', 'admin.leadership.create'];
             @endphp
@@ -64,7 +65,7 @@
                 </ul>
             </li>
             @php
-                $front = ['admin.sliders.index', 'admin.historical-outline.index', 'admin.university-glance.index', 'admin.honoris-causas.index', 'admin.vice-chanchellors.index', 'admin.university-ordinances.index'];
+                $front = ['admin.sliders.index', 'admin.historical-outline.index', 'admin.university-glance.index', 'admin.honoris-causas.index', 'admin.vice-chanchellors.index', 'admin.university-ordinances.index', 'admin.missionvision.index', 'admin.home_block_types.index'];
             @endphp
             @can('add-sliders')
             <li class="{{ in_array($currentUrl, $front) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-copy"></i><span>Front End</span> </a>
@@ -75,6 +76,9 @@
                     <li class="{{ in_array($currentUrl, ['admin.honoris-causas.index']) ? 'active' : '' }}"><a href="{{ route('admin.honoris-causas.index') }}">Honoris Causas</a></li>
                     <li class="{{ in_array($currentUrl, ['admin.vice-chanchellors.index']) ? 'active' : '' }}"><a href="{{ route('admin.vice-chanchellors.index') }}">Vice Chancellors</a></li>
                     <li class="{{ in_array($currentUrl, ['admin.university-ordinances.index']) ? 'active' : '' }}"><a href="{{ route('admin.university-ordinances.index') }}">University Ordinances</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.missionvision.index']) ? 'active' : '' }}"><a href="{{ route('admin.missionvision.index') }}">Vision & Mission</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.home_block_types.index']) ? 'active' : '' }}"><a href="{{ route('admin.home_block_types.index') }}">Home Block Types</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.missionvision.index']) ? 'active' : '' }}"><a href="{{ route('admin.missionvision.index') }}">Home Blocks</a></li>
                 </ul>
             </li>
             @endcan
@@ -86,6 +90,17 @@
                 <ul class="ml-menu">
                     <li class="{{ in_array($currentUrl, ['admin.department.index']) ? 'active' : '' }}"><a href="{{ route('admin.department.index') }}">All Departments</a></li>
                     <li class="{{ in_array($currentUrl, ['admin.department.create']) ? 'active' : '' }}"><a href="{{ route('admin.department.create') }}">Add Departments</a></li>
+                </ul>
+            </li>
+            @endcan
+            @php
+                $institutes = ['admin.institutes.index', 'admin.institutes.create'];
+            @endphp
+            @can('add-department')
+            <li class="{{ in_array($currentUrl, $institutes) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city-alt"></i><span>Institutes</span> </a>
+                <ul class="ml-menu">
+                    <li class="{{ in_array($currentUrl, ['admin.institutes.index']) ? 'active' : '' }}"><a href="{{ route('admin.institutes.index') }}">All Institute</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.institutes.create']) ? 'active' : '' }}"><a href="{{ route('admin.institutes.create') }}">Add Institute</a></li>
                 </ul>
             </li>
             @endcan
@@ -129,11 +144,32 @@
                 $news = ['admin.news.index', 'admin.news.add'];
                 $events = ['admin.events.index', 'admin.events.create'];
                 $notices = ['admin.notices.index', 'admin.notices.create'];
+                $libraries = ['admin.libraries.index', 'admin.libraries.create'];
+                $academic_calendars = ['admin.academic_calendars.index', 'admin.academic_calendars.create'];
+                $offices = ['admin.offices.index', 'admin.offices.create'];
             @endphp
+            <li class="{{ in_array($currentUrl, $offices) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Offices</span> </a>
+                <ul class="ml-menu">
+                    <li class="{{ in_array($currentUrl, ['admin.offices.index']) ? 'active' : '' }}"> <a href="{{ route('admin.offices.index') }}">Office List</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.offices.create']) ? 'active' : '' }}"> <a href="{{ route('admin.offices.create') }}">Add office</a></li>
+                </ul>
+            </li>
             <li class="{{ in_array($currentUrl, $news) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>News</span> </a>
                 <ul class="ml-menu">
                     <li class="{{ in_array($currentUrl, ['admin.news.index']) ? 'active' : '' }}"> <a href="{{ route('admin.news.index') }}">News List</a></li>
                     <li class="{{ in_array($currentUrl, ['admin.news.create']) ? 'active' : '' }}"> <a href="{{ route('admin.news.create') }}">Add News</a></li>
+                </ul>
+            </li>
+            <li class="{{ in_array($currentUrl, $libraries) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Library</span> </a>
+                <ul class="ml-menu">
+                    <li class="{{ in_array($currentUrl, ['admin.libraries.index']) ? 'active' : '' }}"> <a href="{{ route('admin.libraries.index') }}">Libraries List</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.libraries.create']) ? 'active' : '' }}"> <a href="{{ route('admin.libraries.create') }}">Add Library</a></li>
+                </ul>
+            </li>
+            <li class="{{ in_array($currentUrl, $academic_calendars) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Academic Calendars</span> </a>
+                <ul class="ml-menu">
+                    <li class="{{ in_array($currentUrl, ['admin.academic_calendars.index']) ? 'active' : '' }}"> <a href="{{ route('admin.academic_calendars.index') }}">Calendar List</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.academic_calendars.create']) ? 'active' : '' }}"> <a href="{{ route('admin.academic_calendars.create') }}">Add Calender</a></li>
                 </ul>
             </li>
             <li class="{{ in_array($currentUrl, $events) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Events</span> </a>

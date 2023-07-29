@@ -5,11 +5,11 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Professors</h2>
+                <h2>All Staff</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
             <div>
-                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add Professor</a>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add Staff</a>
             </div>
         </div>
     </div>

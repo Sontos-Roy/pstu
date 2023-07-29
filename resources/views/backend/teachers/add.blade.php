@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Add Professor</h2>
+        <h2>Add Staff</h2>
         <small class="text-muted">Patuakhali Science &amp; Technology University</small>
     </div>
     <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data" id="ajax_form">
