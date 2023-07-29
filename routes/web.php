@@ -63,6 +63,7 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/programs/{slug}', 'programShow')->name('programs.show');
         Route::get('/faculties', 'faculties')->name('faculties.all');
         Route::get('/institutes', 'institutes')->name('institutes.all');
+        Route::get('/institute/{slug}', 'institutesShow')->name('institutes.show');
         Route::get('/about/historical-outline', 'outlineHistoric')->name('historic.outline');
         Route::get('/about/university-glance', 'universityGlance')->name('university.glance');
         Route::get('/honoris-causa', 'honorisCausas')->name('honoris.causa');

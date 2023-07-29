@@ -118,6 +118,11 @@ class HomeController extends Controller
         return view('frontend.institutes.index', $this->data);
     }
 
+    function institutesShow($slug){
+        $this->data['institute'] = Institutes::whereSlug($slug)->first();
+        return view('frontend.institutes.show', $this->data);
+    }
+
 
     function programs(Request $request){
         $input = $request->input('name');
