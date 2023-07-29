@@ -3,21 +3,20 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Home Block Update</h2>
+        <h2>Home Block Create</h2>
         <small class="text-muted">Patuakhali Science & Technology University</small>
     </div>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
 
             <div class="card">
-                <form action="{{ route('admin.home_block_types.update',[$item->id]) }}" method="POST" id="ajax_form">
+                <form action="{{ route('admin.home_block_types.store') }}" method="POST" id="ajax_form">
                     @csrf
-                    @method('PATCH')
                     <div class="row clearfix">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Home Block Title" value="{{ $item->name}}">
+                                    <input type="text" class="form-control" name="name" placeholder="Home Block Title">
                                 </div>
                             </div>
                         </div>
@@ -45,15 +44,13 @@
                                         </tr>
 
                                         <tbody class="data">
-                                            @foreach($item->details as $key=>$detail)
                                             <tr>
                                                 <td>
-                                                    <input type="hidden" name="details_id[]" value="{{ $detail->id}}">
-                                                    <input type="text" name="titles[]" required class="form-control" value="{{ $detail->name}}" style="border: 1px solid black;" placeholder="Enter Title ..">
+                                                    <input type="text" name="titles[]" required class="form-control" style="border: 1px solid black;" placeholder="Enter Title ..">
                                                         
                                                 </td>
                                                 <td> 
-                                                    <input type="date" name="dates[]" required class="form-control" value="{{ $detail->published_date}}">
+                                                    <input type="date" name="dates[]" required class="form-control" value="{{ date('Y-m-d')}}">
                                                 </td>
                                                 <td> 
                                                     <input type="file" name="images[]" class="form-control">
@@ -65,12 +62,8 @@
                                                 </td>
                                                 <td> 
                                                     <a class="btn btn-xs btn-primary add_row" style="cursor: pointer;color: #fff"> Add</a>
-                                                    @if($key>0)
-                                                    <a class="btn btn-xs btn-danger remove_row" style="cursor: pointer;color:#fff"> Remove</a>
-                                                    @endif
                                                 </td>
                                             </tr>
-                                            @endforeach
                                         </tbody>
 
 
@@ -78,7 +71,7 @@
                                 </div>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary" type="submit" style="cursor: pointer;color: #fff">Update</button>
+                            <button class="btn btn-primary" type="submit" style="cursor: pointer;color: #fff">Submit</button>
                         </div>
 
                     </div>

@@ -11,10 +11,9 @@ class HomeBlockType extends Model
 
     protected $guarded = [];
 
-    function type(){
-        return $this->belongsTo(HomeBlock::class, 'type_id');
+    function details(){
+
+        return $this->hasMany(HomeBlock::class, 'type_id');
     }
-    function user(){
-        return $this->belongsTo(User::class);
-    }
+    
 }
