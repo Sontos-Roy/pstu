@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\NoticeController;
 use App\Http\Controllers\Backend\OfficeController;
 use App\Http\Controllers\Backend\Permissions\RoleController;
 use App\Http\Controllers\Backend\ProgramController;
+use App\Http\Controllers\Backend\ResearchController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\TeacherController;
@@ -70,6 +71,8 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/notices/{slug}', 'noticeShow')->name('notices.show');
         Route::get('/events/{slug}', 'eventShow')->name('events.show');
         Route::get('/news', 'news')->name('news');
+        Route::get('/researchs', 'researchs')->name('researchs');
+        Route::get('/researchs/{slug}', 'researchsShow')->name('researchs.show');
         Route::get('/events', 'events')->name('events');
         Route::get('/news/{slug}', 'newsShow')->name('news.show');
         Route::get('/university-ordinances', 'universityOrdinances')->name('university.ordinances');
@@ -134,6 +137,7 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'
     Route::resource('/academic_calendars', AcademicCalendarController::class);
     Route::resource('/institutes', InsituteController::class);
     Route::resource('/programs', ProgramController::class);
+    Route::resource('/researchs', ResearchController::class);
     Route::post('/image-upload', [UploadController::class, 'index'])->name('ckeditor.upload');
 
     // Front
