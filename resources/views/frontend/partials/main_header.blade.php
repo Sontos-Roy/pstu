@@ -165,6 +165,30 @@
                                             University
                                             Ordinance</a>
                                             </li>
+                                            <li>
+                                                <a href="{{ route('front.university.ordinances') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Regent Board
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.university.ordinances') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Academic council
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.university.ordinances') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Finance Committee
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.university.ordinances') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Planning and Works Committee
+                                                </a>
+                                            </li>
 
                                         </ul>
                                     </div>
