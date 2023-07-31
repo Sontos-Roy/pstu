@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\UniversityOrdinance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -152,8 +153,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
 
     Route::resource('/users', TeacherController::class);
     Route::post('/user-profile/{id}', [TeacherController::class, 'userProfile'])->name('user.userProfile');
-
-
+    Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);
     Route::resource('/settings', SettingController::class);
@@ -185,6 +185,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('change-page-status/{id}', [PageController::class, 'changeStatus'])->name('change.page.status');
     Route::get('get-departments', [BackendHomeController::class, 'getDepartments'])->name('get.departments');
 });
+
 Auth::routes();
 
 
