@@ -1,6 +1,6 @@
 @extends('frontend.partials.app')
-@push('department')
-{{ $department->name }}
+@push('faculty')
+{{ $item->title }}
 @endpush
 @section('content')
 <div class="breadcrumb-area shadow dark text-center text-light" style="background-image: url('{{ getImage('settings', getSetting('pagebanner1')) }}'); background-size: cover; background-repeat: no-repeat;padding: 103px 0;">

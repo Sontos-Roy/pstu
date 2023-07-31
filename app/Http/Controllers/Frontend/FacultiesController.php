@@ -41,4 +41,25 @@ class FacultiesController extends Controller
 
         return view('frontend.faculties.introduction', $this->data);
     }
+
+    function missionShow($slug){
+        $faculty = Faculty::whereSlug($slug)->first();
+        $data['item'] = $faculty;
+        $data['data'] = MissionVission::where('faculty_id', $faculty->id)->first();
+
+        return view('frontend.faculty_mission', $data);
+    }
+
+    function getDepartments($slug){
+        $faculty= Faculty::whereSlug($slug)->first();
+        $this->data['faculty'] = $faculty;
+        $this->data['departments'] = Department::where('faculty_id', $faculty->id)->get();
+
+        return view('frontend.faculties.departments', $this->data);
+    }
+
+    function getCalendar($slug){
+        
+    }
 }
+

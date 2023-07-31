@@ -30,7 +30,7 @@
                         <div class="info" style="height: 140px">
                             <a href="{{ route('front.faculties.show', $item->slug) }}">
                             </a><a href="{{ route('front.faculties.show', $item->slug) }}">
-                            <span>{{ $item->title }}</span>
+                            <span>Head Of {{ $item->name }}</span>
                             </a>
                             <h4>
                                 <a href="{{ route('front.faculties.show', $item->slug) }}" target="_blank"> {{ $item->user->name }}

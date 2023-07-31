@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicCalendar;
 use App\Models\Department;
 use App\Models\Image;
 use App\Models\MissionVission;
@@ -31,9 +32,17 @@ class DepartmentController extends Controller
     }
     function missionShow($slug){
         $department = Department::whereSlug($slug)->first();
-        $data['department'] = $department;
+        $data['item'] = $department;
         $data['data'] = MissionVission::where('department_id', $department->id)->first();
 
-        return view('frontend.mission', $data);
+        return view('frontend.department_mission', $data);
+    }
+
+    function calendarShow($slug){
+        $department = Department::whereSlug($slug)->first();
+        $this->data['data'] = AcademicCalendar::where('department_id', $department->id)->get();
+        $this->data['department'] = $department;
+        return view('frontend.departments.calendar', $this->data);
+
     }
 }
