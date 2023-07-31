@@ -84,7 +84,7 @@
        <div class="row">
           <div class="site-heading text-center">
              <div class="col-md-8 col-md-offset-2">
-                <h2>Departments of this Faculty</h2>
+                <h2>Departments List</h2>
              </div>
           </div>
        </div>
@@ -271,7 +271,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            
+
                         </div>
                     </div>
                 </div>

@@ -40,6 +40,9 @@ use App\Http\Controllers\Frontend\InstituteController;
 use App\Http\Controllers\Frontend\OfficeController as FrontendOfficeController;
 use App\Http\Controllers\Frontend\TeacherController as FrontendTeacherController;
 
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+
+
 
 use App\Http\Controllers\Backend\UserAwardController;
 use App\Http\Controllers\Backend\UserEducationController;
@@ -87,21 +90,24 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/university-ordinances', 'universityOrdinances')->name('university.ordinances');
         Route::get('/p/{slug}', 'PageSlug')->name('page.show');
         Route::get('/students/{slug}', 'studentPage')->name('student.page');
-        Route::get('/academic-calender/{faculty?}/{department?}', 'academicCalendar')->name('academic.calendar');
+        Route::get('/academic-calender/{faculty?}', 'academicCalendar')->name('academic.calendar');
         Route::get('get-calendars', 'CalendarsHtml')->name('get.calendars');
     });
 
     Route::controller(FacultiesController::class)->group(function(){
         Route::group(['prefix' => 'faculty', 'as' => 'faculties.'], function(){
             Route::get('/{slug}', 'facultyShow')->name('show');
-            Route::get('/intro/{slug}', 'facultyIntro')->name('intro');
+            Route::get('/{slug}/intro', 'facultyIntro')->name('intro');
+            Route::get('/{slug}/mission', 'missionShow')->name('mission');
+            Route::get('{slug}/departments', 'getDepartments')->name('departments');
+            Route::get('{slug}/calendars', 'getCalendar')->name('calendar');
         });
     });
     Route::controller(InstituteController::class)->group(function(){
         Route::group(['prefix' => 'institute', 'as' => 'institutes.'], function(){
             Route::get('/directors', 'directors')->name('directors');
             Route::get('/{slug}', 'instituteShow')->name('show');
-            Route::get('/intro/{slug}', 'instituteShowIntro')->name('intro');
+            Route::get('/{slug}/intro', 'instituteShowIntro')->name('intro');
         });
     });
 
@@ -110,7 +116,8 @@ Route::group(['as'=>'front.'], function(){
 
             Route::get('/{slug}', 'departmentShow')->name('show');
             Route::get('/intro/{slug}', 'departmentShow')->name('intro');
-            Route::get('/mission/{slug}', 'missionShow')->name('mission');
+            Route::get('/{slug}/mission', 'missionShow')->name('mission');
+            Route::get('/{slug}/calendar', 'calendarShow')->name('calendar');
 
         });
     });
@@ -123,6 +130,9 @@ Route::group(['as'=>'front.'], function(){
         Route::get('offices', 'allOffices')->name('all.offices');
         Route::get('office/{slug}', 'officeShow')->name('office.show');
         Route::get('officers', 'Officers')->name('officers');
+    });
+    Route::controller(FrontendUserController::class)->group(function(){
+        Route::get('user-profile/{id}', 'userProfile')->name('user.profile');
     });
 });
 
@@ -140,7 +150,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('/permissions/store', [RoleController::class, 'storePermission'])->name('permissions.store');
     Route::put('/permissions/update/{id}', [RoleController::class, 'updatePermission'])->name('permissions.update');
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
-    
+
     Route::resource('/users', TeacherController::class);
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);

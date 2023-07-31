@@ -47,15 +47,15 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">About</a>
                         <ul class="dropdown-menu animated #">
 
-                            <li><a href="">Mission &amp; Vision</a></li>
+                            <li><a href="{{ route('front.faculties.mission', [request()->segment(2)]) }}">Mission &amp; Vision</a></li>
 
                         </ul>
                     </li>
                     <li class="dropdown on">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Academics</a>
                         <ul class="dropdown-menu animated #">
-                            <li><a href="">Academic Departments</a></li>
-                            <li><a href="">Academic calendar</a></li>
+                            <li><a href="{{ route('front.faculties.departments', [request()->segment(2)]) }}">Academic Departments</a></li>
+                            <li><a href="{{ route('front.academic.calendar', [request()->segment(2)]) }}">Academic calendar</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

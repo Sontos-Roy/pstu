@@ -77,6 +77,18 @@
                                         <li><a title="twitter" href="{{ $teacher->userDetails ? $teacher->userDetails->twitter : '' }}"><i class="zmdi zmdi-twitter"></i></a></li>
                                         <li><a title="instagram" href="{{ $teacher->userDetails ? $teacher->userDetails->youtube : '' }}"><i class="zmdi zmdi-youtube"></i></a></li>
                                     </ul>
+
+                                    <div class="dropdown">
+                                      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        Details
+                                      </button>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ route('admin.user_educations.create')}}?user_id={{$teacher->id}}">Education Add</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                      </div>
+                                    </div>
+
                                 </td>
                             </tr>
                             @endforeach

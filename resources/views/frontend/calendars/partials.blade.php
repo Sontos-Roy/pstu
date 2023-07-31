@@ -1,6 +1,6 @@
 <div class="col-sm-12" style="overflow-x:auto;">
     <div class="panel panel-default">
-        <div class="panel-heading" style="color: white; background: #213e5e">Department of Accounting &amp; Information Systems</div>
+        <div class="panel-heading" style="color: white; background: #213e5e">Department of {{ $department->name }}</div>
         <div class="panel-body">
             <table class="table table-bordered table-style table-striped">
                 <tbody>

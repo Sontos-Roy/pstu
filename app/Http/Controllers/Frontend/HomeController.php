@@ -132,9 +132,6 @@ class HomeController extends Controller
         return view('frontend.institutes.index', $this->data);
     }
 
-
-
-
     function programs(Request $request){
         $input = $request->input('name');
         $select = $request->input('department');
@@ -206,15 +203,22 @@ class HomeController extends Controller
         return view('frontend.libraries', $this->data);
     }
 
-    function academicCalendar($faculty = null, $department = null){
-        $this->data['faculties'] = Faculty::all();
+    function academicCalendar($faculty = null){
+
+        if($faculty){
+            $this->data['faculties'] = Faculty::whereSlug($faculty)->get();
+        }else{
+            $this->data['faculties'] = Faculty::all();
+        }
 
         return view('frontend.calendars.index', $this->data);
     }
     function CalendarsHtml(){
         $data = AcademicCalendar::where('department_id', request()->id)->get();
 
-        $html = view('frontend.calendars.partials', compact('data'))->render();
+        $department = Department::find(request()->id);
+
+        $html = view('frontend.calendars.partials', compact('data', 'department'))->render();
 
         return response()->json(['status'=>true, 'html' => $html]);
     }

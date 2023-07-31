@@ -69,7 +69,7 @@
                                     <li><a href="">PhD in Applied Mathematics</a></li>
                                 </ul>
                             </li>
-                            <li><a href="">Academic Calendar</a></li>
+                            <li><a href="{{ route('front.departments.calendar', [request()->segment(2)]) }}">Academic Calendar</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
