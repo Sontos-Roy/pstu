@@ -83,9 +83,12 @@
                                         Details
                                       </button>
                                       <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('admin.user_educations.create')}}?user_id={{$teacher->id}}">Education Add</a>
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                        <a class="dropdown-item" href="#">Link 3</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_educations.create')}}?user_id={{$teacher->id}}">Education Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_experience.create')}}?user_id={{$teacher->id}}">Experience Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_awards.create')}}?user_id={{$teacher->id}}">Award Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_memberships.create')}}?user_id={{$teacher->id}}">Membership Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_interest.create')}}?user_id={{$teacher->id}}">Research Interest Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_supervision.create')}}?user_id={{$teacher->id}}">Research Supervision Add</a>
                                       </div>
                                     </div>
 

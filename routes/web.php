@@ -1,5 +1,4 @@
 <?php
-
 use App\Models\UniversityOrdinance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -152,6 +151,9 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
 
     Route::resource('/users', TeacherController::class);
+    Route::post('/user-profile/{id}', [TeacherController::class, 'userProfile'])->name('user.userProfile');
+
+
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);
     Route::resource('/settings', SettingController::class);

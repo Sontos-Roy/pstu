@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\UserResearchInterest;
+use App\Models\User;
+
 
 class UserResearchInterestController extends Controller
 {
@@ -15,12 +18,11 @@ class UserResearchInterestController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        $user=User::find(request('user_id'));
+
+        $view=view('backend.teachers.add_research_interest', compact('user'))->render();
+        return response()->json(['html'=>$view]);
     }
 
     /**
@@ -28,8 +30,20 @@ class UserResearchInterestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'subject' => 'required',
+            'research' => 'required',
+            'description' => '',
+            'user_id' => '',
+        ]);
+
+        $data['created_by'] = \Auth::id();
+        $create = UserResearchInterest::create($data);
+
+        return response()->json(['status'=> true, 'msg'=> 'User Research Interest Created Successful']);
+
     }
+
 
     /**
      * Display the specified resource.

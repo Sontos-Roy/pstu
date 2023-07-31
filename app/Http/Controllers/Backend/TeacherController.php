@@ -119,9 +119,18 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         $this->data['teacher'] = User::find($id);
-
+        
         return view('backend.teachers.view', $this->data);
     }
+
+
+    public function userProfile(string $id)
+    {
+        $this->data['teacher'] = User::find($id);
+
+        return view('backend.teachers.profile', $this->data);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
