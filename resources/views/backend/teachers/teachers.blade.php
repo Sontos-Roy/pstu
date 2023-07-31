@@ -33,7 +33,7 @@
                                 <th>Department</th>
                                 <th>Position</th>
                                 <th>role</th>
-                                
+
                                 <th>Address</th>
                                 <th>Website</th>
                                 <th>Action</th>
@@ -49,7 +49,7 @@
                                 <td>{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}</td>
                                 <td>
                                     @foreach($teacher->roles as $role)
-                                    
+
                                     <span class="badge badge-info">{{$role->name}}</span>
                                     @endforeach
                                 </td>

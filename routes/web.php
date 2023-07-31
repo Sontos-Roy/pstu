@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\AcademicCalendarController;
+use App\Http\Controllers\Backend\AdmissionController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FacultyController;
@@ -181,6 +182,8 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('/missionvision', VisionMissionController::class);
     Route::post('change-page-status/{id}', [PageController::class, 'changeStatus'])->name('change.page.status');
     Route::get('get-departments', [BackendHomeController::class, 'getDepartments'])->name('get.departments');
+    Route::resource('/admissions', AdmissionController::class);
+
 });
 
 Auth::routes();

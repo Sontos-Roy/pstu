@@ -129,7 +129,7 @@
                     @can('missionvision.view')
                     <li class="{{ in_array($currentUrl, ['admin.missionvision.index']) ? 'active' : '' }}"><a href="{{ route('admin.missionvision.index') }}">Vision & Mission</a></li>
                     @endcan
-                    
+
                     @can('home_block_types.view')
                     <li class="{{ in_array($currentUrl, ['admin.home_block_types.index']) ? 'active' : '' }}"><a href="{{ route('admin.home_block_types.index') }}">Home Blocks </a></li>
                     @endcan
@@ -207,7 +207,7 @@
             @php
                 $programs = ['admin.programs.index', 'admin.programs.create'];
             @endphp
-            
+
             @if(auth()->user()->can('programs.view') || auth()->user()->can('programs.create'))
 
             <li class="{{ in_array($currentUrl, $programs) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city-alt"></i><span>Programs</span> </a>
@@ -226,6 +226,7 @@
                 $news = ['admin.news.index', 'admin.news.add'];
                 $events = ['admin.events.index', 'admin.events.create'];
                 $notices = ['admin.notices.index', 'admin.notices.create'];
+                $admissions = ['admin.admissions.index', 'admin.admissions.create'];
                 $libraries = ['admin.libraries.index', 'admin.libraries.create'];
                 $academic_calendars = ['admin.academic_calendars.index', 'admin.academic_calendars.create'];
                 $offices = ['admin.offices.index', 'admin.offices.create'];
@@ -311,6 +312,18 @@
                 </ul>
             </li>
             @endif
+            @if(auth()->user()->can('admissions.view') || auth()->user()->can('admissions.create'))
+            <li class="{{ in_array($currentUrl, $admissions) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Admissions</span> </a>
+                <ul class="ml-menu">
+                    @can('admissions.view')
+                    <li class="{{ in_array($currentUrl, ['admin.admissions.index']) ? 'active' : '' }}"> <a href="{{ route('admin.admissions.index') }}">Admissions List</a></li>
+                    @endcan
+                    @can('admissions.create')
+                    <li class="{{ in_array($currentUrl, ['admin.admissions.create']) ? 'active' : '' }}"> <a href="{{ route('admin.admissions.create') }}">Create Admissions</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
 
             @if(auth()->user()->can('researchs.view') || auth()->user()->can('researchs.create'))
             <li class="{{ in_array($currentUrl, $researchs) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Researches</span> </a>
@@ -329,7 +342,7 @@
                 $permissions = ['admin.permissions.index', 'admin.permissions.add'];
                 $roles = ['admin.roles.index', 'admin.roles.create'];
             @endphp
-            
+
             @if(auth()->user()->can('permissions.view') || auth()->user()->can('roles.view'))
             <li class="{{ in_array($currentUrl, $permissions) || in_array($currentUrl, $roles) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-key"></i><span>Role & Permissions</span> </a>
                 <ul class="ml-menu">
@@ -351,7 +364,7 @@
             <li class="{{ in_array($currentUrl, ['admin.settings.index']) ? 'active' : '' }}">
                 <a href="{{ route('admin.settings.index') }}"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
             @endif
-            
+
 
             <li style="height: 100px;">
                  
