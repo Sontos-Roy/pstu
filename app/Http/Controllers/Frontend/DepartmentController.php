@@ -35,6 +35,5 @@ class DepartmentController extends Controller
         $data['data'] = MissionVission::where('department_id', $department->id)->first();
 
         return view('frontend.mission', $data);
-
     }
 }

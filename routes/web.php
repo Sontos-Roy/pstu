@@ -33,6 +33,7 @@ use App\Http\Controllers\Frontend\DepartmentController;
 use App\Http\Controllers\Frontend\FacultiesController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\InstituteController;
+use App\Http\Controllers\Frontend\OfficeController as FrontendOfficeController;
 use App\Http\Controllers\Frontend\TeacherController as FrontendTeacherController;
 use App\Models\UniversityOrdinance;
 use Illuminate\Support\Facades\Auth;
@@ -112,6 +113,11 @@ Route::group(['as'=>'front.'], function(){
     Route::controller(FrontendTeacherController::class)->group(function(){
         Route::get('dean-or-faculties', 'getDeans')->name('get.deans');
         Route::get('head-of-departments', 'getHeads')->name('get.heads');
+    });
+    Route::controller(FrontendOfficeController::class)->group(function(){
+        Route::get('offices', 'allOffices')->name('all.offices');
+        Route::get('office/{slug}', 'officeShow')->name('office.show');
+        Route::get('officers', 'Officers')->name('officers');
     });
 });
 
