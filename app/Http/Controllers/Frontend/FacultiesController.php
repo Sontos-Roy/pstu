@@ -25,13 +25,13 @@ class FacultiesController extends Controller
         $this->data['mission'] = MissionVission::where('faculty_id', $faculty->id)->first();
 
         $this->data['departments'] = $departments->get();
-        $this->data['newses'] = News::orderBy('id', 'DESC')->whereIn('depertment_id', $departmentsId)->take(6)->get();
-        $this->data['researchs'] = Research::orderBy('id', 'DESC')->whereIn('department_id', $departmentsId)->take(6)->get();
+        $this->data['newses'] = News::orderBy('id', 'DESC')->where('faculty_id', $faculty->id)->take(6)->get();
+        $this->data['researchs'] = Research::orderBy('id', 'DESC')->where('faculty_id', $faculty->id)->take(6)->get();
         $this->data['sliders'] = Slider::where('isActive', 1)
         ->where('faculty_id', $faculty->id)
         ->where('select_for', "faculty")
         ->get();
-        $this->data['notices'] = Notice::whereIn('depertment_id', $departmentsId)->get();
+        $this->data['notices'] = Notice::where('faculty_id', $faculty->id)->get();
 
         return view('frontend.faculties.faculties_show', $this->data);
     }
@@ -59,7 +59,7 @@ class FacultiesController extends Controller
     }
 
     function getCalendar($slug){
-        
+
     }
 }
 
