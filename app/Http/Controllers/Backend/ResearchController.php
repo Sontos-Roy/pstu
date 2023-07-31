@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\Research;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,7 @@ class ResearchController extends Controller
     public function create()
     {
         $this->data['departments'] = Department::all();
+        $this->data['faculties'] = Faculty::all();
 
         return view('backend.researchs.add', $this->data);
     }
@@ -84,6 +86,7 @@ class ResearchController extends Controller
     {
         $this->data['research'] = Research::find($id);
         $this->data['departments'] = Department::all();
+        $this->data['faculties'] = Faculty::all();
 
         return view('backend.researchs.edit', $this->data);
     }
