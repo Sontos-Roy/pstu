@@ -8,9 +8,11 @@
                 <h2>All Events</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('events.create')
             <div>
                 <a href="{{ route('admin.events.create') }}" class="btn btn-raised btn-defualt">Add Event</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -46,15 +48,20 @@
                                         <a href="{{ route('admin.events.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             visibility
                                             </span></a>
+                                        @can('events.edit')
                                         <a href="{{ route('admin.events.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
-                                            </span></a>
-                                    <form action="{{ route('admin.events.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            </span>
+                                        </a>
+                                        @endcan
+                                        @can('events.delete')
+                                        <form action="{{ route('admin.events.destroy', $item->id) }}" class="delete_form" method="POST">
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             delete
                                             </span></button>
-                                    </form>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

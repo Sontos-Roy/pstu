@@ -8,9 +8,11 @@
                 <h2>All Images</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('images.create')
             <div>
                 <a href="javascript:void(0)" class="btn btn-raised btn-defualt" data-toggle="modal" data-target="#createsetting">Add Image</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -41,15 +43,19 @@
                                 <td>{{ $item->program->title }}</td>
                                 <td>
                                     <div class="d-flex">
+                                        @can('images.edit')
                                         <a href="{{ route('admin.images.edit', $item->id) }}" class="btn modal_btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
-                                    <form action="{{ route('admin.images.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
+                                        @endcan
+                                        @can('images.delete')
+                                        <form action="{{ route('admin.images.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                                delete
+                                                </span></button>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

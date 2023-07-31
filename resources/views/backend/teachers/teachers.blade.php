@@ -13,9 +13,11 @@
                 <h2>All Staff</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
+            @can('users.create')
             <div>
                 <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add Staff</a>
             </div>
+            @endcan
         </div>
     </div>
     <style>
@@ -39,26 +41,32 @@
     </style>
     <div class="row clearfix">
         @foreach ($teachers as $teacher)
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
             <div class="card">
                 <div class="body">
                     <ul class="header-dropdown">
                         <li class="dropdown"> <a href="javascript:void(0);" class="px-2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{{ route('admin.users.show', $teacher->id) }}">Show Profile</a></li>
+                                @can('users.edit')
                                 <li><a href="{{ route('admin.users.edit', $teacher->id) }}">Edit Profile</a></li>
+                                @endcan
+                                @can('users.delete')
                                 <li>
                                     <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
                                         @method('DELETE')
                                         <button type="submit" class="btn shadow-none btn-sm">Delete Profile</button>
                                     </form>
                                 </li>
+                                @endcan
                             </ul>
                         </li>
                     </ul>
                     <div class="member-card verified">
                         <div class="thumb-xl member-thumb">
-                            <img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" class="img-thumbnail rounded-circle profile_image" alt="profile-image">
+                            <img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" 
+                            width="80" 
+                            class="img-thumbnail rounded-circle profile_image" alt="profile-image">
                         </div>
 
 
