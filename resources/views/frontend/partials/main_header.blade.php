@@ -294,7 +294,7 @@
                                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
                                                         Halls and
                                                         Hostel</a></li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Head of
+                                                <li><a href="{{ route('front.officers') }}"><i class="fas fa-angle-double-right"></i> Head of
                                                         Offices</a></li>
 
                                             </ul>
@@ -304,7 +304,7 @@
                                         <h6 class="title menuTitle">Others</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> All
+                                                <li><a href="{{ route('front.all.offices') }}"><i class="fas fa-angle-double-right"></i> All
                                                         Offices</a></li>
                                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
                                                         Faculty Member

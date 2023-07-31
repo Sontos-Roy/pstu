@@ -38,9 +38,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                 <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="">
-                <img src="{{ getImage('settings', getSetting('logo')) }}" width="84" class="logo" alt="Logo">
-                </a>
+
             </div>
             <!-- End Header Navigation -->
 
