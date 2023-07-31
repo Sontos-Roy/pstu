@@ -20,74 +20,73 @@
             @endcan
         </div>
     </div>
-    <style>
-        .header-dropdown{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .shadow-none{
-            box-shadow: none !important;
-            cursor: pointer;
-            width: 100%;
-        }
-        .shadow-none:hover{
-            background-color: rgba(0,0,0,0.075) !important;
-        }
-        .profile_image{
-            aspect-ratio: 3 / 3;
-        }
-
-    </style>
     <div class="row clearfix">
-        @foreach ($teachers as $teacher)
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="body">
-                    <ul class="header-dropdown">
-                        <li class="dropdown"> <a href="javascript:void(0);" class="px-2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="{{ route('admin.users.show', $teacher->id) }}">Show Profile</a></li>
-                                @can('users.edit')
-                                <li><a href="{{ route('admin.users.edit', $teacher->id) }}">Edit Profile</a></li>
-                                @endcan
-                                @can('users.delete')
-                                <li>
-                                    <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
+                <div class="body table-responsive">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>role</th>
+                                
+                                <th>Address</th>
+                                <th>Website</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teachers as $key=>$teacher)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td><img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" width="80" alt=""></td>
+                                <td>{{ StrLimit($teacher->name, 100) }}</td>
+                                <td>{{ $teacher->userDetails && $teacher->userDetails->department ? $teacher->userDetails->department->name : '' }}</td>
+                                <td>{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}</td>
+                                <td>
+                                    @foreach($teacher->roles as $role)
+                                    
+                                    <span class="badge badge-info">{{$role->name}}</span>
+                                    @endforeach
+                                </td>
+                                <td>{{ $teacher->userDetails ? $teacher->userDetails->present_address : '' }}</td>
+                                <td>{{ Str::limit($teacher->userDetails ? $teacher->userDetails->website : '', 20, '...') }}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.users.show', $teacher->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">
+                                            show
+                                        </a>
+                                        @can('users.edit')
+                                        <a href="{{ route('admin.users.edit', $teacher->id) }}" class="btn btn-primary waves-effect pull-right btn-xs" style="color: white;">edit
+                                        </a>
+                                        @endcan
+                                        @can('users.delete')
+                                        <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
                                         @method('DELETE')
-                                        <button type="submit" class="btn shadow-none btn-sm">Delete Profile</button>
-                                    </form>
-                                </li>
-                                @endcan
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="member-card verified">
-                        <div class="thumb-xl member-thumb">
-                            <img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" 
-                            width="80" 
-                            class="img-thumbnail rounded-circle profile_image" alt="profile-image">
-                        </div>
+                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                        </form>
+                                        @endcan
+                                    </div>
 
-
-                        <div class="m-t-20">
-                            <h4 class="m-b-0">{{ $teacher->name }}</h4>
-                            <p class="text-muted">{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}<span> <br> <strong>{{ $teacher->userDetails && $teacher->userDetails->department ? $teacher->userDetails->department->name : '' }}</strong> <a href="{{ $teacher->userDetails ? $teacher->userDetails->website : '' }}" class="text-pink">{{ Str::limit($teacher->userDetails ? $teacher->userDetails->website : '', 20, '...') }}</a> </span></p>
-                        </div>
-
-                        <p class="text-muted">{{ $teacher->userDetails ? $teacher->userDetails->present_address : '' }}</p>
-                        <a href="{{ route('admin.users.show', $teacher->id) }}" class="btn btn-raised btn-default">View Profile</a>
-                        <ul class="social-links  m-t-10">
-                            <li><a title="facebook" href="{{ $teacher->userDetails ? $teacher->userDetails->facebook : '' }}"><i class="zmdi zmdi-facebook"></i></a></li>
-                            <li><a title="twitter" href="{{ $teacher->userDetails ? $teacher->userDetails->twitter : '' }}"><i class="zmdi zmdi-twitter"></i></a></li>
-                            <li><a title="instagram" href="{{ $teacher->userDetails ? $teacher->userDetails->youtube : '' }}"><i class="zmdi zmdi-youtube"></i></a></li>
-                        </ul>
-                    </div>
+                                    <ul class="social-links  m-t-10 d-none">
+                                        <li><a title="facebook" href="{{ $teacher->userDetails ? $teacher->userDetails->facebook : '' }}"><i class="zmdi zmdi-facebook"></i></a></li>
+                                        <li><a title="twitter" href="{{ $teacher->userDetails ? $teacher->userDetails->twitter : '' }}"><i class="zmdi zmdi-twitter"></i></a></li>
+                                        <li><a title="instagram" href="{{ $teacher->userDetails ? $teacher->userDetails->youtube : '' }}"><i class="zmdi zmdi-youtube"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
+
     {{ $teachers->links('pagination::bootstrap-4') }}
 </div>
 @endsection
