@@ -23,7 +23,7 @@ class TeacherController extends Controller
         // $this->data['teachers'] = User::join('user_details', 'users.id', '=', 'user_details.user_id')
         // ->orderBy('users.name', 'ASC')
         // ->get();;
-        $role = Role::where('name', 'teacher')->firstOrFail();
+        $role = Role::where('name', 'Dean')->firstOrFail();
         $teacherUserIds = $role->users()->pluck('id')->toArray();
 
         $this->data['teachers'] = User::whereIn('id', $teacherUserIds)->orderBy('name')->paginate(6 );

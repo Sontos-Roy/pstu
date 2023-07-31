@@ -64,11 +64,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 @endsection
 
 @push('script')
@@ -92,16 +87,16 @@
             }
         });
     })
-        $('#departments').on('change', function() {
+        $('#department_id').on('change', function() {
         var facultyId = $(this).val();
         $.ajax({
-            url: '{{ route("admin.get.departments")}}',
+            url: '{{ route("front.get.calendars")}}',
             type: 'GET',
             dataType: 'json',
             data:{
                 id: facultyId
             },
-            success: function(status, data) {
+            success: function(data) {
                 $(document).find('#show_result').empty();
 
                 $('#show_result').html(data.html)

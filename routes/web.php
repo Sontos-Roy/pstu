@@ -58,6 +58,8 @@ Route::group(['as'=>'front.'], function(){
     Route::controller(HomeController::class)->group(function(){
         Route::get('/', 'index')->name('home');
         Route::get('/notices', 'notices')->name('notices');
+        Route::get('/block/{slug}', 'blockShow')->name('block.show');
+        Route::get('/block/details/{slug}', 'blockDetailsShow')->name('block.details.show');
         Route::get('/departments', 'departments')->name('departments');
         Route::get('/programs', 'programs')->name('programs');
         Route::get('/libraries', 'libraries')->name('libraries');
@@ -102,6 +104,7 @@ Route::group(['as'=>'front.'], function(){
 
             Route::get('/{slug}', 'departmentShow')->name('show');
             Route::get('/intro/{slug}', 'departmentShow')->name('intro');
+            Route::get('/mission/{slug}', 'missionShow')->name('mission');
 
         });
     });
@@ -114,7 +117,7 @@ Route::group(['as'=>'front.'], function(){
 
 // Frontend
 
-Route::group(['middleware' => ['auth', 'role:Admin'], 'as' => 'admin.', 'prefix'=>'admin'], function(){
+Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
     Route::get('/', function () {
         return redirect()->route('admin.home');
     });

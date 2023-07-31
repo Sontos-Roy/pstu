@@ -240,9 +240,9 @@
                                         <h6 class="title menuTitle">Admission</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/undergraduatePrograms"><i class="fas fa-angle-double-right"></i> Undergraduate
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Undergraduate
                                                         Programs</a></li>
-                                                <li><a href="https://www.du.ac.bd/graduatePrograms"><i class="fas fa-angle-double-right"></i> Graduate
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Graduate
                                                         Programs</a></li>
                                                 <li><a target="_blank" href=""><i class="fas fa-angle-double-right"></i>
                                                         MPhil Programs</a>
@@ -288,13 +288,13 @@
                                         <h6 class="title menuTitle">Head of Administrative Offices</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/leadershipList/director_research_center"><i class="fas fa-angle-double-right"></i> Directors
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Directors
                                                         of
                                                         Research Centers &amp; Bureau</a></li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/provost"><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
                                                         Halls and
                                                         Hostel</a></li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/office_head"><i class="fas fa-angle-double-right"></i> Head of
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Head of
                                                         Offices</a></li>
 
                                             </ul>
@@ -304,13 +304,13 @@
                                         <h6 class="title menuTitle">Others</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/all_offices"><i class="fas fa-angle-double-right"></i> All
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> All
                                                         Offices</a></li>
-                                                <li><a href="https://www.du.ac.bd/faculty_member"><i class="fas fa-angle-double-right"></i>
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i>
                                                         Faculty Member
                                                         Profile</a>
                                                 </li>
-                                                <li><a href="https://www.du.ac.bd/staff_information"><i class="fas fa-angle-double-right"></i> Officer Profile</a>
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Officer Profile</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -333,17 +333,17 @@
                                 Facilities</h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                    <li><a href="https://www.du.ac.bd/scholarship_financial_aid"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Scholarships &amp;
                                             Financial Aids</a></li>
-                                    <li><a href="https://www.du.ac.bd/students/HallsResidence" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Halls of Residence
                                         </a></li>
-                                    <li><a href="https://www.du.ac.bd/students/Transport"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Transport
                                             Facilities</a>
                                     </li>
-                                    <li><a href="https://www.du.ac.bd/students/Insurance"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Health Insurance </a>
                                     </li>
 
@@ -355,23 +355,23 @@
                             </h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                    <li><a href="https://service.du.ac.bd/home" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply for
                                             Certificate/Marksheet</a>
                                     </li>
-                                    <li><a href="https://studentscholarship.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply
                                             for Govt. Scholarships</a>
                                     </li>
-                                    <li><a href="http://result.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Examination
                                             Results</a>
                                     </li>
-                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply for
                                             Transcript</a>
                                     </li>
-                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Exam Form Fill-up</a>
                                     </li>
                                 </ul>
@@ -381,7 +381,7 @@
                             <h6 class="title menuTitle">Alumni</h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                        <li><a href="https://duaa-bd.org/"><i class="fas fa-angle-double-right"></i>
+                                        <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Alumni
                                             Association</a>
                                         </li>
@@ -392,9 +392,60 @@
                         </li>
                         </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">Research
+                                <span></span></a>
+
+                            <ul class="dropdown-menu menuBody animated fadeOutUp" style="display: none; opacity: 1;">
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Research Centers &amp; Bureaus</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Research &amp; Publications</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Research Collaboration</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> Funded
+                                        Projects</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                        University Journals</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">Links
+                                <span></span></a>
+
+                            <ul class="dropdown-menu menuBody animated">
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                        Registered Graduate</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        DU Login</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Student Login</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Telephone and Email Index</a></li>
+
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> DU Forms</a>
+                                </li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> Approved
+                                        NOC/GO</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                        E-Tender</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i> DU Jobs</a>
+                                </li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> Trust
+                                        Funds</a></li>
+
+                                <li><a href="{{ route('front.notices') }}"><i class="fas fa-angle-double-right"></i> Notice</a>
+                                </li>
+                                <li><a href="{{ route('front.news') }}"><i class="fas fa-angle-double-right"></i> Latest
+                                        News</a>
+                                </li>
+                                <li><a href="{{ route('front.events') }}"><i class="fas fa-angle-double-right"></i> Events</a>
+                                </li>
+                            </ul>
+                        </li>
 
 
-                </ul>
+                    </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

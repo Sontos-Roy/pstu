@@ -15,17 +15,17 @@
                         <th>Final Exam Start Date</th>
                         <th class="width-10per">Final Exam End  Date (Appox.)</th>
                     </tr>
-                    @forelse ($dates as $data)
+                    @forelse ($data as $item)
                     <tr>
-                        <td>1st Year BBA 2nd Sem.(28th Batch)</td>
-                        <td>2021-2022</td>
-                        <td>05-02-2023</td>
-                        <td>12-03-2023</td>
-                        <td>30-04-2023</td>
-                        <td>11-05-2023</td>
-                        <td></td>
-                        <td>21-05-2023</td>
-                        <td>22-06-2023</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->academic_year }}</td>
+                        <td>{{ $item->class_start }}</td>
+                        <td>{{ $item->first_mid_term }}</td>
+                        <td>{{ $item->second_mid_term }}</td>
+                        <td>{{ $item->field_work }}</td>
+                        <td>{{ $item->class_completion }}</td>
+                        <td>{{ $item->final_exam_start }}</td>
+                        <td>{{ $item->final_exam_end }}</td>
                     </tr>
                     @empty
                     <h2>Empty</h2>
