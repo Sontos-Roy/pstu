@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Event;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +27,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("backend.events.add");
+        $this->data['faculties'] = Faculty::all();
+        $this->data['departments'] = Department::all();
+        return view("backend.events.add", $this->data);
     }
 
     /**
@@ -38,6 +42,8 @@ class EventController extends Controller
             'short' => 'required',
             'date' => 'date',
             'time' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'message' => 'required',
             'image' => 'image'
         ]);
@@ -75,6 +81,8 @@ class EventController extends Controller
     public function edit(string $id)
     {
         $this->data['event'] = Event::find($id);
+        $this->data['faculties'] = Faculty::all();
+        $this->data['departments'] = Department::all();
 
         return view('backend.events.edit', $this->data);
     }
@@ -89,6 +97,8 @@ class EventController extends Controller
             'short' => 'required',
             'date' => '',
             'time' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'message' => 'required',
             'image' => 'image'
         ]);

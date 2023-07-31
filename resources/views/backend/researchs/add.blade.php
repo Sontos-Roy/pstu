@@ -24,6 +24,19 @@
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <label for="">Select Faculty</label>
+                                    <div class="form-line">
+                                        <select name="faculty_id" id="" class="select2 form-control">
+                                            <option value="">Select Faculty</option>
+                                            @foreach ($faculties as $faculty)
+                                                <option value="{{ $faculty->id }}">{{ $faculty->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
                                     <label for="">Select Departments</label>
                                     <div class="form-line">
                                         <select name="department_id" id="" class="select2 form-control">

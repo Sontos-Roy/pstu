@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class NoticeController extends Controller
     public function index()
     {
         $this->data['notices'] = Notice::orderBy("id", "DESC")->get();
+
 
         return view('backend.notices.index', $this->data);
     }
@@ -33,6 +35,7 @@ class NoticeController extends Controller
             $query->where('user_id', Auth::id());
         }
         $this->data['departments'] = $query->get();
+        $this->data['faculties'] = Faculty::all();
 
         return view('backend.notices.add', $this->data);
     }
@@ -90,6 +93,7 @@ class NoticeController extends Controller
     {
         $this->data['notice'] = Notice::find($id);
         $this->data['departments'] = Department::all();
+        $this->data['faculties'] = Faculty::all();
 
         return view('backend.notices.edit', $this->data);
     }
