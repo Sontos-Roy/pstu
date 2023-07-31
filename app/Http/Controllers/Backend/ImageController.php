@@ -17,8 +17,15 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $this->data['images'] = Image::paginate(10);
-        $this->data['faculties'] = Faculty::all();
+
+        $query= Image::query();
+                if(auth()->user()->hasRole('faculty')){
+                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                }
+        $this->data['images'] =$query->paginate(10);
+
+
+        $this->data['faculties'] = getFaculty();
         $this->data['departments'] = Department::all();
         $this->data['programs'] = Program::all();
         $this->data['institutes'] = Institutes::all();

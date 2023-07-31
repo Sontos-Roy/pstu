@@ -88,4 +88,11 @@ class User extends Authenticatable
 
     }
 
+    public function faculties(){
+        return $this->hasMany(Faculty::class, 'user_id');
+    }
+
+
+
+
 }

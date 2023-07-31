@@ -17,7 +17,13 @@ class EventController extends Controller
      */
     public function index()
     {
-        $this->data['events'] = Event::orderBy('id', 'DESC')->get();
+
+        $query= Event::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                }
+        $this->data['events'] =$query->get();
+
 
         return view("backend.events.index", $this->data);
     }
@@ -27,7 +33,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $this->data['faculties'] = Faculty::all();
+        $this->data['faculties'] = getFaculty();
         $this->data['departments'] = Department::all();
         return view("backend.events.add", $this->data);
     }
@@ -81,7 +87,7 @@ class EventController extends Controller
     public function edit(string $id)
     {
         $this->data['event'] = Event::find($id);
-        $this->data['faculties'] = Faculty::all();
+        $this->data['faculties'] = getFaculty();
         $this->data['departments'] = Department::all();
 
         return view('backend.events.edit', $this->data);

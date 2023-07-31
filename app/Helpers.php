@@ -35,17 +35,6 @@ if (!function_exists('getSetting')) {
     }
 }
 
-// function getImage($folder=null,$file=null){
-//     $url = asset("images/nothing.png");
-//     $path = public_path('images/'.$folder.'/'.$file);
-//     if (!empty($folder) && (!empty($file))) {
-//         if(file_exists($path)){
-//             $url = asset('images/'.$folder.'/'.$file);
-//         }
-//     }
-//     return $url;
-// }
-
 
 
 function getImage($folder=null,$file=null){
@@ -162,4 +151,15 @@ function getStudentPage()
 
     $studentPages = StudentsPages::take(6)->get();
     return $studentPages;
+}
+
+    function getFaculty(){
+
+    $query = Faculty::select('title','id');
+            if(auth()->user()->hasRole('faculty')){
+                $query->whereIn('id', auth()->user()->faculties()->pluck('id'));
+            }
+    return $query->get();
+
+
 }
