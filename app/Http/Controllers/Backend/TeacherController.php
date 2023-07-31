@@ -19,11 +19,8 @@ class TeacherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // $this->data['teachers'] = User::join('user_details', 'users.id', '=', 'user_details.user_id')
-        // ->orderBy('users.name', 'ASC')
-        // ->get();;
+    public function index(){
+        
         $role = Role::where('name', 'Dean')->firstOrFail();
         $teacherUserIds = $role->users()->pluck('id')->toArray();
 
@@ -121,9 +118,18 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         $this->data['teacher'] = User::find($id);
-
+        
         return view('backend.teachers.view', $this->data);
     }
+
+
+    public function userProfile(string $id)
+    {
+        $this->data['teacher'] = User::find($id);
+
+        return view('backend.teachers.profile', $this->data);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

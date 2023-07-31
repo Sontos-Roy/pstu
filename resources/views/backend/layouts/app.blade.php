@@ -235,8 +235,8 @@
     @yield('content')
 </section>
 <!-- main content -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
-</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 <div class="color-bg"></div>
 <style>
     .pagination{
@@ -437,10 +437,6 @@ $(document).ready(function() {
         type: 'GET',
         data: {},
         success: function(data) {
-            // Populate the modal with received data
-            // $('#name').val(data.name);
-
-            // Open the modal
             $('#editModal').html(data.html).modal('show');
         },
         error: function(xhr, status, error) {

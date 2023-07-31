@@ -51,4 +51,41 @@ class User extends Authenticatable
     function department(){
         return $this->hasOne(Department::class);
     }
+
+    public function awards(){
+
+        return $this->hasMany(UserAward::class, 'user_id');
+
+    }
+
+    public function educations(){
+
+        return $this->hasMany(UserEducation::class, 'user_id');
+
+    }
+
+    public function experiences(){
+
+        return $this->hasMany(UserExperience::class, 'user_id');
+
+    }
+
+    public function memberships(){
+
+        return $this->hasMany(UserMembership::class, 'user_id');
+
+    }
+
+    public function research_interests(){
+
+        return $this->hasMany(UserResearchInterest::class, 'user_id');
+
+    }
+
+    public function research_supervisions(){
+
+        return $this->hasMany(UserResearchSupervision::class, 'user_id');
+
+    }
+
 }
