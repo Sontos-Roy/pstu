@@ -16,7 +16,12 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $this->data['sliders'] = Slider::all();
+        $query= Slider::query();
+                if(auth()->user()->hasRole('faculty')){
+                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                }
+        $this->data['sliders'] =$query->get();
+
         $this->data['faculties'] = Faculty::all();
         $this->data['departments'] = Department::all();
         return view("backend.homeSlider.index", $this->data);
