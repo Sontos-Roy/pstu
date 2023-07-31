@@ -135,6 +135,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('/permissions/store', [RoleController::class, 'storePermission'])->name('permissions.store');
     Route::put('/permissions/update/{id}', [RoleController::class, 'updatePermission'])->name('permissions.update');
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
+    
     Route::resource('/users', TeacherController::class);
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);

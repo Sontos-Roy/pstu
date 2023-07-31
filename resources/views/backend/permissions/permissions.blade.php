@@ -17,43 +17,56 @@
     <!-- #END# Basic Examples -->
     <!-- Exportable Table -->
     <div class="row clearfix">
+        
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="header">
                     <h2>All Permissions </h2>
                 </div>
                 <div class="body table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                        <thead>
-                            <tr>
-                                <th>no</th>
-                                <th>Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($permissions as $key=>$item)
-                            <tr>
-                                <td>{{ $key+1 }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>
-                                    <div class="d-flex">
-                                        @can("edit-permission")
-                                        <a href="{{ route('admin.permissions.edit', $item->id) }}" class="btn btn-info waves-effect pull-right" style="color: white;">Edit</a>
-                                        @endcan
-                                        @can("delete-permission")
-                                        <form action="{{ route('admin.permissions.delete', $item->id) }}" class="delete_form" method="POST">
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger waves-effect pull-right" style="color: white;">Delete</button>
-                                        </form>
-                                        @endcan
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
+                    <form>
+                    <div class="col-lg-12 col-md-12 col-sm-12 row">
+                        <div class="col-md-3">
+                            <input type="text" name="q" value="{{ request('q') ??''}}" class="form-control" placeholder="Search here" style="border: 1px solid">
+                        </div>
+                        
+                    </div>
+                    </form>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        <th>no</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($permissions as $key=>$item)
+                                    <tr>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @can("edit-permission")
+                                                <a href="{{ route('admin.permissions.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">Edit</a>
+                                                @endcan
+                                                @can("delete-permission")
+                                                <form action="{{ route('admin.permissions.delete', $item->id) }}" class="delete_form" method="POST">
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">Delete</button>
+                                                </form>
+                                                @endcan
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

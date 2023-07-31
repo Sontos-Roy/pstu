@@ -8,9 +8,11 @@
                 <h2>All Block Types</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('home_block_types.create')
             <div>
                 <a href="{{ route('admin.home_block_types.create') }}" class="btn btn-raised btn-defualt">Add Block</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -39,22 +41,27 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
+
                                         <a href="{{ route('admin.home_block_types.show', $item->id) }}" class="btn btn-primary waves-effect pull-right btn-sm" style="color: white;">
                                             <span class="material-symbols-outlined">
                                             visibility
                                             </span>
                                         </a>
 
-
+                                        @can('home_block_types.edit')
                                         <a href="{{ route('admin.home_block_types.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
-                                            </span></a>
-                                    <form action="{{ route('admin.home_block_types.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
+                                            </span>
+                                        </a>
+                                        @endcan
+                                        @can('home_block_types.delete')
+                                        <form action="{{ route('admin.home_block_types.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                                delete
+                                                </span></button>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

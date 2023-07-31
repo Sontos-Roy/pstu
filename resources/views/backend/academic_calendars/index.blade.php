@@ -8,9 +8,11 @@
                 <h2>All Academic Calendar</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('academic_calendars.create')
             <div>
                 <a href="{{ route('admin.academic_calendars.create') }}" class="btn btn-raised btn-defualt">Add Calendar</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -54,15 +56,22 @@
                                 <td>
                                     <div class="d-flex">
 
+                                        @can('academic_calendars.edit')
                                         <a href="{{ route('admin.academic_calendars.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
-                                            </span></a>
-                                    <form action="{{ route('admin.academic_calendars.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
+                                            </span>
+                                        </a>
+                                        @endcan
+
+                                        @can('academic_calendars.delete')
+                                        <form action="{{ route('admin.academic_calendars.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                                delete
+                                                </span>
+                                            </button>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -8,9 +8,11 @@
                 <h2>All News                        </h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('news.create')
             <div>
                 <a href="{{ route('admin.news.create') }}" class="btn btn-raised btn-defualt">Add News</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -41,22 +43,27 @@
                                 <td>{{ $item->user->name }}</td>
                                 <td>
                                     {{ $item->department ? $item->department->name : ''}}
-    </td>
+                                </td>
                                 <td><img src="{{ getImage('news', $item->image) }}" width="100" alt=""></td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('admin.news.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             visibility
                                             </span></a>
+                                        @can('news.edit')
                                         <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
-                                    <form action="{{ route('admin.news.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
+                                        @endcan
+
+                                        @can('news.delete')
+                                        <form action="{{ route('admin.news.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                                delete
+                                                </span></button>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

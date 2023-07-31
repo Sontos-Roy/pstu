@@ -8,9 +8,11 @@
                 <h2>All Faculties</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
+            @can('faculties.create')
             <div>
                 <a href="{{ route('admin.faculties.create') }}" class="btn btn-raised btn-defualt">Add Faculty</a>
             </div>
+            @endcan
         </div>
     </div>
     <!-- Basic Examples -->
@@ -44,15 +46,20 @@
                                         <a href="{{ route('admin.faculties.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             visibility
                                             </span></a>
+                                        @can('faculties.edit')
                                         <a href="{{ route('admin.faculties.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
-                                            </span></a>
-                                    <form action="{{ route('admin.faculties.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
+                                            </span>
+                                        </a>
+                                        @endcan
+                                        @can('faculties.delete')
+                                        <form action="{{ route('admin.faculties.destroy', $item->id) }}" class="delete_form" method="POST">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                                delete
+                                                </span></button>
+                                        </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
