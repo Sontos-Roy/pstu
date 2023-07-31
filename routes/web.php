@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Backend\AcademicCalendarController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
@@ -36,26 +39,28 @@ use App\Http\Controllers\Frontend\InstituteController;
 use App\Http\Controllers\Frontend\OfficeController as FrontendOfficeController;
 use App\Http\Controllers\Frontend\TeacherController as FrontendTeacherController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
-use App\Models\UniversityOrdinance;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Frontend
+use App\Http\Controllers\Backend\UserAwardController;
+use App\Http\Controllers\Backend\UserEducationController;
+use App\Http\Controllers\Backend\UserMembershipController;
+use App\Http\Controllers\Backend\UserResearchInterestController;
+use App\Http\Controllers\Backend\UserExperienceController;
+use App\Http\Controllers\Backend\UserResearchSupervisionController;
+
+Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
+    Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
+    Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
+    Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);
+    Route::resource('user-experience', UserExperienceController::class,['names'=>'user_experience']);
+    Route::resource('user-research-interest', UserResearchInterestController::class,['names'=>'user_research_interest']);
+    Route::resource('user-research-supervision', UserResearchSupervisionController::class,['names'=>'user_research_supervision']);
+
+
+});
+
+
 Route::group(['as'=>'front.'], function(){
     Route::controller(HomeController::class)->group(function(){
         Route::get('/', 'index')->name('home');
@@ -145,6 +150,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
 
     Route::resource('/users', TeacherController::class);
+    Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);
     Route::resource('/settings', SettingController::class);
@@ -176,6 +182,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('change-page-status/{id}', [PageController::class, 'changeStatus'])->name('change.page.status');
     Route::get('get-departments', [BackendHomeController::class, 'getDepartments'])->name('get.departments');
 });
+
 Auth::routes();
 
 

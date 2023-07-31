@@ -9,6 +9,7 @@ use App\Models\UserDetail;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
@@ -109,7 +110,8 @@ class TeacherController extends Controller
         $teacher->userDetails()->save($details);
 
 
-        return response()->json(['status'=>true, 'msg'=>'Teachers Created Successfuly', 'url'=>route('admin.users.index')]);
+
+        return response()->json(['status'=>true, 'msg'=>'User Created Successfuly', 'url'=>route('admin.users.index')]);
 
     }
 
@@ -259,8 +261,11 @@ class TeacherController extends Controller
         }
 
 
-
-        return response()->json(['status'=>true, 'msg'=>'Teachers Updated Successfuly', 'url'=>route('admin.users.index')]);
+        if(Auth::id() == $teacher->id){
+            return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.show', Auth::id())]);
+        }else{
+            return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.index')]);
+        }
     }
 
     /**
