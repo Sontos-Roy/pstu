@@ -204,6 +204,7 @@
             </li>
             @endcan
 
+            <li class="{{ in_array($currentUrl, ['admin.images.index']) ? 'active' : '' }}"><a href="{{ route('admin.images.index') }}"><i class="zmdi zmdi-view-web"></i><span>Images</span></a></li>
 
             <li class="{{ in_array($currentUrl, ['admin.settings.index']) ? 'active' : '' }}"><a href="{{ route('admin.settings.index') }}"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
             <li style="height: 100px;">

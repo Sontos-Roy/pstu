@@ -143,6 +143,42 @@
             </div>
         </div>
     </div>
+    <div class="popular-courses-area weekly-top-items bottom-less default-padding">
+        <div class="container">
+
+            <div class="row">
+                <div class="top-course-items flex-item">
+                    <!-- Single Item -->
+                    @foreach ($blocks as $block)
+                    <div class="col-md-6 col-sm-6 equal-height">
+                        <div class="row">
+                            <div class="item">
+                                <div class="thumb col-md-5" style="background-image: url('{{ getImage('home_blocks',$block->image)}}');">
+                                    <div class="overlay">
+
+                                    </div>
+                                </div>
+                                <div class="info col-md-7">
+                                    <h4>
+                                        <a href="{{ route('front.block.show', $block->slug) }}">{{ $block->name }}</a>
+                                    </h4>
+                                    <ul>
+                                        @foreach ($block->details as $details)
+                                        <li> <a href="{{ route('front.block.details.show', $details->slug) }}">{{ $details->name }}</a> </li>
+                                        @endforeach
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="blog-area default-padding bottom-less">
         <div class="container">
            <div class="row">
@@ -192,191 +228,7 @@
         </div>
     </div>
 
-    <div class="popular-courses-area weekly-top-items bottom-less">
-        <div class="container">
 
-            <div class="row">
-                <div class="top-course-items flex-item">
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/stats.avif') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-                                    <h4>
-                                        <a href="#">About Us</a>
-                                    </h4>
-                                    <ul>
-                                    <li> <a href="{{ route('front.historic.outline') }}">Historic Outline</a> </li>
-                                    <li> <a href="{{ route('front.university.glance') }}">At A Glance</a> </li>
-                                    <li> <a href="{{ route('front.honoris.causa') }}">Honoris Causa</a> </li>
-                                    <li><a href="{{ route('front.vice.chencellors.message', 'vice-chancellor') }}">Message from the Vice Chancellor</a></li>
-                                            <li><a href="{{ route('front.vice.chencellors') }}">List of Vice Chancellors</a></li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/stats2.avif') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-
-                                    <h4>
-                                        <a href="#">Leadership</a>
-                                    </h4>
-                                    <ul>
-                                        @foreach (LeaderShips() as $item)
-                                            <li><a href="{{ route('front.vice.chencellors.message', $item->slug) }}">{{ $item->designation }}</a></li>
-                                            @endforeach
-
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/gov.avif') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-                                    <div class="meta">
-                                        <ul>
-
-
-                                        </ul>
-                                    </div>
-                                    <h4>
-                                        <a href="#">Governance Frameworks</a>
-                                    </h4>
-                                    <ul>
-                                        <li> <a href="{{ route('front.university.ordinances') }}">University Ordinance</a> </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/academic.avif') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-                                    <div class="meta">
-                                        <ul>
-
-
-                                        </ul>
-                                    </div>
-                                    <h4>
-                                        <a href="#">Academics</a>
-                                    </h4>
-                                    <ul>
-                                    <li> <a href="{{ route('front.programs') }}">Programs</a> </li>
-                                    <li> <a href="{{ route('front.faculties.all') }}">Faculties</a> </li>
-                                    <li> <a href="{{ route('front.departments') }}">Departments</a> </li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/comp.webp') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-                                    <div class="meta">
-                                        <ul>
-
-
-                                        </ul>
-                                    </div>
-                                    <h4>
-                                        <a href="#">Administration</a>
-                                    </h4>
-                                    <ul>
-                                        <li> <a href="{{ route('front.get.deans') }}">Deans</a> </li>
-                                        <li> <a href="{{ route('front.get.heads') }}">Chairmans</a> </li>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-6 col-sm-6 equal-height">
-                        <div class="row">
-                            <div class="item">
-                                <div class="thumb col-md-5" style="background-image: url({{ asset('frontend/img/people.jpg') }});">
-                                    <div class="overlay">
-
-                                    </div>
-                                </div>
-                                <div class="info col-md-7">
-                                    <div class="meta">
-                                        <ul>
-
-
-                                        </ul>
-                                    </div>
-                                    <h4>
-                                        <a href="#">Students</a>
-                                    </h4>
-                                    <ul>
-                                        @foreach (getStudentPage() as $item)
-                                                <li><a href="{{ route('front.student.page', $item->slug) }}">
-                                                    {{ $item->title }}
-                                                    </a>
-                                                    </li>
-                                                @endforeach
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                </div>
-            </div>
-        </div>
-    </div>
     <style>
         .top-course-items .item .info{
             min-height: 200px;

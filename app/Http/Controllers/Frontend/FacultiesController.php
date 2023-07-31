@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Faculty;
+use App\Models\Image;
 use App\Models\MissionVission;
 use App\Models\News;
 use App\Models\Notice;
@@ -19,6 +20,7 @@ class FacultiesController extends Controller
         $this->data['faculty'] = $faculty;
         $departments = Department::where('faculty_id', $faculty->id);
         $departmentsId = $departments->pluck('id');
+        $this->data['images'] = Image::where('faculty_id', $faculty->id)->get();
 
         $this->data['mission'] = MissionVission::where('faculty_id', $faculty->id)->first();
 

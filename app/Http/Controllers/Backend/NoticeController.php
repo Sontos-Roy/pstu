@@ -26,7 +26,13 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        $this->data['departments'] = Department::all();
+        $query=Department::query();
+
+        if(Auth::user()->hasRole('Dean')){
+
+            $query->where('user_id', Auth::id());
+        }
+        $this->data['departments'] = $query->get();
 
         return view('backend.notices.add', $this->data);
     }

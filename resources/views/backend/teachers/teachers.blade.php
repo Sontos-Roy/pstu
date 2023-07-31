@@ -1,6 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('content')
+<style>
+    .member-card.verified .member-thumb img {
+        min-width: 280px;
+    }
+</style>
 <div class="container-fluid">
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">

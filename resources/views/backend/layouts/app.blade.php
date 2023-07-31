@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="{{ asset('backend/css/themes/all-themes.css') }}"/>
 </head>
 
-<body class="theme-blush">
+<body class="theme-green">
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">

@@ -8,6 +8,8 @@ use App\Models\Department;
 use App\Models\Event;
 use App\Models\Faculty;
 use App\Models\HistoricalOutline;
+use App\Models\HomeBlock;
+use App\Models\HomeBlockType;
 use App\Models\HonorisCausa;
 use App\Models\Institutes;
 use App\Models\LeaderShip;
@@ -31,7 +33,7 @@ class HomeController extends Controller
     function index(){
 
 
-
+        $this->data['blocks'] = HomeBlockType::take(6)->get();
         $this->data['vc'] = LeaderShip::whereSlug('vice-chancellor')->first();
         $this->data['sliders'] = Slider::where('isActive', 1)->get();
         $this->data['leaderships'] = LeaderShip::whereNot('slug', 'vice-chancellor')->get();
@@ -40,6 +42,17 @@ class HomeController extends Controller
         $this->data['notices'] = Notice::orderBy('id', 'DESC')->take(5)->get();
         $this->data['page'] = Pages::whereSlug('welcome-message')->first();
         return view('frontend.index', $this->data);
+    }
+    function blockShow($slug){
+        $this->data['block'] = HomeBlockType::whereSlug($slug)->first();
+
+        return view('frontend.block-types', $this->data);
+    }
+    function blockDetailsShow($slug){
+        $this->data['item'] = HomeBlock::whereSlug($slug)->first();
+        $this->data['blocks'] = HomeBlockType::all();
+
+        return view('frontend.block-show', $this->data);
     }
     function notices(){
         $this->data['notices'] = Notice::orderBy('id', 'DESC')->paginate(12);
@@ -198,10 +211,10 @@ class HomeController extends Controller
 
         return view('frontend.calendars.index', $this->data);
     }
-    function CalendarsHtml($id){
-        $data = AcademicCalendar::where('department_id', $id)->get();
+    function CalendarsHtml(){
+        $data = AcademicCalendar::where('department_id', request()->id)->get();
 
-        $html = view('frontend.calendars.partials', compact($data))->render();
+        $html = view('frontend.calendars.partials', compact('data'))->render();
 
         return response()->json(['status'=>true, 'html' => $html]);
     }

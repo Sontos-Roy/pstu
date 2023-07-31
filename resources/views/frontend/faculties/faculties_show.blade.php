@@ -261,24 +261,17 @@
                     <!-- End Mixitup Nav-->
                     <div class="row magnific-mix-gallery masonary text-light">
                         <div id="portfolio-grid" class="portfolio-items col-3" style="position: relative; height: 283.656px;">
+                            @foreach ($images as $image)
                             <div class="pf-item other" style="position: absolute; left: 0%; top: 0px;">
                                 <div class="item-effect">
-                                    <img src="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691022.jpg" alt="thumb">
+                                    <img src="{{ getImage('images', $image->image) }}" alt="thumb">
                                     <div class="overlay">
-                                        <h4>Curzon Hall</h4>
-                                        <a href="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691022.jpg" class="item popup-link"><i class="fa fa-plus"></i></a>
+                                        <a href="{{ getImage('images', $image->image) }}" class="item popup-link"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pf-item other" style="position: absolute; left: 33.2489%; top: 0px;">
-                                <div class="item-effect">
-                                    <img src="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691089.jpg" alt="thumb">
-                                    <div class="overlay">
-                                        <h4>Curzon Exam Hall</h4>
-                                        <a href="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691089.jpg" class="item popup-link"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                            
                         </div>
                     </div>
                 </div>

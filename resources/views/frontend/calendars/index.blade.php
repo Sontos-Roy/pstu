@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <h2>All Libraires</h2>
+                    <h2>All Academic Calendars</h2>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('front.home') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li class="active">All Libraires</li>
+                        <li class="active">All Academic Calendars</li>
                     </ul>
                 </div>
             </div>
@@ -64,11 +64,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 @endsection
 
 @push('script')
@@ -85,26 +80,26 @@
             },
             success: function(data) {
                 $(document).find('select#department_id').empty();
+                $('select#department_id').html('<option value="">Select One</option>');
                 $.each(data, function(index, department) {
                     $('select#department_id').append('<option value ="'+department.id+'">'+department.name+'</option>');
                 });
             }
         });
     })
-        $('#departments').on('change', function() {
+        $('#department_id').on('change', function() {
         var facultyId = $(this).val();
         $.ajax({
-            url: '{{ route("admin.get.departments")}}',
+            url: '{{ route("front.get.calendars")}}',
             type: 'GET',
             dataType: 'json',
             data:{
                 id: facultyId
             },
             success: function(data) {
-                $(document).find('select#department_id').empty();
-                $.each(data, function(index, department) {
-                    $('select#department_id').append('<option value ="'+department.id+'">'+department.name+'</option>');
-                });
+                $(document).find('#show_result').empty();
+
+                $('#show_result').html(data.html)
             }
         });
     })
