@@ -19,11 +19,8 @@ class TeacherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // $this->data['teachers'] = User::join('user_details', 'users.id', '=', 'user_details.user_id')
-        // ->orderBy('users.name', 'ASC')
-        // ->get();;
+    public function index(){
+        
         $role = Role::where('name', 'Dean')->firstOrFail();
         $teacherUserIds = $role->users()->pluck('id')->toArray();
 
