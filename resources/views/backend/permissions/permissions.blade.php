@@ -8,7 +8,7 @@
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
             <div>
-                @can("add-permissions")
+                @can("permissions.create")
                 <a href="{{ route('admin.permissions.add') }}" class="btn btn-raised btn-defualt">Add Permission</a>
                 @endcan
             </div>
@@ -49,10 +49,10 @@
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             <div class="d-flex">
-                                                @can("edit-permission")
+                                                @can("permissions.edit")
                                                 <a href="{{ route('admin.permissions.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">Edit</a>
                                                 @endcan
-                                                @can("delete-permission")
+                                                @can("permissions.delete")
                                                 <form action="{{ route('admin.permissions.delete', $item->id) }}" class="delete_form" method="POST">
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">Delete</button>

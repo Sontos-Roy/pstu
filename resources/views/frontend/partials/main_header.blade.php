@@ -147,7 +147,7 @@
                                     <h6 class="title menuTitle">University Leadership</h6>
                                     <div class="content">
                                         <ul class="menu-col">
-                                            @foreach (LeaderShips() as $item)
+                                            @foreach (LeaderShips()->take(6) as $item)
                                             <li><a href="{{ route('front.vice.chencellors.message', $item->slug) }}"><i class="fas fa-angle-double-right"></i>
                                                 {{ $item->designation }}</a>
                                             </li>
@@ -282,7 +282,7 @@
                                         <h6 class="title menuTitle">Head of Administrative Offices</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Directors
+                                                <li><a href="{{ route('front.research_center.directors') }}"><i class="fas fa-angle-double-right"></i> Directors
                                                         of
                                                         Research Centers &amp; Bureau</a></li>
                                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
@@ -391,7 +391,7 @@
                                 <span></span></a>
 
                             <ul class="dropdown-menu menuBody animated fadeOutUp" style="display: none; opacity: 1;">
-                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                <li><a href="{{ route('front.research_center') }}"><i class="fas fa-angle-double-right"></i>
                                         Research Centers &amp; Bureaus</a></li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
                                         Research &amp; Publications</a></li>
@@ -408,22 +408,20 @@
                                 <span></span></a>
 
                             <ul class="dropdown-menu menuBody animated">
-                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
-                                        Registered Graduate</a></li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
-                                        DU Login</a></li>
+                                        PSTU Login</a></li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
                                         Student Login</a></li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
                                         Telephone and Email Index</a></li>
 
-                                <li><a href=""><i class="fas fa-angle-double-right"></i> DU Forms</a>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> PSTU Forms</a>
                                 </li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Approved
-                                        NOC/GO</a></li>
+                                        NOC/GO/Order</a></li>
                                 <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                         E-Tender</a></li>
-                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i> DU Jobs</a>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i> PSTU Jobs</a>
                                 </li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Trust
                                         Funds</a></li>
@@ -435,6 +433,8 @@
                                 </li>
                                 <li><a href="{{ route('front.events') }}"><i class="fas fa-angle-double-right"></i> Events</a>
                                 </li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    Tender</a></li>
                             </ul>
                         </li>
 

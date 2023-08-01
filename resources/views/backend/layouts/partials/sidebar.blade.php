@@ -54,6 +54,46 @@
             </li>
             @endcan
 
+
+            @php
+                $deg = ['admin.designations.index', 'admin.designations.create'];
+            @endphp
+
+            @if(auth()->user()->can('designations.view') || auth()->user()->can('designations.create'))
+
+            <li class="{{ in_array($currentUrl, $deg) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span> Designation </span> </a>
+                <ul class="ml-menu">
+                    @can('designations.view')
+                    <li class="{{ in_array($currentUrl, ['admin.designations.index']) ? 'active' : '' }}"><a href="{{ route('admin.designations.index') }}">All  Designation </a></li>
+                    @endcan
+                    @can('designations.create')
+                    <li class="{{ in_array($currentUrl, ['admin.designations.create']) ? 'active' : '' }}"><a href="{{ route('admin.designations.create') }}">Add  Designation </a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
+
+
+            @php
+                $noc = ['admin.noces.index', 'admin.noces.create'];
+            @endphp
+
+            @if(auth()->user()->can('noces.view') || auth()->user()->can('noces.create'))
+
+            <li class="{{ in_array($currentUrl, $noc) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span> NOC </span> </a>
+                <ul class="ml-menu">
+                    @can('noces.view')
+                    <li class="{{ in_array($currentUrl, ['admin.noces.index']) ? 'active' : '' }}"><a href="{{ route('admin.noces.index') }}">All  NOC </a></li>
+                    @endcan
+                    @can('noces.create')
+                    <li class="{{ in_array($currentUrl, ['admin.noces.create']) ? 'active' : '' }}"><a href="{{ route('admin.noces.create') }}">Add  NOC </a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
+
+
+
             @php
                 $leaders = ['admin.leadership.index', 'admin.leadership.create'];
             @endphp
@@ -71,6 +111,8 @@
                 </ul>
             </li>
             @endif
+
+
             @php
                 $pages = ['admin.pages.index', 'admin.pages.create'];
             @endphp
@@ -230,7 +272,7 @@
                 $libraries = ['admin.libraries.index', 'admin.libraries.create'];
                 $academic_calendars = ['admin.academic_calendars.index', 'admin.academic_calendars.create'];
                 $offices = ['admin.offices.index', 'admin.offices.create'];
-                $researchs = ['admin.researchs.index', 'admin.researchs.create'];
+                $researchs = ['admin.researchs.index', 'admin.researchs.create', 'admin.research_center.index', 'admin.research_center.create'];
             @endphp
 
             @if(auth()->user()->can('offices.view') || auth()->user()->can('offices.create'))
@@ -354,6 +396,18 @@
                     @endcan
                     @can('researchs.create')
                     <li class="{{ in_array($currentUrl, ['admin.researchs.create']) ? 'active' : '' }}"> <a href="{{ route('admin.researchs.create') }}">Add Research</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
+            @if(auth()->user()->can('researchs.view') || auth()->user()->can('researchs.create'))
+            <li class="{{ in_array($currentUrl, $researchs) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Research Centers</span> </a>
+                <ul class="ml-menu">
+                    @can('researchs.view')
+                    <li class="{{ in_array($currentUrl, ['admin.research_center.index']) ? 'active' : '' }}"> <a href="{{ route('admin.research_center.index') }}">Centers List</a></li>
+                    @endcan
+                    @can('researchs.create')
+                    <li class="{{ in_array($currentUrl, ['admin.research_center.create']) ? 'active' : '' }}"> <a href="{{ route('admin.research_center.create') }}">Add Research Center</a></li>
                     @endcan
                 </ul>
             </li>

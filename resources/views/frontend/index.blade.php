@@ -56,7 +56,7 @@
                             <a href="{{ route('front.vice.chencellors.message', $vc->slug) }}">
                                 <div style="height: 200px;" class="info">
                                     <p>
-                                        <img src="{{ getImage('teachers', $vc->user->userDetails->image) }}" height="180" width="200" alt=" Vice Chancellor" srcset="">
+                                        <img src="{{ getImage('teachers', $vc->user ? $vc->user->userDetails->image : '') }}" height="180" width="200" alt=" Vice Chancellor" srcset="">
 
                                     </p>
                                     <p style="font-weight: bold; font-size: 12px; text-align: center;">
@@ -94,7 +94,7 @@
                             <a href="{{ route('front.vice.chencellors.message', $item->slug) }}">
                                 <div style="height: 220px;" class="info">
                                     <p>
-                                        <img src="{{ getImage('teachers', $item->user->userDetails->image) }}" height="180" width="200" alt="{{ $item->designation }}" srcset="">
+                                        <img src="{{ getImage('teachers', $vc->user ? $vc->user->userDetails->image : '') }}" height="180" width="200" alt="{{ $item->designation }}" srcset="">
 
                                     </p>
                                     <p style="font-weight: bold; font-size: 14px;">
