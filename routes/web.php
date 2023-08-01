@@ -59,8 +59,10 @@ use App\Http\Controllers\Backend\UserResearchSupervisionController;
 use App\Http\Controllers\Backend\UserPublicationController;
 use App\Http\Controllers\Backend\UserProjectController;
 use App\Http\Controllers\Backend\DesignationController;
+use App\Http\Controllers\Backend\NocController;
 use App\Http\Controllers\Frontend\CommitteeController;
 use App\Http\Controllers\Frontend\ResearchController as FrontendResearchController;
+use App\Http\Controllers\Frontend\StudentControler;
 
 
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
@@ -152,6 +154,10 @@ Route::group(['as'=>'front.'], function(){
     });
     Route::controller(FrontendUserController::class)->group(function(){
         Route::get('user-profile/{id}', 'userProfile')->name('user.profile');
+    });
+    Route::controller(StudentControler::class)->group(function(){
+        Route::get('pstu-form', 'pstuForm')->name('pstu.form');
+        Route::post('marksheet', 'marksheetStore')->name('marksheet.store');
     });
 
     Route::controller(CommitteeController::class)->group(function(){

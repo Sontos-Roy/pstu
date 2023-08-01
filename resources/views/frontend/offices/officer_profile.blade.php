@@ -21,12 +21,12 @@
                     <!-- Start Thumbnail -->
                     <div class="col-md-4">
                         <div class="thumb">
-                            <img src="{{ getImage('teachers', $item->user->userDetails->image) }}" class="img-thumbnail" style="width: 100%;" 
+                            <img src="{{ getImage('teachers', $item->user->userDetails->image) }}" class="img-thumbnail" style="width: 100%;"
                             alt="Thumb" onerror="this.src='https://www.du.ac.bd/fontView/assets/img/default.png'">
                             <div class="info">
                                 <h4>{{ $item->user->name }}</h4>
                                 <span>(Professor &amp; Chairman)</span>
-                                <p>Department of Physics</p>
+                                {{-- <p>Department of Physics</p> --}}
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                         <a data-toggle="tab" href="#educationInfo" aria-expanded="true">
                                         Education
                                         </a>
-                                    </li> 
+                                    </li>
 
                                     <li>
                                         <a data-toggle="tab" href="#experience" aria-expanded="false">

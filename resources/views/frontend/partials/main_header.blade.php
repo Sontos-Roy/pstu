@@ -408,14 +408,14 @@
                                 <span></span></a>
 
                             <ul class="dropdown-menu menuBody animated">
-                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                <li><a href="{{ route('login') }}"><i class="fas fa-angle-double-right"></i>
                                         PSTU Login</a></li>
-                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                <li><a href="{{ route('login') }}"><i class="fas fa-angle-double-right"></i>
                                         Student Login</a></li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i>
                                         Telephone and Email Index</a></li>
 
-                                <li><a href=""><i class="fas fa-angle-double-right"></i> PSTU Forms</a>
+                                <li><a href="{{ route('front.pstu.form') }}"><i class="fas fa-angle-double-right"></i> PSTU Forms</a>
                                 </li>
                                 <li><a href=""><i class="fas fa-angle-double-right"></i> Approved
                                         NOC/GO/Order</a></li>
