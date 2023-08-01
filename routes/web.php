@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\Permissions\RoleController;
 use App\Http\Controllers\Backend\PlanningWorkCommitteeController;
 use App\Http\Controllers\Backend\ProgramController;
 use App\Http\Controllers\Backend\RegentBoardController;
+use App\Http\Controllers\Backend\ResearchCentercontroller;
 use App\Http\Controllers\Backend\ResearchController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\StudentController;
@@ -56,6 +57,7 @@ use App\Http\Controllers\Backend\UserResearchInterestController;
 use App\Http\Controllers\Backend\UserExperienceController;
 use App\Http\Controllers\Backend\UserResearchSupervisionController;
 use App\Http\Controllers\Frontend\CommitteeController;
+use App\Http\Controllers\Frontend\ResearchController as FrontendResearchController;
 
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
@@ -148,6 +150,12 @@ Route::group(['as'=>'front.'], function(){
         Route::get('academic-council', 'academicCouncil')->name('academic_council');
         Route::get('planing-work-committee', 'planningWorkCommittee')->name('planning_work_committee');
     });
+
+    Route::controller(FrontendResearchController::class)->group(function(){
+        Route::get('research-centers', 'ResearchCenters')->name('research_center');
+        Route::get('research-centers/directors', 'ResearchCenterDirectors')->name('research_center.directors');
+        Route::get('research-centers/{slug}', 'ResearchCenterShow')->name('research_center.show');
+    });
 });
 
 // Frontend
@@ -184,6 +192,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('/programs', ProgramController::class);
     Route::resource('/images', ImageController::class);
     Route::resource('/researchs', ResearchController::class);
+    Route::resource('/research-center', ResearchCentercontroller::class, ['names' => 'research_center']);
     Route::resource('/regent-board', RegentBoardController::class,['names' => 'regent_board']);
     Route::resource('/planning-work-committee', PlanningWorkCommitteeController::class,['names' => 'planning_work_committee']);
     Route::resource('/academic-council', AcademicCouncilController::class,['names' => 'academic_council']);

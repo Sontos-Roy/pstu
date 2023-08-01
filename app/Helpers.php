@@ -132,7 +132,7 @@ if(!empty($value) && !empty($limit)){
 
 function LeaderShips()
 {
-    $leaderships = LeaderShip::take(4)->get();
+    $leaderships = LeaderShip::all();
 
     return $leaderships;
 }
