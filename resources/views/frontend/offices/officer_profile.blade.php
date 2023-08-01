@@ -333,19 +333,19 @@
                                             <div class="col-lg-10 col-md-9 col-sm-6 col-xs-12">
                                                 <div class="bold font-size-18px">Dr. (Mrs.) Supriya Saha</div>
                                                 <div style="font-size:13px;">
-                                                    Professor &amp; Chairman
+                                                    {{ $item->user->name }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Department of Physics
+                                                    Department of {{ $item->user && $item->user->department ? $item->user->department->name:'' }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Faculty of Science
+                                                    Faculty of {{ $item->user && $item->user->faculty ? $item->user->faculty->title:'' }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Email: ssahadu@yahoo.com
+                                                    Email: {{ $item->user->email }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Phone: /7030
+                                                    Phone: {{ $item->user->userDetails ? $item->user->userDetails->phone : '' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -361,12 +361,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-    <!-- Start Footer
-
-
 @endsection
