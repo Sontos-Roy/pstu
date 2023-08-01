@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\FinanceCommittee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FinanceCommitteeController extends Controller
 {
@@ -12,7 +14,9 @@ class FinanceCommitteeController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['members'] = FinanceCommittee::all();
+
+        return view('backend.committees.finance_committee.index', $this->data);
     }
 
     /**
@@ -20,7 +24,7 @@ class FinanceCommitteeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.committees.finance_committee.add');
     }
 
     /**
@@ -28,7 +32,19 @@ class FinanceCommitteeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'designation' => 'required',
+            'phone' => 'required',
+            'email' => '',
+            'address' => 'required',
+        ]);
+
+        $data['user_id'] = Auth::id();
+
+        FinanceCommittee::create($data);
+
+        return response()->json(['status' => true, 'msg' => 'Finance Committee Member Created Successfully', 'url' => route('admin.finance_committee.index')]);
     }
 
     /**
@@ -44,7 +60,9 @@ class FinanceCommitteeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->data['item'] = FinanceCommittee::find($id);
+
+        return view('backend.committees.finance_committee.edit', $this->data);
     }
 
     /**
@@ -52,7 +70,18 @@ class FinanceCommitteeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'designation' => 'required',
+            'phone' => 'required',
+            'email' => '',
+            'address' => 'required',
+        ]);
+
+        $data['user_id'] = Auth::id();
+        FinanceCommittee::find($id)->update($data);
+
+        return response()->json(['status' => true, 'msg' => 'Finance Committee Member Updated Successfully', 'url' => route('admin.finance_committee.index')]);
     }
 
     /**
@@ -60,6 +89,9 @@ class FinanceCommitteeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        FinanceCommittee::find($id)->delete();
+
+        return response()->json(['status' => true, 'msg' => 'Finance Committee Member Deleted Successfully']);
+
     }
 }

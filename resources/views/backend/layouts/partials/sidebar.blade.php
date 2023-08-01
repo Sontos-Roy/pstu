@@ -325,9 +325,9 @@
             </li>
             @endif
                 @php
-                    $committee = ['admin.regent_board.index', 'admin.planning_work_committee.index'];
+                    $committee = ['admin.regent_board.index', 'admin.planning_work_committee.index', 'admin.academic_council.index', 'admin.finance_committee.index'];
                 @endphp
-            @if(auth()->user()->can('regentboard.view') || auth()->user()->can('planning.work.view'))
+            @if(auth()->user()->can('regentboard.view') || auth()->user()->can('planning.work.view') || auth()->user()->can('academic.council.view') || auth()->user()->can('finance.committee.view'))
             <li class="{{ in_array($currentUrl, $committee) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>University Governance</span> </a>
                 <ul class="ml-menu">
                     @can('regentboard.view')
@@ -335,6 +335,12 @@
                     @endcan
                     @can('planning.work.view')
                     <li class="{{ in_array($currentUrl, ['admin.planning_work_committee.index']) ? 'active' : '' }}"> <a href="{{ route('admin.planning_work_committee.index') }}">Planing Work Committees</a></li>
+                    @endcan
+                    @can('academic.council.view')
+                    <li class="{{ in_array($currentUrl, ['admin.academic_council.index']) ? 'active' : '' }}"> <a href="{{ route('admin.academic_council.index') }}">Academic Council</a></li>
+                    @endcan
+                    @can('finance.committee.view')
+                    <li class="{{ in_array($currentUrl, ['admin.finance_committee.index']) ? 'active' : '' }}"> <a href="{{ route('admin.finance_committee.index') }}">Finance Committees</a></li>
                     @endcan
                 </ul>
             </li>

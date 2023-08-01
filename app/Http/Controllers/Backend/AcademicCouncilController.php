@@ -16,7 +16,7 @@ class AcademicCouncilController extends Controller
     {
         $this->data['members'] = AcademicCouncil::all();
 
-        return view('backend.committees.planning_work.index', $this->data);
+        return view('backend.committees.academic_council.index', $this->data);
     }
 
     /**
@@ -24,7 +24,7 @@ class AcademicCouncilController extends Controller
      */
     public function create()
     {
-        return view('backend.committees.planning_work.add');
+        return view('backend.committees.academic_council.add');
     }
 
     /**
@@ -62,7 +62,7 @@ class AcademicCouncilController extends Controller
     {
         $this->data['item'] = AcademicCouncil::find($id);
 
-        return view('backend.committees.planning_work.edit', $this->data);
+        return view('backend.committees.academic_council.edit', $this->data);
     }
 
     /**
@@ -91,7 +91,7 @@ class AcademicCouncilController extends Controller
     {
         AcademicCouncil::find($id)->delete();
 
-        return response()->json(['status' => true, 'msg' => 'Planning Work Member Deleted Successfully']);
+        return response()->json(['status' => true, 'msg' => 'Academic Council Member Deleted Successfully']);
 
     }
 }

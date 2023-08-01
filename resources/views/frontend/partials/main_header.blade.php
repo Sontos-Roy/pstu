@@ -166,25 +166,25 @@
                                             Ordinance</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('front.university.ordinances') }}">
+                                                <a href="{{ route('front.regent_borad') }}">
                                                     <i class="fas fa-angle-double-right"></i>
                                                     Regent Board
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('front.university.ordinances') }}">
+                                                <a href="{{ route('front.academic_council') }}">
                                                     <i class="fas fa-angle-double-right"></i>
                                                     Academic council
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('front.university.ordinances') }}">
+                                                <a href="{{ route('front.finanace_committee') }}">
                                                     <i class="fas fa-angle-double-right"></i>
                                                     Finance Committee
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('front.university.ordinances') }}">
+                                                <a href="{{ route('front.planning_work_committee') }}">
                                                     <i class="fas fa-angle-double-right"></i>
                                                     Planning and Works Committee
                                                 </a>

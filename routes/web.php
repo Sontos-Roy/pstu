@@ -55,6 +55,7 @@ use App\Http\Controllers\Backend\UserMembershipController;
 use App\Http\Controllers\Backend\UserResearchInterestController;
 use App\Http\Controllers\Backend\UserExperienceController;
 use App\Http\Controllers\Backend\UserResearchSupervisionController;
+use App\Http\Controllers\Frontend\CommitteeController;
 
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
@@ -138,6 +139,13 @@ Route::group(['as'=>'front.'], function(){
     });
     Route::controller(FrontendUserController::class)->group(function(){
         Route::get('user-profile/{id}', 'userProfile')->name('user.profile');
+    });
+
+    Route::controller(CommitteeController::class)->group(function(){
+        Route::get('regent-board', 'regentBoard')->name('regent_borad');
+        Route::get('finance-committee', 'financeCommittee')->name('finanace_committee');
+        Route::get('academic-council', 'academicCouncil')->name('academic_council');
+        Route::get('planing-work-committee', 'planningWorkCommittee')->name('planning_work_committee');
     });
 });
 
