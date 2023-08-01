@@ -44,15 +44,11 @@
                                 <div class="form-group drop-custum">
                                     <select class="form-control show-tick p-2" name="faculty_id">
                                         <option value="">-- Faculty Select --</option>
-                                        @php
-                                            if ($user->userDetails && $user->userDetails->faculty_id) {
-                                                $faculty_id = $user->userDetails->faculty_id;
-                                            }else{
-                                                $faculty_id = 0;
-                                            }
-                                        @endphp
+                      
                                         @foreach ($faculties as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $faculty_id ? 'selected': '' }} class="p-2">{{ $item->title }}</option>
+                                            <option value="{{ $item->id }}" 
+                                                {{ $item->id == $user->faculty_id ? 'selected': '' }} class="p-2">{{ $item->title }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

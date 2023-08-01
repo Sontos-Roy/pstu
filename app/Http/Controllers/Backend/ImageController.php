@@ -20,15 +20,20 @@ class ImageController extends Controller
 
         $query= Image::query();
                 if(auth()->user()->hasRole('faculty')){
-                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
                 }
         $this->data['images'] =$query->paginate(10);
 
 
         $this->data['faculties'] = getFaculty();
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
         $this->data['programs'] = Program::all();
         $this->data['institutes'] = Institutes::all();
+
         return view("backend.Images.index", $this->data);
     }
 

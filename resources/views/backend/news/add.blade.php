@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <select name="depertment_id" id="" class="select2 form-control">
-                                            <option value="">Select Id Name</option>
+                                            <option value="">Select Department</option>
                                             @foreach ($departments as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -35,6 +35,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select name="faculty_id" id="" class="select2 form-control">
+                                            <option value="">Select Faculties</option>
+                                            @foreach ($faculties as $item)
+                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">

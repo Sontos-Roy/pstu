@@ -20,8 +20,14 @@ class ResearchController extends Controller
 
         $query= Research::orderBy("id", "DESC");
                 if(auth()->user()->hasRole('faculty')){
-                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                    $query->where('faculty_id', auth()->user()->faculty_id);
                 }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
+                }
+
+
         $this->data['researchs'] =$query->get();
 
         return view('backend.researchs.index', $this->data);
@@ -32,7 +38,7 @@ class ResearchController extends Controller
      */
     public function create()
     {
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
         $this->data['faculties'] = getFaculty();
 
         return view('backend.researchs.add', $this->data);
@@ -88,10 +94,11 @@ class ResearchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id){
+        
         $this->data['research'] = Research::find($id);
-        $this->data['departments'] = Department::all();
+
+        $this->data['departments'] = getDepartment();
         $this->data['faculties'] = getFaculty();
 
         return view('backend.researchs.edit', $this->data);

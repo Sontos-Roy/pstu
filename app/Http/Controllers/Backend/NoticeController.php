@@ -19,7 +19,11 @@ class NoticeController extends Controller
     {
         $query= Notice::orderBy("id", "DESC");
                 if(auth()->user()->hasRole('faculty')){
-                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
                 }
         $this->data['notices'] =$query->get();
 
@@ -32,13 +36,7 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        $query=Department::query();
-
-        if(Auth::user()->hasRole('Dean')){
-
-            $query->where('user_id', Auth::id());
-        }
-        $this->data['departments'] = $query->get();
+        $this->data['departments'] = getDepartment();
         $this->data['faculties'] = getFaculty();
 
         return view('backend.notices.add', $this->data);
@@ -97,7 +95,8 @@ class NoticeController extends Controller
     public function edit(string $id)
     {
         $this->data['notice'] = Notice::find($id);
-        $this->data['departments'] = Department::all();
+        
+        $this->data['departments'] = getDepartment();
         $this->data['faculties'] = getFaculty();
 
         return view('backend.notices.edit', $this->data);

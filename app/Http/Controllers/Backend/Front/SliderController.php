@@ -18,11 +18,11 @@ class SliderController extends Controller
     {
         $query= Slider::query();
                 if(auth()->user()->hasRole('faculty')){
-                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                    $query->where('faculty_id', auth()->user()->faculty_id);
                 }
         $this->data['sliders'] =$query->get();
 
-        $this->data['faculties'] = Faculty::all();
+        $this->data['faculties'] = getFaculty();
         $this->data['departments'] = Department::all();
         return view("backend.homeSlider.index", $this->data);
     }

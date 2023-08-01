@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="">Select Departments</label>
                                     <div class="form-line">
-                                        <select name="depertment_id" id="" class="select2 form-control">
+                                        <select name="department_id" id="" class="select2 form-control">
                                             <option value="">Select Departments</option>
                                             @foreach ($departments as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>

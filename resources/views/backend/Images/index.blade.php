@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">Faculty</label>
+                                <label for="" class="col-4 col-form-label">Programs</label>
                                 <div class="col-8">
                                     <select name="program_id" id="" class="form-control">
                                         <option value="">Select One</option>

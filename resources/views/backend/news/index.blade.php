@@ -29,6 +29,7 @@
                                 <th>Message</th>
                                 <th>User</th>
                                 <th>Department</th>
+                                <th>Faculty</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
@@ -41,9 +42,8 @@
                                 <td>{{ StrLimit($item->slug, 100) }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
                                 <td>{{ $item->user->name }}</td>
-                                <td>
-                                    {{ $item->department ? $item->department->name : ''}}
-                                </td>
+                                <td>{{ $item->department ? $item->department->name : ''}}</td>
+                                <td>{{ $item->faculty ? $item->faculty->title : ''}}</td>
                                 <td><img src="{{ getImage('news', $item->image) }}" width="100" alt=""></td>
                                 <td>
                                     <div class="d-flex">
