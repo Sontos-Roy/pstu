@@ -38,6 +38,18 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                 <i class="fa fa-bars"></i>
                 </button>
+                <a class="navbar-brand" href="{{ route('front.home') }}">
+                    <div class="p-1" style="
+                    margin-top: 4px;
+                    position: absolute;
+                    background: white;
+                    border-radius: 0 0 45% 45%; padding: 0 4px 2px;">
+                        <img src="{{ getImage('settings', getSetting('logo')) }}" class="logo logo-display" alt="Logo" style="
+                    width: 80px;" >
+                    </div>
+                    <!-- <center><span style="color:lightcoral">PSTU</span></center> -->
+                    <img src="{{ getImage('settings', getSetting('logo')) }}" class="logo logo-scrolled" alt="Logo" style="width:84px;">
+                </a>
 
             </div>
             <!-- End Header Navigation -->

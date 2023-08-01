@@ -14,9 +14,9 @@
                 <div data-aos="fade-left" class="equal-height col-md-12 col-sm-12" style="height: 320px;">
                     <div class="item mariner">
                         <center>
-                            <h3>Apply For Certificate/Marksheet</h3>
+                            <h3>Apply For Govt. Scholarships</h3>
                         </center>
-                        <form action="{{ route('front.marksheet.store') }}" id="ajax_form" method="POST">
+                        <form action="{{ route('front.scholarship.store') }}" id="ajax_form" method="POST">
                             @csrf
                             <br>
                             <div class="form-group">
@@ -63,21 +63,10 @@
 
                             <br>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Select Document:</label>
-                                <div class="col-sm-10">
-                                    <select name="document" id="" class="form-control">
-                                        <option value="Certificate">Certificate</option>
-                                        <option value="MarkSheet">MarkSheet</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Select Document Type:</label>
+                                <label for="email" class="col-sm-2 control-label">Select For:</label>
                                 <div class="col-sm-10">
                                     <select name="document_type" id="" class="form-control">
-                                        <option value="Original">Original</option>
-                                        <option value="Copy">Copy</option>
+                                        <option value="">Scholarships</option>
                                     </select>
                                 </div>
                             </div>

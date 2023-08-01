@@ -66,7 +66,7 @@ use App\Http\Controllers\Frontend\StudentControler;
 
 
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
-    
+
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
     Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
     Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);
@@ -157,7 +157,9 @@ Route::group(['as'=>'front.'], function(){
     });
     Route::controller(StudentControler::class)->group(function(){
         Route::get('pstu-form', 'pstuForm')->name('pstu.form');
+        Route::get('pstu-scholarship-form', 'ScholarForm')->name('pstu.scholarship');
         Route::post('marksheet', 'marksheetStore')->name('marksheet.store');
+        Route::post('scholarship-apply', 'ScholarStore')->name('scholarship.store');
     });
 
     Route::controller(CommitteeController::class)->group(function(){
