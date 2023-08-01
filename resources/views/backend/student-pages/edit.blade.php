@@ -17,6 +17,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <input type="text" name="menu" class="form-control" placeholder="Menu " value="{{ $item->menu }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
                                         <input type="text" name="title" class="form-control" placeholder="Title " value="{{ $item->title }}">
                                     </div>
                                 </div>

@@ -333,13 +333,12 @@
                                     <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Halls of Residence
                                         </a></li>
-                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
-                                            Transport
-                                            Facilities</a>
-                                    </li>
-                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
-                                            Health Insurance </a>
-                                    </li>
+                                        @foreach (getStudentPage() as $page)
+                                        <li><a href="{{ route('front.student.page', $page->slug) }}"><i class="fas fa-angle-double-right"></i>
+                                            {{$page->menu}}</a>
+                                        </li>
+                                        @endforeach
+
 
                                 </ul>
                             </div>

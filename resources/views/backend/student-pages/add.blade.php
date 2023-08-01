@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Add Student Page</h2>
+        <h2>Edit Student Page</h2>
         <small class="text-muted">Patuakhali Science & Technology University</small>
     </div>
     <div class="row clearfix">
@@ -16,11 +16,21 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <input type="text" name="menu" class="form-control" placeholder="Menu Name ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
                                         <input type="text" name="title" class="form-control" placeholder="Title ">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="row clearfix">
                             <div class="col-sm-12">

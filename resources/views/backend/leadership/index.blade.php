@@ -35,7 +35,11 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td><img src="{{ getImage('teachers', $item->user->userDetails->image) }}" width="100" alt=""></td>
+                                @if ($item->user)
+                                <td><img src="{{ getImage('teachers', $item->user ? $item->user->userDetails->image : '') }}" width="100" alt=""></td>
+                                @else
+                                <td><img src="{{ getImage('leaders', $item->image) }}" width="100" alt=""></td>
+                                @endif
                                 <td>{{ $item->designation }}</td>
                                 <td>{{ $item->slug }}</td>
                                 <td>{{ StrLimit($item->message_short, 200) }}</td>

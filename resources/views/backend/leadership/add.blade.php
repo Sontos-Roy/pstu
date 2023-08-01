@@ -27,6 +27,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
+                                <label for="inputName" class="col-4 col-form-label">Image</label>
+                                <div class="col-8">
+                                    <input type="file" class="form-control" style="border: 1px solid black;" name="image">
+                                </div>
+                        </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
