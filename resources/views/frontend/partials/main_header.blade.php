@@ -349,11 +349,11 @@
                             </h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="{{ route('front.pstu.form') }}" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply for
                                             Certificate/Marksheet</a>
                                     </li>
-                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="{{ route('front.pstu.scholarship') }}" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply
                                             for Govt. Scholarships</a>
                                     </li>
