@@ -55,15 +55,21 @@ use App\Http\Controllers\Backend\UserMembershipController;
 use App\Http\Controllers\Backend\UserResearchInterestController;
 use App\Http\Controllers\Backend\UserExperienceController;
 use App\Http\Controllers\Backend\UserResearchSupervisionController;
+use App\Http\Controllers\Backend\UserPublicationController;
+use App\Http\Controllers\Backend\UserProjectController;
 use App\Http\Controllers\Frontend\CommitteeController;
 
+
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
+    
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
     Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
     Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);
     Route::resource('user-experience', UserExperienceController::class,['names'=>'user_experience']);
     Route::resource('user-research-interest', UserResearchInterestController::class,['names'=>'user_research_interest']);
     Route::resource('user-research-supervision', UserResearchSupervisionController::class,['names'=>'user_research_supervision']);
+    Route::resource('user-publications', UserPublicationController::class,['names'=>'user_publications']);
+    Route::resource('user-projects', UserProjectController::class,['names'=>'user_projects']);
 
 
 });

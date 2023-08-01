@@ -228,11 +228,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($item->user->publications as $pub)
+                                                    <tr>
+                                                        <td>{{$pub->subject}}</td>
+                                                        <td>{{$pub->project_name}}</td>
+                                                        <td>{{$pub->source}}</td>
+                                                        <td>{{$pub->from_date}}</td>
+                                                        <td>{{$pub->to_date}}</td>
+                                                        <td>{{$pub->collaboration}}</td>
+                                                    </tr>
+                                                    @empty
                                                     <tr>
                                                         <td colspan="6" class="text-center"> No project/research work is
                                                             found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
@@ -291,8 +302,27 @@
                                         <table class="table  width100per">
                                             <tbody>
                                                 <tr>
+                                                    <th class="width10per" nowrap="">Name</th>
+                                                    <th class="width25per">Info</th>
+                                                    <th class="width7per">Date</th>
+                                                    <th class="width7per">Link</th>
+                                                    <th>Pdf view</th>
+                                                </tr>
+
+                                                @forelse($item->user->projects as $mem)
+                                                <tr>
+                                                    <td>{{ $mem->name}}</td>
+                                                    <td>{{ $mem->info}}</td>
+                                                    <td>{{ $mem->date}}</td>
+                                                    <td><a href="{{ $mem->link}}"> View </a>Link</td>
+                                                    <td><a href="{{getPdf('projects',$mem->pdf_file)}}"> View </a></td>
+                                                </tr>
+                                                @empty
+
+                                                <tr>
                                                     <td colspan="6" class="text-center"> No publication is found.</td>
                                                 </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
