@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\AcademicCalendarController;
+use App\Http\Controllers\Backend\AcademicCouncilController;
 use App\Http\Controllers\Backend\AdmissionController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FacultyController;
+use App\Http\Controllers\Backend\FinanceCommitteeController;
 use App\Http\Controllers\Backend\Front\HistoricalOutlineController;
 use App\Http\Controllers\Backend\Front\HonorisCausaController;
 use App\Http\Controllers\Backend\Front\PageController;
@@ -27,7 +29,9 @@ use App\Http\Controllers\Backend\NewsController;
 use App\Http\Controllers\Backend\NoticeController;
 use App\Http\Controllers\Backend\OfficeController;
 use App\Http\Controllers\Backend\Permissions\RoleController;
+use App\Http\Controllers\Backend\PlanningWorkCommitteeController;
 use App\Http\Controllers\Backend\ProgramController;
+use App\Http\Controllers\Backend\RegentBoardController;
 use App\Http\Controllers\Backend\ResearchController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\StudentController;
@@ -171,6 +175,10 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('/programs', ProgramController::class);
     Route::resource('/images', ImageController::class);
     Route::resource('/researchs', ResearchController::class);
+    Route::resource('/regent-board', RegentBoardController::class,['names' => 'regent_board']);
+    Route::resource('/planning-work-committee', PlanningWorkCommitteeController::class,['names' => 'planning_work_committee']);
+    Route::resource('/academic-council', AcademicCouncilController::class,['names' => 'academic_council']);
+    Route::resource('/finance-committee', FinanceCommitteeController::class,['names' => 'finance_committee']);
     Route::post('/image-upload', [UploadController::class, 'index'])->name('ckeditor.upload');
 
     // Front

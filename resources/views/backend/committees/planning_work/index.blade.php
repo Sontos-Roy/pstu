@@ -5,11 +5,11 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Admission Programs</h2>
+                <h2>All Planning and Work Committee Members</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
             <div>
-                <a href="{{ route('admin.admissions.create') }}" class="btn btn-raised btn-defualt">Add Admission</a>
+                <a href="{{ route('admin.planning_work_committee.create') }}" class="btn btn-raised btn-defualt">Add Member</a>
             </div>
         </div>
     </div>
@@ -22,45 +22,39 @@
                         <thead>
                             <tr>
                                 <th>no</th>
-                                <th>Title</th>
-                                <th>Department</th>
-                                <th>Details</th>
-                                <th>Contact</th>
-                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Designation</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($admissions as $key=>$item)
+                            @foreach ($members as $key=>$item)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ StrLimit($item->title, 100) }}</td>
-                                <td>{{ $item->department ? $item->department->name: "" }}</td>
-                                <td>{{ StrLimit($item->details, 100) }}</td>
-                                <td>{{ StrLimit($item->contact, 100) }}</td>
-                                <td>{{ $item->user ? $item->user->name : ''}}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->designation }}</td>
+                                <td>{{ $item->phone }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->address }}</td>
                                 <td>
                                     <div class="d-flex">
 
-                                        @can('admissions.view')
-                                        <a href="{{ route('admin.admissions.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            visibility
-                                            </span></a>
-                                        @endcan
-                                        @can('admissions.edit')
-                                        <a href="{{ route('admin.admissions.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                        @can('committee.edit')
+                                        <a href="{{ route('admin.planning_work_committee.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
                                         @endcan
-                                        @can('admissions.delete')
-                                        <form action="{{ route('admin.admissions.destroy', $item->id) }}" class="delete_form" method="POST">
+                                        @can('committee.delete')
+                                        <form action="{{ route('admin.planning_work_committee.destroy', $item->id) }}" class="delete_form" method="POST">
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                                 delete
                                                 </span></button>
                                         </form>
                                         @endcan
-
 
                                     </div>
                                 </td>

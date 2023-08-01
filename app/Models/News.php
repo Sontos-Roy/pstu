@@ -19,6 +19,7 @@ class News extends Model
         return $this->belongsTo(Department::class, 'depertment_id');
     }
 
+
     function departments(){
         return $this->belongsToMany(Department::class, 'depertment_news');
     }
@@ -27,5 +28,5 @@ class News extends Model
         return $this->belongsTo(Faculty::class);
     }
 
- 
+
 }
