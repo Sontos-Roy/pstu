@@ -3,13 +3,13 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Add Regent Board Member</h2>
+        <h2>Add Academic Council Member</h2>
         <small class="text-muted">Patuakhali Science & Technology University</small>
     </div>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
             <div class="card">
-                <form action="{{ route('admin.regent_board.store') }}" method="POST" id="ajax_form">
+                <form action="{{ route('admin.academic_council.store') }}" method="POST" id="ajax_form">
                     @csrf
                     <div class="body">
                         <div class="row clearfix">
