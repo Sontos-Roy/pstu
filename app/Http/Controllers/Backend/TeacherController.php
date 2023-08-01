@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\Designation;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -34,6 +35,7 @@ class TeacherController extends Controller
         $this->data['roles'] = Role::pluck('name','name')->all();
         $this->data['departments'] = Department::all();
         $this->data['faculties'] = Faculty::all();
+        $this->data['designations'] = Designation::all();
         return view('backend.teachers.add', $this->data);
     }
 
@@ -74,6 +76,7 @@ class TeacherController extends Controller
                 'email' => $request->input('email'),
                 'department_id' => $request->input('department_id'),
                 'faculty_id' => $request->input('faculty_id'),
+                'designation_id' => $request->input('designation_id'),
                 'password' => bcrypt($request->input('password')),
             ]);
 
@@ -84,7 +87,6 @@ class TeacherController extends Controller
             $details->user_id = $teacher->id;
             $details->date_of_birth = $request->input('date_of_birth');
             $details->gender = $request->input('gender');
-            $details->department_id = $request->input('department_id');
             $details->position = $request->input('position');
             $details->present_address = $request->input('present_address');
             $details->permanent_address = $request->input('permanent_address');
@@ -152,8 +154,8 @@ class TeacherController extends Controller
         $faculties= Faculty::all();
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-        return view('backend.teachers.edit',compact('user','roles','userRole', 'departments', 'faculties'));
+        $designations = Designation::all();
+        return view('backend.teachers.edit',compact('user','roles','userRole', 'departments', 'faculties','designations'));
     }
 
     /**
@@ -167,6 +169,7 @@ class TeacherController extends Controller
             'gender' => 'required',
             'department_id' => '',
             'faculty_id' => '',
+            'designation_id' => '',
             'position' => 'required',
             'image' => 'image',
             'banner' => 'image',
@@ -193,6 +196,7 @@ class TeacherController extends Controller
             $teacher->email = $request->input('email');
             $teacher->department_id = $request->input('department_id');
             $teacher->faculty_id = $request->input('faculty_id');
+            $teacher->designation_id = $request->input('designation_id');
    
             $teacher->save();
    
@@ -201,7 +205,6 @@ class TeacherController extends Controller
                 $details = $teacher->userDetails;
                 $details->date_of_birth = $request->input('date_of_birth');
                 $details->gender = $request->input('gender');
-                $details->department_id = $request->input('department_id');
                 $details->position = $request->input('position');
                 $details->present_address = $request->input('present_address');
                 $details->permanent_address = $request->input('permanent_address');

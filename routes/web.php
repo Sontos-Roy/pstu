@@ -59,6 +59,7 @@ use App\Http\Controllers\Backend\UserResearchSupervisionController;
 use App\Http\Controllers\Backend\UserPublicationController;
 use App\Http\Controllers\Backend\UserProjectController;
 use App\Http\Controllers\Backend\DesignationController;
+use App\Http\Controllers\Backend\NocController;
 use App\Http\Controllers\Frontend\CommitteeController;
 use App\Http\Controllers\Frontend\ResearchController as FrontendResearchController;
 use App\Http\Controllers\Frontend\StudentControler;

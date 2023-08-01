@@ -49,6 +49,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
                                     <select class="form-control show-tick p-2" name="department_id">
@@ -59,6 +60,19 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group drop-custum">
+                                    <select class="form-control show-tick p-2" name="designation_id">
+                                        <option value="">-- Designation Select --</option>
+                                        @foreach ($designations as $item)
+                                            <option value="{{ $item->id }}" class="p-2">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
                                     <label for="">Select Role</label>

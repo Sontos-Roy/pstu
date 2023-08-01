@@ -70,6 +70,19 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group drop-custum">
+                                    <select class="form-control show-tick p-2" name="designation_id">
+                                        <option value="">-- Designation Select --</option>
+                                        @foreach ($designations as $item)
+                                            <option value="{{ $item->id }}" class="p-2" {{ $item->id == $user->designation_id ? 'selected': '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
                             <div class="col-md-4 col-sm-12">
                                     <label for="">Select Role</label>
                                     <select class="form-control show-tick p-2 select2 border-none" multiple name="roles[]">
