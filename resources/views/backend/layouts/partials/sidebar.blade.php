@@ -324,6 +324,18 @@
                 </ul>
             </li>
             @endif
+            @if(auth()->user()->can('regentboard.view') || auth()->user()->can('regentboard.create'))
+            <li class="{{ in_array($currentUrl, $admissions) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>University Governance</span> </a>
+                <ul class="ml-menu">
+                    @can('regentboard.view')
+                    <li class="{{ in_array($currentUrl, ['admin.regent_board.index']) ? 'active' : '' }}"> <a href="{{ route('admin.regent_board.index') }}">Regent Board Committees</a></li>
+                    @endcan
+                    @can('admissions.create')
+                    <li class="{{ in_array($currentUrl, ['admin.admissions.create']) ? 'active' : '' }}"> <a href="{{ route('admin.admissions.create') }}">Create Admissions</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
 
             @if(auth()->user()->can('researchs.view') || auth()->user()->can('researchs.create'))
             <li class="{{ in_array($currentUrl, $researchs) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-view-web"></i><span>Researches</span> </a>
