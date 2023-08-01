@@ -58,6 +58,7 @@ use App\Http\Controllers\Backend\UserExperienceController;
 use App\Http\Controllers\Backend\UserResearchSupervisionController;
 use App\Http\Controllers\Backend\UserPublicationController;
 use App\Http\Controllers\Backend\UserProjectController;
+use App\Http\Controllers\Backend\DesignationController;
 use App\Http\Controllers\Frontend\CommitteeController;
 use App\Http\Controllers\Frontend\ResearchController as FrontendResearchController;
 use App\Http\Controllers\Frontend\StudentControler;
@@ -73,6 +74,8 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('user-research-supervision', UserResearchSupervisionController::class,['names'=>'user_research_supervision']);
     Route::resource('user-publications', UserPublicationController::class,['names'=>'user_publications']);
     Route::resource('user-projects', UserProjectController::class,['names'=>'user_projects']);
+    Route::resource('designations', DesignationController::class);
+    Route::resource('noces', NocController::class);
 
 
 });

@@ -54,6 +54,46 @@
             </li>
             @endcan
 
+
+            @php
+                $deg = ['admin.designations.index', 'admin.designations.create'];
+            @endphp
+
+            @if(auth()->user()->can('designations.view') || auth()->user()->can('designations.create'))
+
+            <li class="{{ in_array($currentUrl, $deg) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span> Designation </span> </a>
+                <ul class="ml-menu">
+                    @can('designations.view')
+                    <li class="{{ in_array($currentUrl, ['admin.designations.index']) ? 'active' : '' }}"><a href="{{ route('admin.designations.index') }}">All  Designation </a></li>
+                    @endcan
+                    @can('designations.create')
+                    <li class="{{ in_array($currentUrl, ['admin.designations.create']) ? 'active' : '' }}"><a href="{{ route('admin.designations.create') }}">Add  Designation </a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
+
+
+            @php
+                $noc = ['admin.noces.index', 'admin.noces.create'];
+            @endphp
+
+            @if(auth()->user()->can('noces.view') || auth()->user()->can('noces.create'))
+
+            <li class="{{ in_array($currentUrl, $noc) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span> NOC </span> </a>
+                <ul class="ml-menu">
+                    @can('noces.view')
+                    <li class="{{ in_array($currentUrl, ['admin.noces.index']) ? 'active' : '' }}"><a href="{{ route('admin.noces.index') }}">All  NOC </a></li>
+                    @endcan
+                    @can('noces.create')
+                    <li class="{{ in_array($currentUrl, ['admin.noces.create']) ? 'active' : '' }}"><a href="{{ route('admin.noces.create') }}">Add  NOC </a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
+
+
+
             @php
                 $leaders = ['admin.leadership.index', 'admin.leadership.create'];
             @endphp
@@ -71,6 +111,8 @@
                 </ul>
             </li>
             @endif
+
+
             @php
                 $pages = ['admin.pages.index', 'admin.pages.create'];
             @endphp
