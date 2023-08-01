@@ -119,7 +119,7 @@
                                     </div>
                                   </div>
 
-                                  <div class="card">
+                                <div class="card">
                                     <div class="card-header" id="headingOne">
                                       <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="#Memberships" aria-expanded="true" aria-controls="Memberships">
@@ -141,12 +141,12 @@
                                                         <th> Action </th>
                                                     </tr>
 
-                                                    @foreach($teacher->memberships as $edu)
+                                                    @foreach($teacher->memberships as $mem)
                                                     <tr>
-                                                        <td>{{ $edu->name}}</td>
-                                                        <td>{{ $edu->type}}</td>
-                                                        <td>{{ $edu->membership_year}}</td>
-                                                        <td>{{ $edu->expire_year}}</td>
+                                                        <td>{{ $mem->name}}</td>
+                                                        <td>{{ $mem->type}}</td>
+                                                        <td>{{ $mem->membership_year}}</td>
+                                                        <td>{{ $mem->expire_year}}</td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -154,8 +154,124 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                </div>
 
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#Educations" aria-expanded="true" aria-controls="Educations">
+                                            Educations
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="Educations" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th> Degree Name</th>
+                                                        <th> Mejor Subject </th>
+                                                        <th> Institute </th>
+                                                        <th> Country </th>
+                                                        <th> Passing Year </th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->educations as $edu)
+                                                    <tr>
+                                                        <td>{{ $edu->degree_name}}</td>
+                                                        <td>{{ $edu->mejor_subject}}</td>
+                                                        <td>{{ $edu->institute}}</td>
+                                                        <td>{{ $edu->country}}</td>
+                                                        <td>{{ $edu->passing_year}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#research_interest" aria-expanded="true" aria-controls="research_interest">
+                                            Research Interest
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="research_interest" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th> Subject </th>
+                                                        <th> Description </th>
+                                                        <th> Research </th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->research_interests as $edu)
+                                                    <tr>
+                                                        <td>{{ $edu->subject}}</td>
+                                                        <td>{{ $edu->description}}</td>
+                                                        <td>{{ $edu->research}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#research_supervision" aria-expanded="true" aria-controls="research_supervision">
+                                            Research Supervision
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="research_supervision" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th> Level Of Study </th>
+                                                        <th> title </th>
+                                                        <th> Supervisor </th>
+                                                        <th> Co Supervisor </th>
+                                                        <th> No Of Student </th>
+                                                        <th> Area Research </th>
+                                                        <th> Current Completion </th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->research_supervisions as $edu)
+                                                    <tr>
+                                                        <td>{{ $edu->level_of_study}}</td>
+                                                        <td>{{ $edu->title}}</td>
+                                                        <td>{{ $edu->supervisor}}</td>
+                                                        <td>{{ $edu->co_supervisor}}</td>
+                                                        <td>{{ $edu->no_of_student}}</td>
+                                                        <td>{{ $edu->area_research}}</td>
+                                                        <td>{{ $edu->current_completion}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
