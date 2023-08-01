@@ -26,7 +26,7 @@
                                 <th>Department</th>
                                 <th>Details</th>
                                 <th>Contact</th>
-                                <th>Image</th>
+                                <th>Created By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
