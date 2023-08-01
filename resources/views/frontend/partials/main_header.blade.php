@@ -240,19 +240,13 @@
                                         <h6 class="title menuTitle">Admission</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Undergraduate
-                                                        Programs</a></li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Graduate
-                                                        Programs</a></li>
-                                                <li><a target="_blank" href=""><i class="fas fa-angle-double-right"></i>
-                                                        MPhil Programs</a>
-                                                </li>
-
-
-                                                <li><a target="_blank" href=""><i class="fas fa-angle-double-right"></i>
-                                                        PhD Programs</a></li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> International
-                                                        Students</a></li>
+                                                @foreach (getAdmissions()->take(6) as $admission)
+                                                <li>
+                                                    <a href="{{ route('front.get.admissions', $admission->slug) }}">
+                                                    <i class="fas fa-angle-double-right"></i> {{ $admission->title }}
+                                                    </a>
+                                                    </li>
+                                                @endforeach
 
                                             </ul>
                                         </div>

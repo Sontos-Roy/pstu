@@ -98,6 +98,7 @@ Route::group(['as'=>'front.'], function(){
         Route::get('/students/{slug}', 'studentPage')->name('student.page');
         Route::get('/academic-calender/{faculty?}', 'academicCalendar')->name('academic.calendar');
         Route::get('get-calendars', 'CalendarsHtml')->name('get.calendars');
+        Route::get('admission/{slug}', 'getAdmissions')->name('get.admissions');
     });
 
     Route::controller(FacultiesController::class)->group(function(){

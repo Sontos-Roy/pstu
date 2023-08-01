@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicCalendar;
+use App\Models\Admission;
 use App\Models\Department;
 use App\Models\Event;
 use App\Models\Faculty;
@@ -221,6 +222,12 @@ class HomeController extends Controller
         $html = view('frontend.calendars.partials', compact('data', 'department'))->render();
 
         return response()->json(['status'=>true, 'html' => $html]);
+    }
+
+    function getAdmissions($slug){
+        $this->data['data'] = Admission::whereSlug($slug)->first();
+
+        return view('frontend.admissions', $this->data);
     }
 
 }

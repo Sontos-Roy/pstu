@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admission;
 use App\Models\Faculty;
 use App\Models\LeaderShip;
 use App\Models\Setting;
@@ -171,3 +172,9 @@ function getDepartment(){
 }
 
 
+
+function getAdmissions(){
+    $admissions = Admission::all();
+
+    return $admissions;
+}
