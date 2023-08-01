@@ -273,6 +273,47 @@
                                     </div>
                                 </div>
 
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#awards" aria-expanded="true" aria-controls="awards">
+                                            Award
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="awards" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th class="width10per" nowrap="">Award Type</th>
+                                                        <th class="width25per">Title</th>
+                                                        <th class="width7per">Year</th>
+                                                        <th class="width7per">Country</th>
+                                                        <th>Description</th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->awards as $edu)
+                                                    <tr>
+                                                        <td>{{ $edu->type}}</td>
+                                                        <td>{{ $edu->title}}</td>
+                                                        <td>{{ $edu->year}}</td>
+                                                        <td>{{ $edu->country}}</td>
+                                                        <td>{{ $edu->description}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>

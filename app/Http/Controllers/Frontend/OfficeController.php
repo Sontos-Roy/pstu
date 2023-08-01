@@ -24,4 +24,11 @@ class OfficeController extends Controller
 
         return view('frontend.offices.officers', $this->data);
     }
+
+    function OfficersShow($id){
+        $this->data['item'] = Office::with('user')->find($id);
+
+        return view('frontend.offices.officer_profile', $this->data);
+    }
+
 }
