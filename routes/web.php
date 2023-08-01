@@ -139,6 +139,7 @@ Route::group(['as'=>'front.'], function(){
         Route::get('offices', 'allOffices')->name('all.offices');
         Route::get('office/{slug}', 'officeShow')->name('office.show');
         Route::get('officers', 'Officers')->name('officers');
+        Route::get('officers/{id}', 'OfficersShow')->name('officers.show');
     });
     Route::controller(FrontendUserController::class)->group(function(){
         Route::get('user-profile/{id}', 'userProfile')->name('user.profile');
