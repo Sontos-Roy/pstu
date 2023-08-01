@@ -48,9 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDetail::class);
     }
-    function department(){
-        return $this->hasOne(Department::class);
-    }
+    // function department(){
+    //     return $this->hasOne(Department::class);
+    // }
 
     public function awards(){
 
@@ -92,6 +92,13 @@ class User extends Authenticatable
         return $this->hasMany(Faculty::class, 'user_id');
     }
 
+    public function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+
+    public function department(){
+        return $this->belongsTo(User::class);
+    }
 
 
 
