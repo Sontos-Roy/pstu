@@ -38,7 +38,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->user->name }}</td>
-                                <td>{{ $item->user->desigantion?$item->user->desigantion->name :''}}</td>
+                                <td>{{ $item->user->designation?$item->user->designation->name :''}}</td>
                                 <td>{{ $item->user->department?$item->user->department->name :''}}</td>
                                 <td>{{ $item->type}}</td>
                                 <td>{{ $item->date}}</td>

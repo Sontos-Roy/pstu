@@ -26,6 +26,7 @@ use App\Models\UniversityGlance;
 use App\Models\UniversityOrdinance;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
+use App\Models\Noc;
 use App\Models\ViceChancellor;
 use Illuminate\Http\Request;
 
@@ -228,6 +229,12 @@ class HomeController extends Controller
         $this->data['data'] = Admission::whereSlug($slug)->first();
 
         return view('frontend.admissions', $this->data);
+    }
+
+    public function getNoc(){
+
+        $items=Noc::paginate(25);
+        return view('frontend.noc_list', compact('items'));
     }
 
 }

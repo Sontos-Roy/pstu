@@ -416,7 +416,7 @@
 
                                 <li><a href="{{ route('front.pstu.form') }}"><i class="fas fa-angle-double-right"></i> PSTU Forms</a>
                                 </li>
-                                <li><a href=""><i class="fas fa-angle-double-right"></i> Approved
+                                <li><a href="{{ route('front.noc.list')}}"><i class="fas fa-angle-double-right"></i> Approved
                                         NOC/GO/Order</a></li>
                                 <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                         E-Tender</a></li>
