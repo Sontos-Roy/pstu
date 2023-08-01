@@ -37,8 +37,8 @@ class StudentController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'short' => '',
-            'details' => '',
-            'pdf' => 'mimes:pdf|max:2048',
+            'details' => 'nullable',
+            'pdf' => 'mimes:pdf',
             'image' => 'image'
         ]);
 

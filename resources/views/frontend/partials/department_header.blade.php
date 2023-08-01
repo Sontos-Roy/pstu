@@ -1,10 +1,7 @@
 <div class="top-bar-area bg-dark text-light">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 logo-box">
-                <a href="{{ route('front.home') }}"><img src="{{ getImage('settings', getSetting('logo')) }}" alt="Thumb" height="40"></a>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-9 text-center">
                 <a href=""> <span class="deptHeading">Department of @stack('department')</span> </a>
             </div>
             <div class="col-md-3 link text-right">
@@ -56,7 +53,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
-                <ul class="nav navbar-nav navbar-left" data-in="#" data-out="#">
+                <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
                     <li>
                         <a href="{{ route('front.home') }}" class="dropdown-toggle" data-toggle="dropdown">Home</a>
                         <ul class="dropdown-menu animated #">

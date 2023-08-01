@@ -16,7 +16,11 @@
                         <center>
                             <h3>Apply For Govt. Scholarships</h3>
                         </center>
-                        <form action="{{ route('front.scholarship.store') }}" id="ajax_form" method="POST">
+                        <br><br>
+                        @if(session('success'))
+                        <h4 class="text-success"><strong>{{ session('success') }}</strong></h4>
+                    @endif
+                        <form action="{{ route('front.scholarship.store') }}" method="POST">
                             @csrf
                             <br>
                             <div class="form-group">

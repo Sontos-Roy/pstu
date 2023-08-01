@@ -28,7 +28,7 @@ class StudentControler extends Controller
 
         StudentMarkSheet::create($data);
 
-        return response()->json(['status' => true, 'msg' => 'Application Successfully Send']);
+        return back()->with('success', 'Application Submited Successfully');
     }
     function ScholarForm(){
         return view('frontend.students.scholarships');
@@ -46,7 +46,6 @@ class StudentControler extends Controller
         ]);
 
         Scholarship::create($data);
-
-        return response()->json(['status' => true, 'msg' => 'Application Successfully Send']);
+        return back()->with('success', 'Application Submited Successfully');
     }
 }

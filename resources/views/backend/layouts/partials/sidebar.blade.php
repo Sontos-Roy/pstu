@@ -217,18 +217,14 @@
                 $students = ['admin.students-page.index', 'admin.students-page.create'];
             @endphp
             @if(auth()->user()->can('students-page.view') || auth()->user()->can('students-page.create'))
+
+            @endif
             <li class="{{ in_array($currentUrl, $students) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city-alt"></i><span>Students Page</span> </a>
                 <ul class="ml-menu">
-                    @can('students-page.view')
                     <li class="{{ in_array($currentUrl, ['admin.students-page.index']) ? 'active' : '' }}"><a href="{{ route('admin.students-page.index') }}">All Student Pages</a></li>
-                    @endcan
-
-                    @can('students-page.create')
                     <li class="{{ in_array($currentUrl, ['admin.students-page.create']) ? 'active' : '' }}"><a href="{{ route('admin.students-page.create') }}">Add Student Pages</a></li>
-                    @endcan
                 </ul>
             </li>
-            @endif
 
             @php
                 $faculties = ['admin.faculties.index', 'admin.faculties.create'];
