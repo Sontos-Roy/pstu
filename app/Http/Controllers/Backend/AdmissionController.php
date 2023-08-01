@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admission;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdmissionController extends Controller
 {
@@ -24,7 +27,9 @@ class AdmissionController extends Controller
      */
     public function create()
     {
-        //
+        $this->data['departments'] = Department::all();
+
+        return view('backend.admissions.add', $this->data);
     }
 
     /**
@@ -32,7 +37,18 @@ class AdmissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data= $request->validate([
+            'title' => 'required',
+            'department_id' => 'nullable',
+            'details' => '',
+            'contact' => '',
+        ]);
+
+        $data['slug'] = Str::slug($request->input('title'));
+        $data['user_id'] = Auth::id();
+        Admission::create($data);
+
+        return response()->json(['status' => true, 'msg' => 'Admission Created Successfully', 'url' => route('admin.admissions.index')]);
     }
 
     /**
@@ -48,7 +64,9 @@ class AdmissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->data['admission'] = Admission::find($id);
+        $this->data['departments'] = Department::all();
+        return view('backend.admissions.edit', $this->data);
     }
 
     /**
@@ -56,7 +74,21 @@ class AdmissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data= $request->validate([
+            'title' => 'required',
+            'department_id' => 'nullable',
+            'details' => '',
+            'contact' => '',
+        ]);
+
+        $data['slug'] = Str::slug($request->input('title'));
+        $data['user_id'] = Auth::id();
+        $update = Admission::find($id);
+        $update->fill($data);
+        $update->save();
+
+
+        return response()->json(['status' => true, 'msg' => 'Admission Updated Successfully', 'url' => route('admin.admissions.index')]);
     }
 
     /**
@@ -64,6 +96,8 @@ class AdmissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Admission::find($id)->delete();
+
+        return response()->json(['status' => true, 'msg' => 'Admission Deleted Successfully']);
     }
 }

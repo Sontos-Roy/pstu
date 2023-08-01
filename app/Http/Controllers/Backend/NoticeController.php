@@ -54,6 +54,7 @@ class NoticeController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);
@@ -112,6 +113,7 @@ class NoticeController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);

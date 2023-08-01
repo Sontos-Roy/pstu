@@ -35,14 +35,14 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ StrLimit($item->title, 100) }}</td>
-                                <td>{{ $item->department->name }}</td>
+                                <td>{{ $item->department ? $item->department->name: "" }}</td>
                                 <td>{{ StrLimit($item->details, 100) }}</td>
                                 <td>{{ StrLimit($item->contact, 100) }}</td>
-                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->user ? $item->user->name : ''}}</td>
                                 <td>
                                     <div class="d-flex">
 
-                                        <a href="{{ route('admin.admissions.view', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                        <a href="{{ route('admin.admissions.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             visibility
                                             </span></a>
                                         <a href="{{ route('admin.admissions.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
