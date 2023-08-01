@@ -20,7 +20,11 @@ class EventController extends Controller
 
         $query= Event::orderBy("id", "DESC");
                 if(auth()->user()->hasRole('faculty')){
-                    $query->whereIn('faculty_id', auth()->user()->faculties()->pluck('id'));
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
                 }
         $this->data['events'] =$query->get();
 
@@ -34,7 +38,7 @@ class EventController extends Controller
     public function create()
     {
         $this->data['faculties'] = getFaculty();
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
         return view("backend.events.add", $this->data);
     }
 
@@ -88,7 +92,7 @@ class EventController extends Controller
     {
         $this->data['event'] = Event::find($id);
         $this->data['faculties'] = getFaculty();
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
 
         return view('backend.events.edit', $this->data);
     }
@@ -129,12 +133,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id){
+
         $event = Event::find($id);
-
         deleteImage("events", $event->image);
-
         $event->delete();
 
         return response()->json(['status'=>true, 'msg'=>'Event Deleted Successfully']);

@@ -30,10 +30,10 @@
                                 <th>SL</th>
                                 <th>Image</th>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Department</th>
                                 <th>Position</th>
                                 <th>role</th>
-
                                 <th>Address</th>
                                 <th>Website</th>
                                 <th>Action</th>
@@ -45,7 +45,8 @@
                                 <td>{{ $key+1 }}</td>
                                 <td><img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" width="80" alt=""></td>
                                 <td>{{ StrLimit($teacher->name, 100) }}</td>
-                                <td>{{ $teacher->userDetails && $teacher->userDetails->department ? $teacher->userDetails->department->name : '' }}</td>
+                                <td>{{ StrLimit($teacher->email, 100) }}</td>
+                                <td>{{ $teacher->department ? $teacher->department->name : '' }}</td>
                                 <td>{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}</td>
                                 <td>
                                     @foreach($teacher->roles as $role)

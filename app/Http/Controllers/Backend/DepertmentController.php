@@ -16,7 +16,12 @@ class DepertmentController extends Controller
      */
     public function index()
     {
-        $this->data['departments'] = Department::orderBy('id', 'DESC')->get();
+        $query= Department::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+        $this->data['departments'] =$query->get();
+        
         return view("backend.depertments.departments", $this->data);
     }
 
@@ -25,7 +30,7 @@ class DepertmentController extends Controller
      */
     public function create()
     {
-        $this->data['faculties'] = Faculty::all();
+        $this->data['faculties'] = getFaculty();
         $this->data['users'] =  User::whereHas('roles', function ($query) {
             $query->where('name', 'teacher');
         })->get();
@@ -74,7 +79,7 @@ class DepertmentController extends Controller
      */
     public function edit(string $id)
     {
-        $this->data['faculties'] = Faculty::all();
+        $this->data['faculties'] = getFaculty();
         $this->data['users'] =  User::whereHas('roles', function ($query) {
             $query->where('name', 'teacher');
         })->get();

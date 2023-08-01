@@ -22,11 +22,7 @@ class TeacherController extends Controller
      */
     public function index(){
 
-        $role = Role::where('name', 'Dean')->firstOrFail();
-        $teacherUserIds = $role->users()->pluck('id')->toArray();
-
-        $this->data['teachers'] = User::whereIn('id', $teacherUserIds)->orderBy('name')->paginate(6 );
-
+        $this->data['teachers'] = User::orderBy('name')->paginate(20);
         return view('backend.teachers.teachers', $this->data);
     }
 
@@ -44,8 +40,9 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+
+
        $request->validate([
             'name' => 'required',
             'date_of_birth' => '',
@@ -57,7 +54,7 @@ class TeacherController extends Controller
             'banner' => 'image',
             'present_address' => '',
             'permanent_address' => '',
-            'phone' => '',
+            'phone' => 'required',
             'website' => '',
             'facebook' => '',
             'youtube' => '',
@@ -65,55 +62,64 @@ class TeacherController extends Controller
             'linkedin' => '',
             'google_plus' => '',
             'email' => 'email|required',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
             'roles' => 'required'
         ]);
-        $teacher = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'department_id' => $request->input('department_id'),
-            'faculty_id' => $request->input('faculty_id'),
-            'password' => bcrypt($request->input('password')),
-        ]);
 
-        $teacher->assignRole($request->input('roles'));
+        DB::beginTransaction();
 
+        try {
+            $teacher = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'department_id' => $request->input('department_id'),
+                'faculty_id' => $request->input('faculty_id'),
+                'password' => bcrypt($request->input('password')),
+            ]);
 
-        $details = new UserDetail();
-        $details->user_id = $teacher->id;
-        $details->date_of_birth = $request->input('date_of_birth');
-        $details->gender = $request->input('gender');
-        $details->department_id = $request->input('department_id');
-        $details->position = $request->input('position');
-        $details->present_address = $request->input('present_address');
-        $details->permanent_address = $request->input('permanent_address');
-        $details->phone = $request->input('phone');
-        $details->website = $request->input('website');
-        $details->facebook = $request->input('facebook');
-        $details->youtube = $request->input('youtube');
-        $details->twitter = $request->input('twitter');
-        $details->linkedin = $request->input('linkedin');
-        $details->google_plus = $request->input('google_plus');
+            $teacher->assignRole($request->input('roles'));
 
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time().'_'.$image->getClientOriginalName();
-            $image->storeAs('public/images/teachers', $filename);
-            $details->image = $filename;
+            $details = new UserDetail();
+            $details->user_id = $teacher->id;
+            $details->date_of_birth = $request->input('date_of_birth');
+            $details->gender = $request->input('gender');
+            $details->department_id = $request->input('department_id');
+            $details->position = $request->input('position');
+            $details->present_address = $request->input('present_address');
+            $details->permanent_address = $request->input('permanent_address');
+            $details->phone = $request->input('phone');
+            $details->website = $request->input('website');
+            $details->facebook = $request->input('facebook');
+            $details->youtube = $request->input('youtube');
+            $details->twitter = $request->input('twitter');
+            $details->linkedin = $request->input('linkedin');
+            $details->google_plus = $request->input('google_plus');
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time().'_'.$image->getClientOriginalName();
+                $image->storeAs('public/images/teachers', $filename);
+                $details->image = $filename;
+            }
+            if ($request->hasFile('banner')) {
+                $banner = $request->file('banner');
+                $filename2 = time().'_banner_'.$banner->getClientOriginalName();
+                $banner->storeAs('public/images/teachers', $filename2);
+                $details->banner = $filename2;
+            }
+
+            $teacher->userDetails()->save($details);
+            DB::commit();
+            return response()->json(['status'=>true, 'msg'=>'User Created Successfuly', 'url'=>route('admin.users.index')]);
+
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status'=>false, 'msg'=>$e->getMessage()]);
         }
-        if ($request->hasFile('banner')) {
-            $banner = $request->file('banner');
-            $filename2 = time().'_banner_'.$banner->getClientOriginalName();
-            $banner->storeAs('public/images/teachers', $filename2);
-            $details->banner = $filename2;
-        }
 
-        $teacher->userDetails()->save($details);
-
-
-
-        return response()->json(['status'=>true, 'msg'=>'User Created Successfuly', 'url'=>route('admin.users.index')]);
+        
 
     }
 
@@ -166,7 +172,7 @@ class TeacherController extends Controller
             'banner' => 'image',
             'present_address' => '',
             'permanent_address' => '',
-            'phone' => '',
+            'phone' => 'required',
             'website' => '',
             'facebook' => '',
             'youtube' => '',
@@ -176,110 +182,114 @@ class TeacherController extends Controller
             'email' => 'email|required',
             'roles' => 'required'
         ]);
-        $teacher = User::find($id);
-        $teacher->name = $request->input('name');
-        $teacher->email = $request->input('email');
-        $teacher->department_id = $request->input('department_id');
-        $teacher->faculty_id = $request->input('faculty_id');
-        // if ($request->input('password')) {
-        //     $teacher->password = bcrypt($request->input('password'));
-        // }
-        $teacher->save();
-        // if(!empty($input['password'])){
-        //     $$teacher->password = bcrypt($input['password']);
-        // }else{
-        //     $input = Arr::except($input,array('password'));
-        // }
-
-        if(isset($teacher->userDetails)){
-            $details = $teacher->userDetails;
-            $details->date_of_birth = $request->input('date_of_birth');
-            $details->gender = $request->input('gender');
-            $details->department_id = $request->input('department_id');
-            $details->position = $request->input('position');
-            $details->present_address = $request->input('present_address');
-            $details->permanent_address = $request->input('permanent_address');
-            $details->phone = $request->input('phone');
-            $details->website = $request->input('website');
-            $details->facebook = $request->input('facebook');
-            $details->youtube = $request->input('youtube');
-            $details->twitter = $request->input('twitter');
-            $details->linkedin = $request->input('linkedin');
-            $details->google_plus = $request->input('google_plus');
-            DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-            $teacher->assignRole($request->input('roles'));
 
 
-            if ($request->hasFile('image')) {
-                if ($teacher && $teacher->userDetails && $teacher->userDetails->image) {
-                    $imagePath = '/images/teachers/' . $teacher->userDetails->image;
+    DB::beginTransaction();
 
-                    if (Storage::disk('public')->exists($imagePath)) {
-                        Storage::disk('public')->delete($imagePath);
+        try {
+
+            $teacher = User::find($id);
+            $teacher->name = $request->input('name');
+            $teacher->email = $request->input('email');
+            $teacher->department_id = $request->input('department_id');
+            $teacher->faculty_id = $request->input('faculty_id');
+   
+            $teacher->save();
+   
+
+            if(isset($teacher->userDetails)){
+                $details = $teacher->userDetails;
+                $details->date_of_birth = $request->input('date_of_birth');
+                $details->gender = $request->input('gender');
+                $details->department_id = $request->input('department_id');
+                $details->position = $request->input('position');
+                $details->present_address = $request->input('present_address');
+                $details->permanent_address = $request->input('permanent_address');
+                $details->phone = $request->input('phone');
+                $details->website = $request->input('website');
+                $details->facebook = $request->input('facebook');
+                $details->youtube = $request->input('youtube');
+                $details->twitter = $request->input('twitter');
+                $details->linkedin = $request->input('linkedin');
+                $details->google_plus = $request->input('google_plus');
+                DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+                $teacher->assignRole($request->input('roles'));
+
+
+                if ($request->hasFile('image')) {
+                    if ($teacher && $teacher->userDetails && $teacher->userDetails->image) {
+                        $imagePath = '/images/teachers/' . $teacher->userDetails->image;
+
+                        if (Storage::disk('public')->exists($imagePath)) {
+                            Storage::disk('public')->delete($imagePath);
+                        }
                     }
+                    $image = $request->file('image');
+                    $filename = time().'_'.$image->getClientOriginalName();
+                    $image->storeAs('public/images/teachers', $filename);
+                    $details->image = $filename;
                 }
-                $image = $request->file('image');
-                $filename = time().'_'.$image->getClientOriginalName();
-                $image->storeAs('public/images/teachers', $filename);
-                $details->image = $filename;
-            }
-            if ($request->hasFile('banner')) {
-                if ($teacher && $teacher->userDetails && $teacher->userDetails->image) {
-                    $imagePath = '/images/teachers/' . $teacher->userDetails->image;
+                if ($request->hasFile('banner')) {
+                    if ($teacher && $teacher->userDetails && $teacher->userDetails->image) {
+                        $imagePath = '/images/teachers/' . $teacher->userDetails->image;
 
-                    if (Storage::disk('public')->exists($imagePath)) {
-                        Storage::disk('public')->delete($imagePath);
+                        if (Storage::disk('public')->exists($imagePath)) {
+                            Storage::disk('public')->delete($imagePath);
+                        }
                     }
+                    $banner = $request->file('banner');
+                    $filename2 = time().'_banner_'.$banner->getClientOriginalName();
+                    $banner->storeAs('public/images/teachers', $filename2);
+                    $details->banner = $filename2;
                 }
-                $banner = $request->file('banner');
-                $filename2 = time().'_banner_'.$banner->getClientOriginalName();
-                $banner->storeAs('public/images/teachers', $filename2);
-                $details->banner = $filename2;
+
+                $teacher->userDetails()->save($details);
+            }else{
+                $details = new UserDetail();
+                $details->user_id = $id;
+                $details->date_of_birth = $request->input('date_of_birth');
+                $details->gender = $request->input('gender');
+                $details->department_id = $request->input('department_id');
+                $details->position = $request->input('position');
+                $details->present_address = $request->input('present_address');
+                $details->permanent_address = $request->input('permanent_address');
+                $details->phone = $request->input('phone');
+                $details->website = $request->input('website');
+                $details->facebook = $request->input('facebook');
+                $details->youtube = $request->input('youtube');
+                $details->twitter = $request->input('twitter');
+                $details->linkedin = $request->input('linkedin');
+                $details->google_plus = $request->input('google_plus');
+
+                $teacher->assignRole($request->input('roles'));
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $filename = time().'_'.$image->getClientOriginalName();
+                    $image->storeAs('public/images/teachers', $filename);
+                    $details->image = $filename;
+                }
+                if ($request->hasFile('banner')) {
+
+                    $banner = $request->file('banner');
+                    $filename2 = time().'_banner_'.$banner->getClientOriginalName();
+                    $banner->storeAs('public/images/teachers', $filename2);
+                    $details->banner = $filename2;
+                }
+
+                $teacher->userDetails()->save($details);
+
             }
 
-            $teacher->userDetails()->save($details);
-        }else{
-            $details = new UserDetail();
-            $details->user_id = $id;
-            $details->date_of_birth = $request->input('date_of_birth');
-            $details->gender = $request->input('gender');
-            $details->department_id = $request->input('department_id');
-            $details->position = $request->input('position');
-            $details->present_address = $request->input('present_address');
-            $details->permanent_address = $request->input('permanent_address');
-            $details->phone = $request->input('phone');
-            $details->website = $request->input('website');
-            $details->facebook = $request->input('facebook');
-            $details->youtube = $request->input('youtube');
-            $details->twitter = $request->input('twitter');
-            $details->linkedin = $request->input('linkedin');
-            $details->google_plus = $request->input('google_plus');
-
-            $teacher->assignRole($request->input('roles'));
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $filename = time().'_'.$image->getClientOriginalName();
-                $image->storeAs('public/images/teachers', $filename);
-                $details->image = $filename;
+            DB::commit();
+            if(Auth::id() == $teacher->id){
+                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.show', Auth::id())]);
+            }else{
+                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.index')]);
             }
-            if ($request->hasFile('banner')) {
-
-                $banner = $request->file('banner');
-                $filename2 = time().'_banner_'.$banner->getClientOriginalName();
-                $banner->storeAs('public/images/teachers', $filename2);
-                $details->banner = $filename2;
-            }
-
-            $teacher->userDetails()->save($details);
-
-        }
-
-
-        if(Auth::id() == $teacher->id){
-            return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.show', Auth::id())]);
-        }else{
-            return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.index')]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status'=>false, 'msg'=>$e->getMessage()]);
         }
     }
 

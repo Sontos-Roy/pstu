@@ -43,6 +43,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select name="faculty_id" id="" class="select2 form-control">
+                                            <option value="">Select Faculties</option>
+                                            @foreach ($faculties as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == $news->faculty_id ? 'selected' : '' }}>{{ $item->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">

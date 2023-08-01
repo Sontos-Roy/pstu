@@ -22,4 +22,10 @@ class News extends Model
     function departments(){
         return $this->belongsToMany(Department::class, 'depertment_news');
     }
+
+    public function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+
+ 
 }

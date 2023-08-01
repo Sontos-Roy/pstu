@@ -14,4 +14,13 @@ class Event extends Model
     function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+
+    public function department(){
+        return $this->belongsTo(User::class);
+    }
+    
 }
