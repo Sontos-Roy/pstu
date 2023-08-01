@@ -5,11 +5,11 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Regent Board Members</h2>
+                <h2>All Academic Council Members</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
             <div>
-                <a href="{{ route('admin.regent_board.create') }}" class="btn btn-raised btn-defualt">Add Member</a>
+                <a href="{{ route('admin.academic_council.create') }}" class="btn btn-raised btn-defualt">Add Member</a>
             </div>
         </div>
     </div>
@@ -43,12 +43,12 @@
                                     <div class="d-flex">
 
                                         @can('committee.edit')
-                                        <a href="{{ route('admin.regent_board.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+                                        <a href="{{ route('admin.academic_council.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
                                         @endcan
                                         @can('committee.delete')
-                                        <form action="{{ route('admin.regent_board.destroy', $item->id) }}" class="delete_form" method="POST">
+                                        <form action="{{ route('admin.academic_council.destroy', $item->id) }}" class="delete_form" method="POST">
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                                 delete

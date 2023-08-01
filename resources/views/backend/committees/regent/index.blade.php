@@ -42,12 +42,12 @@
                                 <td>
                                     <div class="d-flex">
 
-                                        @can('committee.edit')
+                                        @can('regentboard.edit')
                                         <a href="{{ route('admin.regent_board.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
                                         @endcan
-                                        @can('committee.delete')
+                                        @can('regentboard.delete')
                                         <form action="{{ route('admin.regent_board.destroy', $item->id) }}" class="delete_form" method="POST">
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">

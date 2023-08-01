@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicCouncil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicCouncilController extends Controller
 {
@@ -12,7 +14,9 @@ class AcademicCouncilController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['members'] = AcademicCouncil::all();
+
+        return view('backend.committees.planning_work.index', $this->data);
     }
 
     /**
@@ -20,7 +24,7 @@ class AcademicCouncilController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.committees.planning_work.add');
     }
 
     /**
@@ -28,7 +32,19 @@ class AcademicCouncilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'designation' => 'required',
+            'phone' => 'required',
+            'email' => '',
+            'address' => 'required',
+        ]);
+
+        $data['user_id'] = Auth::id();
+
+        AcademicCouncil::create($data);
+
+        return response()->json(['status' => true, 'msg' => 'Academic Council Member Created Successfully', 'url' => route('admin.academic_council.index')]);
     }
 
     /**
@@ -44,7 +60,9 @@ class AcademicCouncilController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->data['item'] = AcademicCouncil::find($id);
+
+        return view('backend.committees.planning_work.edit', $this->data);
     }
 
     /**
@@ -52,7 +70,18 @@ class AcademicCouncilController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'designation' => 'required',
+            'phone' => 'required',
+            'email' => '',
+            'address' => 'required',
+        ]);
+
+        $data['user_id'] = Auth::id();
+        AcademicCouncil::find($id)->update($data);
+
+        return response()->json(['status' => true, 'msg' => 'Academic Council Member Updated Successfully', 'url' => route('admin.academic_council.index')]);
     }
 
     /**
@@ -60,6 +89,9 @@ class AcademicCouncilController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        AcademicCouncil::find($id)->delete();
+
+        return response()->json(['status' => true, 'msg' => 'Planning Work Member Deleted Successfully']);
+
     }
 }
