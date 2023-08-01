@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Validation\Validator;
@@ -20,7 +21,7 @@ class TeacherController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        
+
         $role = Role::where('name', 'Dean')->firstOrFail();
         $teacherUserIds = $role->users()->pluck('id')->toArray();
 
@@ -36,6 +37,7 @@ class TeacherController extends Controller
     {
         $this->data['roles'] = Role::pluck('name','name')->all();
         $this->data['departments'] = Department::all();
+        $this->data['faculties'] = Faculty::all();
         return view('backend.teachers.add', $this->data);
     }
 
@@ -48,7 +50,8 @@ class TeacherController extends Controller
             'name' => 'required',
             'date_of_birth' => '',
             'gender' => 'required',
-            'department_id' => 'required',
+            'department_id' => '',
+            'faculty_id' => '',
             'position' => 'required',
             'image' => 'image',
             'banner' => 'image',
@@ -68,6 +71,8 @@ class TeacherController extends Controller
         $teacher = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'department_id' => $request->input('department_id'),
+            'faculty_id' => $request->input('faculty_id'),
             'password' => bcrypt($request->input('password')),
         ]);
 
@@ -118,7 +123,7 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         $this->data['teacher'] = User::find($id);
-        
+
         return view('backend.teachers.view', $this->data);
     }
 
@@ -138,10 +143,11 @@ class TeacherController extends Controller
     {
         $user = User::find($id);
         $departments = Department::all();
+        $faculties= Faculty::all();
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('backend.teachers.edit',compact('user','roles','userRole', 'departments'));
+        return view('backend.teachers.edit',compact('user','roles','userRole', 'departments', 'faculties'));
     }
 
     /**
@@ -153,7 +159,8 @@ class TeacherController extends Controller
             'name' => 'required',
             'date_of_birth' => '',
             'gender' => 'required',
-            'department_id' => 'required',
+            'department_id' => '',
+            'faculty_id' => '',
             'position' => 'required',
             'image' => 'image',
             'banner' => 'image',
@@ -172,6 +179,8 @@ class TeacherController extends Controller
         $teacher = User::find($id);
         $teacher->name = $request->input('name');
         $teacher->email = $request->input('email');
+        $teacher->department_id = $request->input('department_id');
+        $teacher->faculty_id = $request->input('faculty_id');
         // if ($request->input('password')) {
         //     $teacher->password = bcrypt($request->input('password'));
         // }
