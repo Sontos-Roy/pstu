@@ -12,11 +12,16 @@
         <div class="row">
             <div class="features">
                 <div data-aos="fade-left" class="equal-height col-md-12 col-sm-12" style="height: 320px;">
+
                     <div class="item mariner">
                         <center>
                             <h3>Apply For Certificate/Marksheet</h3>
                         </center>
-                        <form action="{{ route('front.marksheet.store') }}" id="ajax_form" method="POST">
+                        <br><br>
+                        @if(session('success'))
+                        <h4 class="text-success"><strong>{{ session('success') }}</strong></h4>
+                    @endif
+                        <form action="{{ route('front.marksheet.store') }}" method="POST">
                             @csrf
                             <br>
                             <div class="form-group">

@@ -38,7 +38,7 @@ class StudentController extends Controller
             'title' => 'required',
             'short' => '',
             'details' => '',
-            'pdf' => 'mimes:pdf|max:2048',
+            'pdf' => 'mimes:pdf',
             'image' => 'image'
         ]);
 

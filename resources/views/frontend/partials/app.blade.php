@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="assets1/img/pstulogo.png') }}" type="image/x-icon"/>
 
     <!-- ========== Start Stylesheet ========== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/flaticon-set.css') }}" rel="stylesheet" />
@@ -179,6 +180,8 @@
     <script src="{{ asset('frontend/js/loopcounter.js') }}"></script>
     {{-- <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/bootsnav.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script>
             $(document).on('submit','form#ajax_form', function(e) {
