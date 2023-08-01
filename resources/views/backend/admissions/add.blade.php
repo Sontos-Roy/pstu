@@ -36,7 +36,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <textarea rows="10" name="details" class="form-control no-resize" id="editor" placeholder="Message In Short" style="height: 200px;"></textarea>
+                                        <textarea rows="10" name="details" class="form-control no-resize" id="editor" placeholder="Add Admission Details" style="height: 200px;"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <textarea rows="10" name="contact" class="form-control no-resize" id="editor2" placeholder="Message In Short" style="height: 200px;"></textarea>
+                                        <textarea rows="10" name="contact" class="form-control no-resize" id="editor2" placeholder="Add Contact Details" style="height: 200px;"></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -48,6 +48,7 @@ class ResearchController extends Controller
             'short' => '',
             'message' => '',
             'department_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);
@@ -106,6 +107,7 @@ class ResearchController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);
