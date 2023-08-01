@@ -101,6 +101,18 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class,'department_id');
     }
 
+    public function publications(){
+
+        return $this->hasMany(UserPublication::class,'user_id');
+    }
+
+    public function projects(){
+        
+        return $this->hasMany(UserProject::class,'user_id');
+    }
+
+    
+
 
 
 }
