@@ -143,7 +143,7 @@
             <!-- Tasks -->
 
             <!-- #END# Tasks -->
-            <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>
+            <!--<li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings"></i></a></li>-->
         </ul>
     </div>
 </nav>
@@ -155,77 +155,77 @@
     @include('backend.layouts.partials.sidebar')
     <!-- #END# Left Sidebar -->
     <!-- Right Sidebar -->
-    <aside id="rightsidebar" class="right-sidebar">
-        <ul class="nav nav-tabs tab-nav-right" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
-            {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li> --}}
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane in active in active" id="skins">
-                <ul class="demo-choose-skin">
-                    <li data-theme="red"><div class="red"></div><span>Red</span> </li>
-                    <li data-theme="purple"><div class="purple"></div><span>Purple</span> </li>
-                    <li data-theme="blue"><div class="blue"></div><span>Blue</span> </li>
-                    <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span> </li>
-                    <li data-theme="green"><div class="green"></div><span>Green</span> </li>
-                    <li data-theme="deep-orange"><div class="deep-orange"></div><span>Deep Orange</span> </li>
-                    <li data-theme="blue-grey"><div class="blue-grey"></div><span>Blue Grey</span> </li>
-                    <li data-theme="black"><div class="black"></div><span>Black</span> </li>
-                    <li data-theme="blush"  class="active"><div class="blush"></div><span>Blush</span> </li>
-                </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="settings">
-                <div class="demo-settings">
-                    <p>GENERAL SETTINGS</p>
-                    <ul class="setting-list">
-                        <li>
-                            <span>Report Panel Usage</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Email Redirect</span>
-                            <div class="switch">
-                                <label><input type="checkbox"><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                    <p>SYSTEM SETTINGS</p>
-                    <ul class="setting-list">
-                        <li>
-                            <span>Notifications</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Auto Updates</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                    <p>ACCOUNT SETTINGS</p>
-                    <ul class="setting-list">
-                        <li>
-                            <span>Offline</span>
-                            <div class="switch">
-                                <label><input type="checkbox"><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Location Permission</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </aside>
+    <!--<aside id="rightsidebar" class="right-sidebar">-->
+    <!--    <ul class="nav nav-tabs tab-nav-right" role="tablist">-->
+    <!--        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>-->
+    <!--        {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li> --}}-->
+    <!--        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>-->
+    <!--    </ul>-->
+    <!--    <div class="tab-content">-->
+    <!--        <div role="tabpanel" class="tab-pane in active in active" id="skins">-->
+    <!--            <ul class="demo-choose-skin">-->
+    <!--                <li data-theme="red"><div class="red"></div><span>Red</span> </li>-->
+    <!--                <li data-theme="purple"><div class="purple"></div><span>Purple</span> </li>-->
+    <!--                <li data-theme="blue"><div class="blue"></div><span>Blue</span> </li>-->
+    <!--                <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span> </li>-->
+    <!--                <li data-theme="green"><div class="green"></div><span>Green</span> </li>-->
+    <!--                <li data-theme="deep-orange"><div class="deep-orange"></div><span>Deep Orange</span> </li>-->
+    <!--                <li data-theme="blue-grey"><div class="blue-grey"></div><span>Blue Grey</span> </li>-->
+    <!--                <li data-theme="black"><div class="black"></div><span>Black</span> </li>-->
+    <!--                <li data-theme="blush"  class="active"><div class="blush"></div><span>Blush</span> </li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--        <div role="tabpanel" class="tab-pane" id="settings">-->
+    <!--            <div class="demo-settings">-->
+    <!--                <p>GENERAL SETTINGS</p>-->
+    <!--                <ul class="setting-list">-->
+    <!--                    <li>-->
+    <!--                        <span>Report Panel Usage</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <span>Email Redirect</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox"><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                </ul>-->
+    <!--                <p>SYSTEM SETTINGS</p>-->
+    <!--                <ul class="setting-list">-->
+    <!--                    <li>-->
+    <!--                        <span>Notifications</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <span>Auto Updates</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                </ul>-->
+    <!--                <p>ACCOUNT SETTINGS</p>-->
+    <!--                <ul class="setting-list">-->
+    <!--                    <li>-->
+    <!--                        <span>Offline</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox"><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <span>Location Permission</span>-->
+    <!--                        <div class="switch">-->
+    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+    <!--                        </div>-->
+    <!--                    </li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</aside>-->
     <!-- #END# Right Sidebar -->
 </section>
 <!--Side menu and right menu -->
@@ -515,9 +515,10 @@ $(document).ready(function() {
 
         // Make an AJAX request to fetch departments based on the selected faculty_id
         $.ajax({
-            url: '{{ route("admin.get.departments",'+facultyId +') }}',
+            url: "{{ route('admin.get.departments') }}",
             type: 'GET',
             dataType: 'json',
+            data: { id: facultyId },
             success: function(data) {
                 // Populate the departments select element with the fetched data
                 var departmentsSelect = $('#departments');

@@ -38,7 +38,7 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->user->name }}</td>
-                                <td>{{ $item->faculty->title }}</td>
+                                <td>{{ $item->faculty? $item->faculty->title : '' }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
                                 <td><img src="{{ getImage('departments', $item->image) }}" alt="" width="100"></td>
                                 <td>

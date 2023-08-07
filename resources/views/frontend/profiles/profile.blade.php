@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <h2>Membar Profile</h2>
+                    <h2>Profile Of {{ $user->name }}</h2>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('front.home') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li class="active">Member Profile</li>
+                        <li class="active">Profile Of {{ $user->name }}</li>
                     </ul>
                 </div>
             </div>
@@ -21,14 +21,12 @@
                     <!-- Start Thumbnail -->
                     <div class="col-md-4">
                         <div class="thumb">
-                            <img src="https://duap.du.ac.bd/upload/img/phy_ssahadu.jpg" class="img-thumbnail" style="width: 100%;" alt="Thumb" onerror="this.src='https://www.du.ac.bd/fontView/assets/img/default.png'">
+                            <img src="{{ getImage('teachers', $user->userDetails->image) }}" class="img-thumbnail" style="width: 100%;"
+                            alt="Thumb" onerror="this.src='https://www.du.ac.bd/fontView/assets/img/default.png'">
                             <div class="info">
-                                <h4>Dr. (Mrs.) Supriya Saha</h4>
-                                <span>
-                                (Professor &amp; Chairman)</span>
-                                <p>
-                                    Department of Physics
-                                </p>
+                                <h4>{{ $user->name }}</h4>
+                                <span>(Professor &amp; Chairman)</span>
+                                {{-- <p>Department of Physics</p> --}}
                             </div>
                         </div>
                     </div>
@@ -39,13 +37,16 @@
                         </div>
                         <div class="course-info-list text-justify">
                             <div class="tab-info">
+                                @if($user)
                                 <!-- Tab Nav -->
                                 <ul class="nav nav-pills">
+
                                     <li class="active">
                                         <a data-toggle="tab" href="#educationInfo" aria-expanded="true">
                                         Education
                                         </a>
                                     </li>
+
                                     <li>
                                         <a data-toggle="tab" href="#experience" aria-expanded="false">
                                         Experience
@@ -92,11 +93,21 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @forelse($user->educations as $edu)
+                                                        <tr>
+                                                            <td>{{ $edu->degree_name}}</td>
+                                                            <td>{{ $edu->mejor_subject}}</td>
+                                                            <td>{{ $edu->institute}}</td>
+                                                            <td>{{ $edu->country}}</td>
+                                                            <td>{{ $edu->passing_year}}</td>
+                                                        </tr>
+                                                        @empty
                                                         <tr>
                                                             <td colspan="5" class="text-center"> No education
                                                                 information is found.
                                                             </td>
                                                         </tr>
+                                                        @endforelse
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -117,9 +128,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->experiences as $exp)
+                                                    <tr>
+                                                        <td>{{ $exp->title}}</td>
+                                                        <td>{{ $exp->organization}}</td>
+                                                        <td>{{ $exp->location}}</td>
+                                                        <td>{{ $exp->from_date}}</td>
+                                                        <td>{{ $exp->to_date}}</td>
+                                                    </tr>
+
+                                                    @empty
                                                     <tr>
                                                         <td colspan="6" class="text-center"> No experience is found</td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>
@@ -136,11 +158,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->research_interests as $res)
+                                                    <tr>
+                                                        <td>{{ $res->subject}}</td>
+                                                        <td>{{ $res->description}}</td>
+                                                        <td>{{ $res->research}}</td>
+                                                    </tr>
+                                                    @empty
                                                     <tr>
                                                         <td colspan="2" class="text-center"> No research interest is
                                                             found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
@@ -160,12 +190,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->research_supervisions as $edu)
+                                                    <tr>
+                                                        <td>{{ $edu->level_of_study}}</td>
+                                                        <td>{{ $edu->title}}</td>
+                                                        <td>{{ $edu->supervisor}}</td>
+                                                        <td>{{ $edu->co_supervisor}}</td>
+                                                        <td>{{ $edu->no_of_student}}</td>
+                                                        <td>{{ $edu->area_research}}</td>
+                                                        <td>{{ $edu->current_completion}}</td>
+                                                    </tr>
+                                                    @empty
+
                                                     <tr>
                                                         <td colspan="7" class="text-center"> No project/research
                                                             supervision is
                                                             found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
@@ -185,11 +228,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->publications as $pub)
+                                                    <tr>
+                                                        <td>{{$pub->subject}}</td>
+                                                        <td>{{$pub->project_name}}</td>
+                                                        <td>{{$pub->source}}</td>
+                                                        <td>{{$pub->from_date}}</td>
+                                                        <td>{{$pub->to_date}}</td>
+                                                        <td>{{$pub->collaboration}}</td>
+                                                    </tr>
+                                                    @empty
                                                     <tr>
                                                         <td colspan="6" class="text-center"> No project/research work is
                                                             found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
@@ -226,11 +280,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->memberships as $mem)
+                                                    <tr>
+                                                        <td>{{ $mem->name}}</td>
+                                                        <td>{{ $mem->type}}</td>
+                                                        <td>{{ $mem->membership_year}}</td>
+                                                        <td>{{ $mem->expire_year}}</td>
+                                                    </tr>
+                                                    @empty
                                                     <tr>
                                                         <td colspan="5" class="text-center"> No Collaboration &amp;
                                                             Membership is found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>
@@ -239,8 +302,27 @@
                                         <table class="table  width100per">
                                             <tbody>
                                                 <tr>
+                                                    <th class="width10per" nowrap="">Name</th>
+                                                    <th class="width25per">Info</th>
+                                                    <th class="width7per">Date</th>
+                                                    <th class="width7per">Link</th>
+                                                    <th>Pdf view</th>
+                                                </tr>
+
+                                                @forelse($user->projects as $mem)
+                                                <tr>
+                                                    <td>{{ $mem->name}}</td>
+                                                    <td>{{ $mem->info}}</td>
+                                                    <td>{{ $mem->date}}</td>
+                                                    <td><a href="{{ $mem->link}}"> View </a>Link</td>
+                                                    <td><a href="{{getPdf('projects',$mem->pdf_file)}}"> View </a></td>
+                                                </tr>
+                                                @empty
+
+                                                <tr>
                                                     <td colspan="6" class="text-center"> No publication is found.</td>
                                                 </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -257,11 +339,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @forelse($user->awards as $award)
+                                                    <tr>
+                                                        <td>{{ $award->type}}</td>
+                                                        <td>{{ $award->title}}</td>
+                                                        <td>{{ $award->year}}</td>
+                                                        <td>{{ $award->country}}</td>
+                                                        <td>{{ $award->description}}</td>
+                                                    </tr>
+                                                    @empty
                                                     <tr>
                                                         <td colspan="5" class="text-center"> No award information is
                                                             found
                                                         </td>
                                                     </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>
@@ -271,37 +363,32 @@
                                             <div class="col-lg-10 col-md-9 col-sm-6 col-xs-12">
                                                 <div class="bold font-size-18px">Dr. (Mrs.) Supriya Saha</div>
                                                 <div style="font-size:13px;">
-                                                    Professor &amp; Chairman
+                                                    {{ $user->name }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Department of Physics
+                                                    Department of {{ $user && $user->department ? $user->department->name:'' }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Faculty of Science
+                                                    Faculty of {{ $user && $user->faculty ? $user->faculty->title:'' }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Email: ssahadu@yahoo.com
+                                                    Email: {{ $user->email }}
                                                 </div>
                                                 <div style="font-size:13px;">
-                                                    Phone: /7030
+                                                    Phone: {{ $user->userDetails ? $user->userDetails->phone : '' }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-    <!-- Start Footer
-
-
 @endsection

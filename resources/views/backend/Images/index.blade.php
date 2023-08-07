@@ -37,17 +37,17 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td><img src="{{ getImage('images', $item->image) }}" alt="" width="100"></td>
-                                <td>{{ $item->faculty->title }}</td>
-                                <td>{{ $item->department->name }}</td>
-                                <td>{{ $item->institute->name }}</td>
-                                <td>{{ $item->program->title }}</td>
+                                <td>{{ $item->faculty? $item->faculty->title: '' }}</td>
+                                <td>{{ $item->department? $item->department->name: "" }}</td>
+                                <td>{{ $item->institute ? $item->institute->name : '' }}</td>
+                                <td>{{ $item->program ? $item->program->title : '' }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        @can('images.edit')
-                                        <a href="{{ route('admin.images.edit', $item->id) }}" class="btn modal_btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            edit_note
-                                            </span></a>
-                                        @endcan
+                                        <!--@can('images.edit')-->
+                                        <!--<a href="{{ route('admin.images.edit', $item->id) }}" class="btn modal_btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">-->
+                                        <!--    edit_note-->
+                                        <!--    </span></a>-->
+                                        <!--@endcan-->
                                         @can('images.delete')
                                         <form action="{{ route('admin.images.destroy', $item->id) }}" class="delete_form" method="POST">
                                             @method('DELETE')

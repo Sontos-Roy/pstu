@@ -10,12 +10,12 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Staff</h2>
+                <h2>All Users</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
             @can('users.create')
             <div>
-                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add Staff</a>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add User</a>
             </div>
             @endcan
         </div>
@@ -100,11 +100,12 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $teachers->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
     </div>
 
-    {{ $teachers->links('pagination::bootstrap-4') }}
+    
 </div>
 @endsection

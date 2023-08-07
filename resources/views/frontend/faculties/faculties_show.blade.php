@@ -67,7 +67,7 @@
                     <div class="item brilliantrose">
                         <a href="{{ route('front.faculties.intro', $faculty->slug) }}">
                             <div style="height: 220px;" class="info">
-                                <h4>Introduction to the faculty</h4>
+                              
                                 {{ $faculty->short }}
                                 <strong class="text-info">Read More</strong>
                             </div>
@@ -111,9 +111,7 @@
                                 <h4 class="text-left " style="height: 50px; word-spacing: 5px">
                                     <a href="{{ route('front.departments.show', $department->slug) }}">{{ StrLimit($department->name, 70) }}</a>
                                 </h4>
-                                <p style="height: 100px">
-                                    {{ StrLimit($department->short, 150) }}
-                                </p>
+                                
                                 <div class="bottom" style="margin-top: 20px">
                                     <div class="col-sm-12">
                                         <a href="{{ route('front.departments.show', $department->slug) }}" class="btn circle btn-dark border btn-sm text-center">

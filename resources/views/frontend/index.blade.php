@@ -264,9 +264,10 @@
                                     <h4 class="text-left " style="height: 50px; word-spacing: 5px">
                                         <a href="{{ route('front.events.show', $event->slug)}}">{{ StrLimit($event->heading, 70) }}</a>
                                     </h4>
-                                    <p style="height: 100px">
-                                        {{ StrLimit($event->short, 150) }}
-                                    </p>
+                                    <!--<p style="height: 100px">-->
+                                    <!--    {{ StrLimit($event->short, 150) }}-->
+                                    <!--</p>-->
+                                    <br>
                                     <div class="bottom" style="margin-top: 20px">
                                         <div class="col-sm-12">
                                             <a href="{{ route('front.events.show', $event->slug)}}" class="btn circle btn-dark border btn-sm text-center">

@@ -23,7 +23,7 @@
                             <h3>Message from the {{ $data->designation }}</h3>
                         </div>
                         <div class="col-sm-3 col-lg-2">
-                            <img src="{{ getImage('teachers', $data->user->userDetails->image) }}" alt="Thumb" class="img-thumbnail image-showing">
+                            <img src="{{ getImage('teachers', $data->user? $data->user->userDetails->image: '') }}" alt="Thumb" class="img-thumbnail image-showing">
                         </div>
                         <div class="col-lg-10 col-sm-9">
                             <div class="margin-top-30px">

@@ -21,7 +21,7 @@
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
                      {{-- {{ __('Logout') }} --}}
-                     <i class="zmdi zmdi-sign-in"></i>
+                     <i class="zmdi zmdi-sign-in"></i>  Logout
                  </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

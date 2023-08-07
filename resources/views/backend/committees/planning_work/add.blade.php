@@ -9,7 +9,7 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
             <div class="card">
-                <form action="{{ route('admin.regent_board.store') }}" method="POST" id="ajax_form">
+                <form action="{{ route('admin.planning_work_committee.store') }}" method="POST" id="ajax_form">
                     @csrf
                     <div class="body">
                         <div class="row clearfix">
