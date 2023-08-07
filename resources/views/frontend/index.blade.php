@@ -94,7 +94,9 @@
                             <a href="{{ route('front.vice.chencellors.message', $item->slug) }}">
                                 <div style="height: 220px;" class="info">
                                     <p>
+                                        @if($item->user)
                                         <img src="{{ getImage('teachers', $item->user->userDetails->image) }}" height="180" width="200" alt="{{ $item->designation }}" srcset="">
+                                        @endif
 
                                     </p>
                                     <p style="font-weight: bold; font-size: 14px;">
