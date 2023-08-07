@@ -22,7 +22,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id','DESC')->get();
         return view('backend.permissions.role',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -32,7 +32,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::get();
+        $permissions = Permission::orderBy('name')->get();
         return view('backend.permissions.roleadd',compact('permissions'));
     }
 
@@ -71,7 +71,7 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::find($id);
-        $permissions = Permission::get();
+        $permissions =Permission::orderBy('name')->get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
@@ -110,7 +110,12 @@ class RoleController extends Controller
     }
 
     public function allPermissions(){
-        $this->data['permissions'] = Permission::all();
+        $query = Permission::orderBy('name');
+        $search=request('q');
+                if($search){
+                    $query->where('name','Like','%'.$search.'%');
+                }
+        $this->data['permissions'] = $query->get();
         return view('backend.permissions.permissions', $this->data);
     }
     public function addPermissions(){
@@ -118,11 +123,11 @@ class RoleController extends Controller
     }
     public function storePermission(Request $request){
         $data = $request->validate([
-            'name'=> 'required'
+            'name'=> 'required|unique:permissions,name'
         ]);
         Permission::create($data);
 
-        return response()->json(['status'=>true, 'msg'=> 'Permission Has Created', 'url'=>route('admin.permissions.index')]);
+        return response()->json(['status'=>true, 'msg'=> 'Permission Has Created', 'url'=>route('admin.permissions.add')]);
         // return redirect()->route('admin.permissions.index')->with('success', 'Permission Created Successfully');
 
     }

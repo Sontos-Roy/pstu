@@ -48,7 +48,75 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDetail::class);
     }
-    function department(){
-        return $this->hasOne(Department::class);
+    // function department(){
+    //     return $this->hasOne(Department::class);
+    // }
+
+    public function awards(){
+
+        return $this->hasMany(UserAward::class, 'user_id');
+
     }
+
+    public function educations(){
+
+        return $this->hasMany(UserEducation::class, 'user_id');
+
+    }
+
+    public function experiences(){
+
+        return $this->hasMany(UserExperience::class, 'user_id');
+
+    }
+
+    public function memberships(){
+
+        return $this->hasMany(UserMembership::class, 'user_id');
+
+    }
+
+    public function research_interests(){
+
+        return $this->hasMany(UserResearchInterest::class, 'user_id');
+
+    }
+
+    public function research_supervisions(){
+
+        return $this->hasMany(UserResearchSupervision::class, 'user_id');
+
+    }
+
+    public function faculties(){
+        
+        return $this->hasMany(Faculty::class, 'user_id');
+    }
+
+    public function faculty(){
+        return $this->belongsTo(Faculty::class,'faculty_id');
+    }
+
+    public function designation(){
+        return $this->belongsTo(Designation::class,'designation_id');
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class,'department_id');
+    }
+
+    public function publications(){
+
+        return $this->hasMany(UserPublication::class,'user_id');
+    }
+
+    public function projects(){
+        
+        return $this->hasMany(UserProject::class,'user_id');
+    }
+
+    
+
+
+
 }

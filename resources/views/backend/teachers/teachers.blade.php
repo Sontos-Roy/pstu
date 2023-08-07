@@ -1,80 +1,111 @@
 @extends('backend.layouts.app')
 
 @section('content')
+<style>
+    .member-card.verified .member-thumb img {
+        min-width: 280px;
+    }
+</style>
 <div class="container-fluid">
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Staff</h2>
+                <h2>All Users</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
+            @can('users.create')
             <div>
-                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add Staff</a>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add User</a>
             </div>
+            @endcan
         </div>
     </div>
-    <style>
-        .header-dropdown{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .shadow-none{
-            box-shadow: none !important;
-            cursor: pointer;
-            width: 100%;
-        }
-        .shadow-none:hover{
-            background-color: rgba(0,0,0,0.075) !important;
-        }
-        .profile_image{
-            aspect-ratio: 3 / 3;
-        }
-
-    </style>
     <div class="row clearfix">
-        @foreach ($teachers as $teacher)
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="body">
-                    <ul class="header-dropdown">
-                        <li class="dropdown"> <a href="javascript:void(0);" class="px-2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="{{ route('admin.users.show', $teacher->id) }}">Show Profile</a></li>
-                                <li><a href="{{ route('admin.users.edit', $teacher->id) }}">Edit Profile</a></li>
-                                <li>
-                                    <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
+                <div class="body table-responsive">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>role</th>
+                                <th>Address</th>
+                                <th>Website</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teachers as $key=>$teacher)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td><img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" width="80" alt=""></td>
+                                <td>{{ StrLimit($teacher->name, 100) }}</td>
+                                <td>{{ StrLimit($teacher->email, 100) }}</td>
+                                <td>{{ $teacher->department ? $teacher->department->name : '' }}</td>
+                                <td>{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}</td>
+                                <td>
+                                    @foreach($teacher->roles as $role)
+
+                                    <span class="badge badge-info">{{$role->name}}</span>
+                                    @endforeach
+                                </td>
+                                <td>{{ $teacher->userDetails ? $teacher->userDetails->present_address : '' }}</td>
+                                <td>{{ Str::limit($teacher->userDetails ? $teacher->userDetails->website : '', 20, '...') }}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.users.show', $teacher->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">
+                                            show
+                                        </a>
+                                        @can('users.edit')
+                                        <a href="{{ route('admin.users.edit', $teacher->id) }}" class="btn btn-primary waves-effect pull-right btn-xs" style="color: white;">edit
+                                        </a>
+                                        @endcan
+                                        @can('users.delete')
+                                        <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
                                         @method('DELETE')
-                                        <button type="submit" class="btn shadow-none btn-sm">Delete Profile</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="member-card verified">
-                        <div class="thumb-xl member-thumb">
-                            <img src="{{ getImage('teachers', $teacher->userDetails ? $teacher->userDetails->image : '') }}" class="img-thumbnail rounded-circle profile_image" alt="profile-image">
-                        </div>
+                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                        </form>
+                                        @endcan
+                                    </div>
 
+                                    <ul class="social-links  m-t-10 d-none">
+                                        <li><a title="facebook" href="{{ $teacher->userDetails ? $teacher->userDetails->facebook : '' }}"><i class="zmdi zmdi-facebook"></i></a></li>
+                                        <li><a title="twitter" href="{{ $teacher->userDetails ? $teacher->userDetails->twitter : '' }}"><i class="zmdi zmdi-twitter"></i></a></li>
+                                        <li><a title="instagram" href="{{ $teacher->userDetails ? $teacher->userDetails->youtube : '' }}"><i class="zmdi zmdi-youtube"></i></a></li>
+                                    </ul>
 
-                        <div class="m-t-20">
-                            <h4 class="m-b-0">{{ $teacher->name }}</h4>
-                            <p class="text-muted">{{ $teacher->userDetails ? $teacher->userDetails->position : '' }}<span> <br> <strong>{{ $teacher->userDetails && $teacher->userDetails->department ? $teacher->userDetails->department->name : '' }}</strong> <a href="{{ $teacher->userDetails ? $teacher->userDetails->website : '' }}" class="text-pink">{{ Str::limit($teacher->userDetails ? $teacher->userDetails->website : '', 20, '...') }}</a> </span></p>
-                        </div>
+                                    <div class="dropdown">
+                                      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        Details
+                                      </button>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_educations.create')}}?user_id={{$teacher->id}}">Education Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_experience.create')}}?user_id={{$teacher->id}}">Experience Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_awards.create')}}?user_id={{$teacher->id}}">Award Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_memberships.create')}}?user_id={{$teacher->id}}">Membership Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_interest.create')}}?user_id={{$teacher->id}}">Research Interest Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_supervision.create')}}?user_id={{$teacher->id}}">Research Supervision Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_projects.create')}}?user_id={{$teacher->id}}">Project Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_publications.create')}}?user_id={{$teacher->id}}">Publication Add</a>
+                                      </div>
+                                    </div>
 
-                        <p class="text-muted">{{ $teacher->userDetails ? $teacher->userDetails->present_address : '' }}</p>
-                        <a href="{{ route('admin.users.show', $teacher->id) }}" class="btn btn-raised btn-default">View Profile</a>
-                        <ul class="social-links  m-t-10">
-                            <li><a title="facebook" href="{{ $teacher->userDetails ? $teacher->userDetails->facebook : '' }}"><i class="zmdi zmdi-facebook"></i></a></li>
-                            <li><a title="twitter" href="{{ $teacher->userDetails ? $teacher->userDetails->twitter : '' }}"><i class="zmdi zmdi-twitter"></i></a></li>
-                            <li><a title="instagram" href="{{ $teacher->userDetails ? $teacher->userDetails->youtube : '' }}"><i class="zmdi zmdi-youtube"></i></a></li>
-                        </ul>
-                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $teachers->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
-    {{ $teachers->links('pagination::bootstrap-4') }}
+
+    
 </div>
 @endsection

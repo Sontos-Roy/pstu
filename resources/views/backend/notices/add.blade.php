@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Add Event</h2>
+        <h2>Add Notice</h2>
         <small class="text-muted">Patuakhali Science & Technology University</small>
     </div>
     <div class="row clearfix">
@@ -24,9 +24,24 @@
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <label for="">Select Faculty</label>
+                                    <div class="form-line">
+                                        <select name="faculty_id" id="" class="select2 form-control">
+                                            <option value="">Select Faculty</option>
+                                            @foreach ($faculties as $faculty)
+                                                <option value="{{ $faculty->id }}">{{ $faculty->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
                                     <label for="">Select Departments</label>
                                     <div class="form-line">
-                                        <select name="departments" id="" class="select2 form-control">
+                                        <select name="depertment_id" id="" class="select2 form-control">
                                             <option value="">Select Departments</option>
                                             @foreach ($departments as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>

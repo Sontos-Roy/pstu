@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Edit Staff</h2>
+        <h2>Edit User</h2>
         <small class="text-muted">Patuakhali Science &amp; Technology University</small>
     </div>
     <form action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data" id="ajax_form">
@@ -42,6 +42,19 @@
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
+                                    <select class="form-control show-tick p-2" name="faculty_id">
+                                        <option value="">-- Faculty Select --</option>
+                      
+                                        @foreach ($faculties as $item)
+                                            <option value="{{ $item->id }}" 
+                                                {{ $item->id == $user->faculty_id ? 'selected': '' }} class="p-2">{{ $item->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group drop-custum">
                                     <select class="form-control show-tick p-2" name="department_id">
                                         <option value="">-- Department Select --</option>
                                         @php
@@ -57,6 +70,19 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group drop-custum">
+                                    <select class="form-control show-tick p-2" name="designation_id">
+                                        <option value="">-- Designation Select --</option>
+                                        @foreach ($designations as $item)
+                                            <option value="{{ $item->id }}" class="p-2" {{ $item->id == $user->designation_id ? 'selected': '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
                             <div class="col-md-4 col-sm-12">
                                     <label for="">Select Role</label>
                                     <select class="form-control show-tick p-2 select2 border-none" multiple name="roles[]">

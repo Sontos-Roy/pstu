@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Admission;
 use App\Models\Faculty;
 use App\Models\LeaderShip;
 use App\Models\Setting;
 use App\Models\StudentsPages;
+use App\Models\Department;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
@@ -35,23 +37,12 @@ if (!function_exists('getSetting')) {
     }
 }
 
-// function getImage($folder=null,$file=null){
-//     $url = asset("images/nothing.png");
-//     $path = public_path('images/'.$folder.'/'.$file);
-//     if (!empty($folder) && (!empty($file))) {
-//         if(file_exists($path)){
-//             $url = asset('images/'.$folder.'/'.$file);
-//         }
-//     }
-//     return $url;
-// }
-
 
 
 function getImage($folder=null,$file=null){
 
 
-    $defaultImage = 'images/'. $folder . '/nothing.png';
+    $defaultImage = 'images/nothing.png';
 
     if (!empty($folder) && !empty($file)) {
         $path = 'images/' . $folder . '/' . $file;
@@ -141,7 +132,7 @@ if(!empty($value) && !empty($limit)){
 
 function LeaderShips()
 {
-    $leaderships = LeaderShip::take(4)->get();
+    $leaderships = LeaderShip::all();
 
     return $leaderships;
 }
@@ -163,3 +154,28 @@ function getStudentPage()
     $studentPages = StudentsPages::take(6)->get();
     return $studentPages;
 }
+
+function getFaculty(){
+    $query = Faculty::select('title','id');
+            if(auth()->user()->hasRole('faculty')){
+                $query->where('id', auth()->user()->faculty_id);
+            }
+    return $query->get();
+}
+
+function getDepartment(){
+    $query = Department::select('name','id');
+            if(auth()->user()->hasRole('department')){
+                $query->where('id', auth()->user()->department_id);
+            }
+    return $query->get();
+}
+
+
+
+function getAdmissions(){
+    $admissions = Admission::all();
+
+    return $admissions;
+}
+

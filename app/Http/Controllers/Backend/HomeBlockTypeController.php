@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\HomeBlockType;
+use App\Models\HomeBlock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use DB;
 
 class HomeBlockTypeController extends Controller
 {
@@ -22,7 +25,8 @@ class HomeBlockTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view("backend.block_types.create");
+
     }
 
     /**
@@ -31,54 +35,126 @@ class HomeBlockTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'head' => 'required',
-            'first_btn' => '',
-            'second_btn' => '',
-            'first_btn_link' => '',
-            'second_btn_link' => '',
-            'isActive' => '',
-            'select_for' => 'required',
-            'faculty_id' => '',
-            'department_id' => '',
+            'name' => 'required',
             'image' => 'image|required',
         ]);
-        $isChecked = $request->has('isActive');
+        $data['slug'] = Str::slug($data['name']);
 
-        if($isChecked){
-            $data['isActive'] = 1;
-        }else{
-            $data['isActive'] = 0;
+    DB::beginTransaction();
+
+    try {
+
+        if($request->hasFile('images')){
+
+            $allowedfileExtension=['jpg','png','jpeg'];
+            $files = $request->file('images');
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check==false){
+                    
+                }
+            }
         }
+
+
+        if($request->hasFile('pdf_files')){
+
+            $allowedfileExtension=['pdf'];
+            $files = $request->file('pdf_files');
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check==false){
+                    
+                }
+            }
+        }
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time().'_'.$image->getClientOriginalName();
-            $image->storeAs('public/images/sliders', $filename);
+            $image->storeAs('public/images/home_blocks', $filename);
             $data['image'] = $filename;
         }
 
-        Slider::create($data);
 
-        return response()->json(['status' => true, 'msg' => 'Slider Created Successfully']);
+        $item=HomeBlockType::create($data);
+
+        
+        $titles=$request->titles;
+        $images=$request->images ??[];
+        $pdf_files=$request->pdf_files ??[];
+
+        if(isset($titles)){
+            $details_data=[];
+            foreach ($titles as $key => $title) {
+
+                $filename='';
+                if(array_key_exists($key,$images)){
+                    $image=$images[$key];
+                    if($image){
+                        $filename = time().'_'.$image->getClientOriginalName();
+                        $image->storeAs('public/images/home_block_details', $filename);
+
+                    }
+                }
+
+                $pdf_file_name='';
+                if(array_key_exists($key,$pdf_files)){
+                    $pdf_file=$pdf_files[$key];
+                    
+                    if($pdf_file){
+                        $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                        $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+
+                    }
+                }
+
+                $details_data[]=[
+                    'name'=>$title,
+                    'slug'=>Str::slug($title),
+                    'published_date'=> $request->dates[$key],
+                    'image'=> $filename,
+                    'file'=> $pdf_file_name,
+
+                ];
+            }
+        }
+
+        if (!empty($details_data)) {
+            $item->details()->createMany($details_data);
+        }
+
+        DB::commit();
+        return response()->json(['status' => true, 'msg' => 'Home Block Created Successfully','url'=>route('admin.home_block_types.index')]);
+
+    } catch (\Exception $e) {
+        DB::rollback();
+        return response()->json(['status' => false, 'msg' => $e->getMessage()]);
+    }
+
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id){
+
+        $item = HomeBlockType::find($id);
+        return view('backend.block_types.show', compact('item'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $data = Slider::find($id);
+    public function edit(string $id){
 
-        $html = view('backend.homeSlider.edit', compact('data'))->render();
-
-        return response()->json(['status'=>true, 'html' => $html]);
+        $item = HomeBlockType::find($id);
+        return view('backend.block_types.edit', compact('item'));
 
     }
 
@@ -87,46 +163,133 @@ class HomeBlockTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $item=HomeBlockType::find($id);
         $data = $request->validate([
-            'head' => 'required',
-            'first_btn' => '',
-            'second_btn' => '',
-            'first_btn_link' => '',
-            'second_btn_link' => '',
-            'select_for' => 'required',
-            'faculty_id' => '',
-            'department_id' => '',
-            'image' => 'image',
+            'name' => 'required',
         ]);
+        $data['slug'] = Str::slug($data['name']);
 
+        DB::beginTransaction();
 
-        $slider = Slider::find($id);
+    try {
 
-        $isChecked = $request->has('isActive');
-
-        if($isChecked){
-            $data['isActive'] = 1;
-        }else{
-            $data['isActive'] = 0;
-        }
 
         if ($request->hasFile('image')) {
-            if ($slider->image) {
-                $imagePath = '/images/sliders/' . $slider->image;
-                if (Storage::disk('public')->exists($imagePath)) {
-                    Storage::disk('public')->delete($imagePath);
-                }
-            }
+
+            deleteFile('home_blocks', $item->image);
+
             $image = $request->file('image');
             $filename = time().'_'.$image->getClientOriginalName();
-            $image->storeAs('public/images/sliders', $filename);
+            $image->storeAs('public/images/home_blocks', $filename);
             $data['image'] = $filename;
         }
-        $slider->fill($data);
-        $slider->save();
+
+        $item->update($data);
+
+        $titles=$request->titles;
+        $details_id=$request->details_id;
+        $images=$request->images ??[];
+        $pdf_files=$request->pdf_files ??[];
 
 
-        return response()->json(['status' => true, 'msg' => 'Slider Updated Successfully']);
+        if(isset($titles)){
+            $details_data=[];
+            foreach ($titles as $key => $title) {
+
+                if (array_key_exists($key,$details_id) && $details_id[$key]) {
+
+                    $home_block=HomeBlock::find($details_id[$key]);
+
+                    $existing_data=[
+                        'name'=>$title,
+                        'slug'=>Str::slug($title),
+                        'published_date'=> $request->dates[$key],
+
+                    ];
+
+                    if(array_key_exists($key,$images)){
+                        deleteImage('home_block_details',$home_block->image);
+                        $image=$images[$key];
+                        $filename='';
+                        if($image){
+                            $filename = time().'_'.$image->getClientOriginalName();
+                            $image->storeAs('public/images/home_block_details', $filename);
+                            $existing_data['image']=$filename;
+                        }
+                    }
+                    
+                    if(array_key_exists($key,$pdf_files)){
+                        deleteFile('home_block_details',$home_block->file);
+                        $pdf_file=$pdf_files[$key];
+                        $pdf_file_name='';
+                        if($pdf_file){
+                            $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                            $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+                            $existing_data['file']=$pdf_file_name;
+                        }
+                    }
+
+
+                    $home_block->update($existing_data);
+                    # code...
+                }else{
+                    $filename='';
+                    if(array_key_exists($key,$images)){
+                        $image=$images[$key];
+                        if($image){
+                            $filename = time().'_'.$image->getClientOriginalName();
+                            $image->storeAs('public/images/home_block_details', $filename);
+
+                        }
+                    }
+
+                    $pdf_file_name='';
+                    if(array_key_exists($key,$pdf_files)){
+                        $pdf_file=$pdf_files[$key];
+                        
+                        if($pdf_file){
+                            $pdf_file_name = time().'_'.$pdf_file->getClientOriginalName();
+                            $pdf_file->storeAs('public/files/home_block_details', $pdf_file_name);
+
+                        }
+                    }
+
+
+                    $details_data[]=[
+                        'name'=>$title,
+                        'slug'=>Str::slug($title),
+                        'published_date'=> $request->dates[$key],
+                        'image'=> $filename,
+                        'file'=> $pdf_file_name,
+
+                    ];
+
+                }
+
+                
+            }
+        }
+
+        $delete_items=$item->details()->whereNotIn('id',$details_id)->get();
+
+        foreach ($delete_items as $key => $delete_item) {
+                deleteImage('home_block_details', $delete_item->image);
+                deleteFile('home_block_details', $delete_item->file);
+                $delete_item->delete();
+        }
+
+        if (!empty($details_data)) {
+            $item->details()->createMany($details_data);
+        }
+
+        DB::commit();
+        return response()->json(['status' => true, 'msg' => 'Home Block Updated Successfully','url'=>route('admin.home_block_types.index')]);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => false, 'msg' => $e->getMessage()]);
+        }
+
     }
 
     /**
@@ -134,31 +297,16 @@ class HomeBlockTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        $slider = Slider::find($id);
+        $item = HomeBlockType::find($id);
 
-        if($slider->image){
-            $imagePath = '/images/sliders/' . $slider->image;
-
-            if (Storage::disk('public')->exists($imagePath)) {
-                Storage::disk('public')->delete($imagePath);
-            }
+        if($item->image){
+            deleteFile('home_blocks', $item->image);
         }
 
-        $slider->delete();
+        $item->details()->delete();
+        $item->delete();
 
-        return response()->json(['status' => true, 'msg' => 'Slider Deleted Successfully']);
+        return response()->json(['status' => true, 'msg' => 'Home Block Deleted Successfully']);
     }
-    public function changeStatus(Request $request, $id){
-        $data = Slider::find($id);
 
-        if($data->isActive == 0){
-            $data->isActive = 1;
-        }else if($data->isActive == 1){
-            $data->isActive = 0;
-        }
-
-        $data->save();
-
-        return response()->json(['msg'=>"Active Status Changed"]);
-    }
 }

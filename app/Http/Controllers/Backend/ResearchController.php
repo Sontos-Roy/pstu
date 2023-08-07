@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\Research;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,18 @@ class ResearchController extends Controller
      */
     public function index()
     {
-        $this->data['researchs'] = Research::orderBy("id", "DESC")->get();
+
+        $query= Research::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
+                }
+
+
+        $this->data['researchs'] =$query->get();
 
         return view('backend.researchs.index', $this->data);
     }
@@ -26,7 +38,8 @@ class ResearchController extends Controller
      */
     public function create()
     {
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
+        $this->data['faculties'] = getFaculty();
 
         return view('backend.researchs.add', $this->data);
     }
@@ -41,6 +54,7 @@ class ResearchController extends Controller
             'short' => '',
             'message' => '',
             'department_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);
@@ -80,10 +94,12 @@ class ResearchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id){
+        
         $this->data['research'] = Research::find($id);
-        $this->data['departments'] = Department::all();
+
+        $this->data['departments'] = getDepartment();
+        $this->data['faculties'] = getFaculty();
 
         return view('backend.researchs.edit', $this->data);
     }
@@ -98,6 +114,7 @@ class ResearchController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);

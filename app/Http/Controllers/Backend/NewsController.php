@@ -14,11 +14,21 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $this->data['news'] = News::orderBy("id", "DESC")->get();
+    public function index(){
 
-        return view('backend.news.index', $this->data);
+
+        $query= News::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
+                }
+        $this->data['news'] =$query->get();
+
+
+        return view('backend.news.index', $this->data); 
     }
 
     /**
@@ -26,8 +36,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $this->data['departments'] = Department::all();
-
+        $this->data['faculties'] = getFaculty();
+        $this->data['departments'] = getDepartment();
+  
         return view('backend.news.add', $this->data);
     }
 
@@ -41,6 +52,7 @@ class NewsController extends Controller
             'short' => 'required',
             'message' => 'required',
             'depertment_id' => '',
+            'faculty_id' => '',
             'image' => 'image'
         ]);
 
@@ -76,8 +88,11 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        $this->data['departments'] = Department::all();
+        $this->data['faculties'] = getFaculty();
+        $this->data['departments'] = getDepartment();
         $this->data['news'] = News::find($id);
+
+        
 
         return view('backend.news.edit', $this->data);
     }
@@ -92,6 +107,7 @@ class NewsController extends Controller
             'short' => 'required',
             'message' => 'required',
             'depertment_id' => '',
+            'faculty_id' => '',
             'image' => ''
         ]);
 

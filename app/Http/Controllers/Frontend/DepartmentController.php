@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicCalendar;
 use App\Models\Department;
+use App\Models\Image;
+use App\Models\MissionVission;
+use App\Models\News;
+use App\Models\Notice;
 use App\Models\Program;
+use App\Models\Research;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -18,6 +24,25 @@ class DepartmentController extends Controller
         ->where('department_id', $department->id)
         ->where('select_for', "department")
         ->get();
+        $this->data['newses'] = News::where('depertment_id', $department->id)->get();
+        $this->data['notices'] = Notice::where('depertment_id', $department->id)->get();
+        $this->data['images'] = Image::where('department_id', $department->id)->get();
+        $this->data['researchs'] = Research::where('department_id', $department->id)->get();
         return view('frontend.departments.show', $this->data);
+    }
+    function missionShow($slug){
+        $department = Department::whereSlug($slug)->first();
+        $data['item'] = $department;
+        $data['data'] = MissionVission::where('department_id', $department->id)->first();
+
+        return view('frontend.department_mission', $data);
+    }
+
+    function calendarShow($slug){
+        $department = Department::whereSlug($slug)->first();
+        $this->data['data'] = AcademicCalendar::where('department_id', $department->id)->get();
+        $this->data['department'] = $department;
+        return view('frontend.departments.calendar', $this->data);
+
     }
 }

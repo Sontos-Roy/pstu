@@ -29,6 +29,34 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <div class="form-group"> 
+                                    <label for="">Select Faculty</label>
+                                    <div class="form-line">
+                                        <select name="faculty_id" id="" class="select2 form-control">
+                                            <option value="">Select Faculty</option>
+                                            @foreach ($faculties as $faculty)
+                                                <option value="{{ $faculty->id }}" {{ $event->faculty_id == $faculty->id ? 'selected' : '' }}>{{ $faculty->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Select Departments</label>
+                                    <div class="form-line">
+                                        <select name="department_id" id="" class="select2 form-control">
+                                            <option value="">Select Departments</option>
+                                            @foreach ($departments as $item)
+                                                <option value="{{ $item->id }}" {{ $event->department_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="date" name="date" class="form-control" placeholder="Date" value="{{ $event->date }}">

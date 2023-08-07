@@ -1,64 +1,123 @@
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="{{ route('admin.sliders.update', $data->id) }}" method="POST" id="ajax_form">
-            <div class="modal-header">
-                <h4 class="modal-title" id="createsettingLabel">Slider Edit</h4>
-            </div>
-            <div class="modal-body">
+@extends('backend.layouts.app')
+
+@section('content')
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Home Block Update</h2>
+        <small class="text-muted">Patuakhali Science & Technology University</small>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12">
+
+            <div class="card">
+                <form action="{{ route('admin.home_block_types.update',[$item->id]) }}" method="POST" id="ajax_form">
                     @csrf
-                    @method("PUT")
-                    <div class="container">
-                            <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">Head Text</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" style="border: 1px solid black;" name="head" value="{{ $data->head }}">
+                    @method('PATCH')
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="name" placeholder="Home Block Title" value="{{ $item->name}}">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">First Button</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" style="border: 1px solid black;" name="first_btn" value="{{ $data->first_btn }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputName">Cover Image</label>
+                            <div>
+                                <input type="file" class="form-control" style="border: 1px solid black;" name="image">
+                            </div>
+                       
+                            
+                        </div>
+
+                        <div class="col-md-12">
+                            
+                                <h5> Block Details </h5>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th width="30%"> Title</th>
+                                            <th width="10%"> Published Date</th>
+                                            <th width="15%"> Image </th>
+                                            <th width="15%"> Pdf</th>
+                                            <th width="10%"> Action</th>
+                                        </tr>
+
+                                        <tbody class="data">
+                                            @foreach($item->details as $key=>$detail)
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="details_id[]" value="{{ $detail->id}}">
+                                                    <input type="text" name="titles[]" required class="form-control" value="{{ $detail->name}}" style="border: 1px solid black;" placeholder="Enter Title ..">
+                                                        
+                                                </td>
+                                                <td> 
+                                                    <input type="date" name="dates[]" required class="form-control" value="{{ $detail->published_date}}">
+                                                </td>
+                                                <td> 
+                                                    <input type="file" name="images[]" class="form-control">
+                                                 </td>
+                                                <td> 
+
+                                                    <input type="file" name="pdf_files[]" class="form-control">
+
+                                                </td>
+                                                <td> 
+                                                    <a class="btn btn-xs btn-primary add_row" style="cursor: pointer;color: #fff"> Add</a>
+                                                    @if($key>0)
+                                                    <a class="btn btn-xs btn-danger remove_row" style="cursor: pointer;color:#fff"> Remove</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+
+
+                                    </table>
                                 </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">Second Button</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" style="border: 1px solid black;" name="second_btn" value="{{ $data->second_btn }}">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">First Button Link</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" style="border: 1px solid black;" name="first_btn_link" value="{{ $data->first_btn_link }}">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="" class="col-4 col-form-label">Second Button Link</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" style="border: 1px solid black;" name="second_btn_link" value="{{ $data->second_btn_link }}">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inputName" class="col-4 col-form-label">Slider Active Or Not</label>
-                                <div class="switch">
-                                    <label class="d-flex">OFF
-                                        <input type="checkbox" {{ $data->isActive == 1 ? 'checked' : '' }} name="isActive">
-                                        <span class="lever"></span>ON</label>
-                                 </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inputName" class="col-4 col-form-label">Type</label>
-                                <div class="col-8">
-                                    <input type="file" class="form-control" style="border: 1px solid black;" name="image">
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit" style="cursor: pointer;color: #fff">Update</button>
+                        </div>
 
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    <button type="submit" class="btn btn-link waves-effect">SAVE CHANGES</button>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
+    </div>
+</div>
+@endsection
+
+@push('script')
+<script type="text/javascript">
+    $(document).on('click','a.add_row', function(){
+
+        let row=`<tr>
+                    <td>
+                        <input type="text" name="titles[]" required class="form-control" style="border: 1px solid black;" placeholder="Enter Title ..">
+                    </td>
+                    <td> 
+                        <input type="date" name="dates[]" required class="form-control" value="{{ date('Y-m-d')}}">
+                    </td>
+                    <td> 
+                        <input type="file" name="images[]" class="form-control">
+                     </td>
+                    <td> 
+                        <input type="file" name="pdf_files[]" class="form-control">
+                    </td>
+                    <td> 
+                        <a class="btn btn-xs btn-primary add_row" style="cursor: pointer;color:#fff"> Add</a>
+                        <a class="btn btn-xs btn-danger remove_row" style="cursor: pointer;color:#fff"> Remove</a>
+                    </td>
+                </tr>`;
+        $('tbody.data').append(row);
+    });
+
+    $(document).on('click','a.remove_row', function(){
+        var whichtr = $(this).closest("tr");
+        whichtr.remove();      
+    });
+</script>
+
+@endpush

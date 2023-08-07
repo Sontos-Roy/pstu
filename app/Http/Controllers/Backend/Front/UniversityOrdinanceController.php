@@ -33,7 +33,7 @@ class UniversityOrdinanceController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'file' => 'required|mimes:pdf|max:2048'
+            'file' => 'required|mimes:pdf'
         ]);
         $data['user_id'] = Auth::id();
 
@@ -77,7 +77,7 @@ class UniversityOrdinanceController extends Controller
         $outline = UniversityOrdinance::find($id);
         $data = $request->validate([
             'title' => 'required',
-            'file' => 'mimes:pdf|max:2048',
+            'file' => 'mimes:pdf',
         ]);
         $data['user_id'] = Auth::id();
 

@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="assets1/img/pstulogo.png') }}" type="image/x-icon"/>
 
     <!-- ========== Start Stylesheet ========== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/flaticon-set.css') }}" rel="stylesheet" />
@@ -177,10 +178,76 @@
     <script src="{{ asset('frontend/js/count-to.js') }}"></script>
     <script src="{{ asset('frontend/js/YTPlayer.min.js') }}"></script>
     <script src="{{ asset('frontend/js/loopcounter.js') }}"></script>
-    <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/bootsnav.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+        <script>
+            $(document).on('submit','form#ajax_form', function(e) {
+                e.preventDefault();
+                $('p.textdanger').text('');
+                $(document).find('p.failed').text('');
+                var url=$(this).attr('action');
+                var method=$(this).attr('method');
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type: method,
+                    url: url,
+                    data: formData,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function(){
+                        $('.submit').attr('disabled', true);
+                        $('.loading').show(100);
+                    },
+                    success: function(res) {
+                        $('.submit').attr('disabled', false);
+                        $('.loading').hide(100);
+                        if(res.status==true){
 
+                            Toast.fire({
+                                icon: 'success',
+                                title: res.msg
+                            });
+                            //  toastr.success(res.msg);
+                            var message = res.msg;
+                            $('.message').html(message);
+                            $('#ajax_form')[0].reset();
+                            if(res.url){
+                                setTimeout(() => {
+                                    document.location.href = res.url;
+                                }, 2000);
+
+                            }else{
+                                window.location.reload();
+                            }
+                        }else if(res.status==false){
+                            //  toastr.error(res.msg);
+                            Toast.fire({
+                                icon: 'error',
+                                title: res.msg
+                            });
+                        }
+
+                    },
+                    error:function (response){
+                        $.each(response.responseJSON.errors,function(field_name,error){
+                            $(document).find('[name='+field_name+']').after('<p style="color:red" class="failed">' +error+ '</p>')
+                            //  toastr.error(error);
+                            Toast.fire({
+                                icon: 'error',
+                                title: error
+                            });
+                            $('.loading').hide(100);
+                            $('.submit').attr('disabled', false);
+                        })
+                    }
+                });
+
+            });
+        </script>
     @stack('script')
 
 </body>

@@ -25,7 +25,7 @@
                         </div>
                         <div class="info">
                             <h4 class="min-height-45px text-left" style="word-spacing: 3px; font-weight: bold; margin-top: 10px;">
-                                <a href="{{ route('front.faculties.show', $item->slug) }}">{{ $item->title }}</a>
+                                <a href="{{ route('front.institutes.show', $item->slug) }}">{{ $item->name }}</a>
                             </h4>
                             @if ($item->website)
                             <div class="footer-meta">

@@ -17,14 +17,14 @@
     <div class="container">
         <div class="row">
                 @foreach ($faculties as $item)
-                <div data-aos="fade-left" class="col-md-4 col-sm-6 equal-height aos-init aos-animate" style="height: 480px;">
+                <div data-aos="fade-left" class="col-md-4 col-sm-6 equal-height aos-init aos-animate" style="height: 480px; margin-bottom: 15px">
                     <div class="item">
                         <div class="thumb">
                             <img src="{{ getImage('faculties', $item->image) }}" alt="Thumb" style="height: 281px;">
 
                         </div>
                         <div class="info">
-                            <h4 class="min-height-45px text-left" style="word-spacing: 3px; font-weight: bold; margin-top: 10px;">
+                            <h4 class="min-height-45px text-left" style="word-spacing: 3px; font-weight: bold; margin-top: 10px; min-height: 45px;">
                                 <a href="{{ route('front.faculties.show', $item->slug) }}">{{ $item->title }}</a>
                             </h4>
                             <div class="footer-meta">

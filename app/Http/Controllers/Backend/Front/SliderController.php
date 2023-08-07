@@ -16,8 +16,13 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $this->data['sliders'] = Slider::all();
-        $this->data['faculties'] = Faculty::all();
+        $query= Slider::query();
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+        $this->data['sliders'] =$query->get();
+
+        $this->data['faculties'] = getFaculty();
         $this->data['departments'] = Department::all();
         return view("backend.homeSlider.index", $this->data);
     }
@@ -79,9 +84,17 @@ class SliderController extends Controller
      */
     public function edit(string $id)
     {
+        $query= Slider::query();
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+        $sliders =$query->get();
+
+        $faculties = getFaculty();
+        $departments = Department::all();
         $data = Slider::find($id);
 
-        $html = view('backend.homeSlider.edit', compact('data'))->render();
+        $html = view('backend.homeSlider.edit', compact('data', 'sliders', 'faculties', 'departments'))->render();
 
         return response()->json(['status'=>true, 'html' => $html]);
 
@@ -98,6 +111,7 @@ class SliderController extends Controller
             'second_btn' => '',
             'first_btn_link' => '',
             'second_btn_link' => '',
+            'isActive' => '',
             'select_for' => 'required',
             'faculty_id' => '',
             'department_id' => '',

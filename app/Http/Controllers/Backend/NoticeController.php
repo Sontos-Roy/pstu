@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,16 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        $this->data['notices'] = Notice::orderBy("id", "DESC")->get();
+        $query= Notice::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
+                }
+        $this->data['notices'] =$query->get();
+
 
         return view('backend.notices.index', $this->data);
     }
@@ -26,7 +36,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
+        $this->data['faculties'] = getFaculty();
 
         return view('backend.notices.add', $this->data);
     }
@@ -41,6 +52,7 @@ class NoticeController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);
@@ -83,7 +95,9 @@ class NoticeController extends Controller
     public function edit(string $id)
     {
         $this->data['notice'] = Notice::find($id);
-        $this->data['departments'] = Department::all();
+        
+        $this->data['departments'] = getDepartment();
+        $this->data['faculties'] = getFaculty();
 
         return view('backend.notices.edit', $this->data);
     }
@@ -98,6 +112,7 @@ class NoticeController extends Controller
             'short' => '',
             'message' => '',
             'depertment_id' => '',
+            'faculty_id' => '',
             'file' => 'mimes:pdf|max:2048',
             'image' => 'image'
         ]);

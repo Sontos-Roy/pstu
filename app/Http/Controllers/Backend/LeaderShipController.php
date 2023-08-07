@@ -39,10 +39,16 @@ class LeaderShipController extends Controller
             'designation' => 'required',
             'message_short' => 'required',
             'message' => 'required',
+            'image' => '',
             'user_id' => ''
         ]);
         $data['slug'] = Str::slug($request->input('designation'));
-
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time().'_'.$image->getClientOriginalName();
+            $image->storeAs('public/images/leaders', $filename);
+            $data['image'] = $filename;
+        }
         LeaderShip::create($data);
 
         // return redirect()->route('admin.leadership.index')->with('success', 'LeaderShip Created Successfully');
@@ -87,6 +93,16 @@ class LeaderShipController extends Controller
 
         $data['slug'] = Str::slug($request->input('designation'));
 
+        if($request->hasFile('image')){
+            if($leader->image){
+                deleteImage("institutes", $leader->image);
+            }
+            $image = $request->file('image');
+            $filename = time().'_'.$image->getClientOriginalName();
+            $image->storeAs('public/images/leaders', $filename);
+            $data['image'] = $filename;
+        }
+
         $leader->fill($data);
         $leader->save();
         // return redirect()->route('admin.leadership.index')->with('success', 'LeaderShip Created Successfully');
@@ -99,6 +115,9 @@ class LeaderShipController extends Controller
     public function destroy(string $id)
     {
         $delete = LeaderShip::find($id);
+        if($delete->image){
+            deleteImage('leaders', $delete->image);
+        }
 
         $delete->delete();
 

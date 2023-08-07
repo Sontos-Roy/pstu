@@ -136,7 +136,7 @@
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="faculty_id" id="">
                                             <option value="">Select one</option>
-                                            @foreach ($faculties as $faculty)
+                                            @foreach (getFaculty() as $faculty)
                                             <option value="{{ $faculty->id }}">{{ $faculty->title }}</option>
                                             @endforeach
                                         </select>

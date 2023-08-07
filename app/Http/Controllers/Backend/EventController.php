@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Event;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,17 @@ class EventController extends Controller
      */
     public function index()
     {
-        $this->data['events'] = Event::orderBy('id', 'DESC')->get();
+
+        $query= Event::orderBy("id", "DESC");
+                if(auth()->user()->hasRole('faculty')){
+                    $query->where('faculty_id', auth()->user()->faculty_id);
+                }
+
+                if(auth()->user()->hasRole('department')){
+                    $query->where('department_id', auth()->user()->department_id);
+                }
+        $this->data['events'] =$query->get();
+
 
         return view("backend.events.index", $this->data);
     }
@@ -25,7 +37,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("backend.events.add");
+        $this->data['faculties'] = getFaculty();
+        $this->data['departments'] = getDepartment();
+        return view("backend.events.add", $this->data);
     }
 
     /**
@@ -38,6 +52,8 @@ class EventController extends Controller
             'short' => 'required',
             'date' => 'date',
             'time' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'message' => 'required',
             'image' => 'image'
         ]);
@@ -75,6 +91,8 @@ class EventController extends Controller
     public function edit(string $id)
     {
         $this->data['event'] = Event::find($id);
+        $this->data['faculties'] = getFaculty();
+        $this->data['departments'] = getDepartment();
 
         return view('backend.events.edit', $this->data);
     }
@@ -89,6 +107,8 @@ class EventController extends Controller
             'short' => 'required',
             'date' => '',
             'time' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'message' => 'required',
             'image' => 'image'
         ]);
@@ -113,12 +133,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id){
+
         $event = Event::find($id);
-
         deleteImage("events", $event->image);
-
         $event->delete();
 
         return response()->json(['status'=>true, 'msg'=>'Event Deleted Successfully']);

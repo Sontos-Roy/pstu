@@ -147,7 +147,7 @@
                                     <h6 class="title menuTitle">University Leadership</h6>
                                     <div class="content">
                                         <ul class="menu-col">
-                                            @foreach (LeaderShips() as $item)
+                                            @foreach (LeaderShips()->take(6) as $item)
                                             <li><a href="{{ route('front.vice.chencellors.message', $item->slug) }}"><i class="fas fa-angle-double-right"></i>
                                                 {{ $item->designation }}</a>
                                             </li>
@@ -164,6 +164,30 @@
                                             <li><a href="{{ route('front.university.ordinances') }}"><i class="fas fa-angle-double-right"></i>
                                             University
                                             Ordinance</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.regent_borad') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Regent Board
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.academic_council') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Academic council
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.finanace_committee') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Finance Committee
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('front.planning_work_committee') }}">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                    Planning and Works Committee
+                                                </a>
                                             </li>
 
                                         </ul>
@@ -187,9 +211,9 @@
                                                 <li><a href="{{ route('front.programs') }}"><i class="fas fa-angle-double-right"></i>
                                                         Academic Programs</a>
                                                 </li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Academic Calendar</a>
+                                                <li><a href="{{ route('front.academic.calendar') }}"><i class="fas fa-angle-double-right"></i> Academic Calendar</a>
                                                 </li>
-                                                <li><a href="https://www.du.ac.bd/libraries"><i class="fas fa-angle-double-right"></i>
+                                                <li><a href="{{ route('front.libraries') }}"><i class="fas fa-angle-double-right"></i>
                                                         Libraries </a></li>
 
                                             </ul>
@@ -216,19 +240,13 @@
                                         <h6 class="title menuTitle">Admission</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/undergraduatePrograms"><i class="fas fa-angle-double-right"></i> Undergraduate
-                                                        Programs</a></li>
-                                                <li><a href="https://www.du.ac.bd/graduatePrograms"><i class="fas fa-angle-double-right"></i> Graduate
-                                                        Programs</a></li>
-                                                <li><a target="_blank" href=""><i class="fas fa-angle-double-right"></i>
-                                                        MPhil Programs</a>
-                                                </li>
-
-
-                                                <li><a target="_blank" href=""><i class="fas fa-angle-double-right"></i>
-                                                        PhD Programs</a></li>
-                                                <li><a href=""><i class="fas fa-angle-double-right"></i> International
-                                                        Students</a></li>
+                                                @foreach (getAdmissions()->take(6) as $admission)
+                                                <li>
+                                                    <a href="{{ route('front.get.admissions', $admission->slug) }}">
+                                                    <i class="fas fa-angle-double-right"></i> {{ $admission->title }}
+                                                    </a>
+                                                    </li>
+                                                @endforeach
 
                                             </ul>
                                         </div>
@@ -254,7 +272,7 @@
                                                     <li><a href="{{ route('front.get.heads') }}"><i class="fas fa-angle-double-right"></i> Chairman of
                                                     Departments</a>
                                                     </li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/director"><i class="fas fa-angle-double-right"></i> Directors of
+                                                <li><a href="{{ route('front.institutes.directors') }}"><i class="fas fa-angle-double-right"></i> Directors of
                                                         Institutes</a></li>
                                             </ul>
                                         </div>
@@ -264,13 +282,13 @@
                                         <h6 class="title menuTitle">Head of Administrative Offices</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/leadershipList/director_research_center"><i class="fas fa-angle-double-right"></i> Directors
+                                                <li><a href="{{ route('front.research_center.directors') }}"><i class="fas fa-angle-double-right"></i> Directors
                                                         of
                                                         Research Centers &amp; Bureau</a></li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/provost"><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Provosts &amp; Wardens of
                                                         Halls and
                                                         Hostel</a></li>
-                                                <li><a href="https://www.du.ac.bd/leadershipList/office_head"><i class="fas fa-angle-double-right"></i> Head of
+                                                <li><a href="{{ route('front.officers') }}"><i class="fas fa-angle-double-right"></i> Head of
                                                         Offices</a></li>
 
                                             </ul>
@@ -280,13 +298,13 @@
                                         <h6 class="title menuTitle">Others</h6>
                                         <div class="content">
                                             <ul class="menu-col">
-                                                <li><a href="https://www.du.ac.bd/all_offices"><i class="fas fa-angle-double-right"></i> All
+                                                <li><a href="{{ route('front.all.offices') }}"><i class="fas fa-angle-double-right"></i> All
                                                         Offices</a></li>
-                                                <li><a href="https://www.du.ac.bd/faculty_member"><i class="fas fa-angle-double-right"></i>
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i>
                                                         Faculty Member
                                                         Profile</a>
                                                 </li>
-                                                <li><a href="https://www.du.ac.bd/staff_information"><i class="fas fa-angle-double-right"></i> Officer Profile</a>
+                                                <li><a href=""><i class="fas fa-angle-double-right"></i> Officer Profile</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -309,19 +327,18 @@
                                 Facilities</h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                    <li><a href="https://www.du.ac.bd/scholarship_financial_aid"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Scholarships &amp;
                                             Financial Aids</a></li>
-                                    <li><a href="https://www.du.ac.bd/students/HallsResidence" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Halls of Residence
                                         </a></li>
-                                    <li><a href="https://www.du.ac.bd/students/Transport"><i class="fas fa-angle-double-right"></i>
-                                            Transport
-                                            Facilities</a>
-                                    </li>
-                                    <li><a href="https://www.du.ac.bd/students/Insurance"><i class="fas fa-angle-double-right"></i>
-                                            Health Insurance </a>
-                                    </li>
+                                        @foreach (getStudentPage() as $page)
+                                        <li><a href="{{ route('front.student.page', $page->slug) }}"><i class="fas fa-angle-double-right"></i>
+                                            {{$page->menu}}</a>
+                                        </li>
+                                        @endforeach
+
 
                                 </ul>
                             </div>
@@ -331,23 +348,23 @@
                             </h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                    <li><a href="https://service.du.ac.bd/home" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="{{ route('front.pstu.form') }}" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply for
                                             Certificate/Marksheet</a>
                                     </li>
-                                    <li><a href="https://studentscholarship.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="{{ route('front.pstu.scholarship') }}" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply
                                             for Govt. Scholarships</a>
                                     </li>
-                                    <li><a href="http://result.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Examination
                                             Results</a>
                                     </li>
-                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Apply for
                                             Transcript</a>
                                     </li>
-                                    <li><a href="https://eco.du.ac.bd/" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
                                             Exam Form Fill-up</a>
                                     </li>
                                 </ul>
@@ -357,7 +374,7 @@
                             <h6 class="title menuTitle">Alumni</h6>
                             <div class="content">
                                 <ul class="menu-col">
-                                        <li><a href="https://duaa-bd.org/"><i class="fas fa-angle-double-right"></i>
+                                        <li><a href=""><i class="fas fa-angle-double-right"></i>
                                             Alumni
                                             Association</a>
                                         </li>
@@ -368,9 +385,60 @@
                         </li>
                         </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">Research
+                                <span></span></a>
+
+                            <ul class="dropdown-menu menuBody animated fadeOutUp" style="display: none; opacity: 1;">
+                                <li><a href="{{ route('front.research_center') }}"><i class="fas fa-angle-double-right"></i>
+                                        Research Centers &amp; Bureaus</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Research &amp; Publications</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Research Collaboration</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> Funded
+                                        Projects</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                        University Journals</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">Links
+                                <span></span></a>
+
+                            <ul class="dropdown-menu menuBody animated">
+                                <li><a href="{{ route('login') }}"><i class="fas fa-angle-double-right"></i>
+                                        PSTU Login</a></li>
+                                <li><a href="{{ route('login') }}"><i class="fas fa-angle-double-right"></i>
+                                        Student Login</a></li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i>
+                                        Telephone and Email Index</a></li>
+
+                                <li><a href="{{ route('front.pstu.form') }}"><i class="fas fa-angle-double-right"></i> PSTU Forms</a>
+                                </li>
+                                <li><a href="{{ route('front.noc.list')}}"><i class="fas fa-angle-double-right"></i> Approved
+                                        NOC/GO/Order</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                        E-Tender</a></li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i> PSTU Jobs</a>
+                                </li>
+                                <li><a href=""><i class="fas fa-angle-double-right"></i> Trust
+                                        Funds</a></li>
+
+                                <li><a href="{{ route('front.notices') }}"><i class="fas fa-angle-double-right"></i> Notice</a>
+                                </li>
+                                <li><a href="{{ route('front.news') }}"><i class="fas fa-angle-double-right"></i> Latest
+                                        News</a>
+                                </li>
+                                <li><a href="{{ route('front.events') }}"><i class="fas fa-angle-double-right"></i> Events</a>
+                                </li>
+                                <li><a href="" target="_blank"><i class="fas fa-angle-double-right"></i>
+                                    Tender</a></li>
+                            </ul>
+                        </li>
 
 
-                </ul>
+                    </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

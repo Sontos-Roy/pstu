@@ -25,7 +25,7 @@
             <div class="col-md-9">
                 <!-- Single Item -->
                 @foreach ($items as $item)
-                <div class="col-md-4 col-sm-6 equal-height" style="height: 161px;">
+                <div class="col-md-4 col-sm-6 equal-height" style="height: 161px; margin-bottom: 15px;">
                     <div class="item">
                         <div class="card shadow">
                             <h4>

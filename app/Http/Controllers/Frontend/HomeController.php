@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicCalendar;
+use App\Models\Admission;
 use App\Models\Department;
 use App\Models\Event;
 use App\Models\Faculty;
 use App\Models\HistoricalOutline;
+use App\Models\HomeBlock;
+use App\Models\HomeBlockType;
 use App\Models\HonorisCausa;
 use App\Models\Institutes;
 use App\Models\LeaderShip;
+use App\Models\Library;
 use App\Models\News;
 use App\Models\Notice;
 use App\Models\Pages;
@@ -21,6 +26,7 @@ use App\Models\UniversityGlance;
 use App\Models\UniversityOrdinance;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
+use App\Models\Noc;
 use App\Models\ViceChancellor;
 use Illuminate\Http\Request;
 
@@ -29,7 +35,7 @@ class HomeController extends Controller
     function index(){
 
 
-
+        $this->data['blocks'] = HomeBlockType::take(6)->get();
         $this->data['vc'] = LeaderShip::whereSlug('vice-chancellor')->first();
         $this->data['sliders'] = Slider::where('isActive', 1)->get();
         $this->data['leaderships'] = LeaderShip::whereNot('slug', 'vice-chancellor')->get();
@@ -39,6 +45,17 @@ class HomeController extends Controller
         $this->data['page'] = Pages::whereSlug('welcome-message')->first();
         return view('frontend.index', $this->data);
     }
+    function blockShow($slug){
+        $this->data['block'] = HomeBlockType::whereSlug($slug)->first();
+
+        return view('frontend.block-types', $this->data);
+    }
+    function blockDetailsShow($slug){
+        $this->data['item'] = HomeBlock::whereSlug($slug)->first();
+        $this->data['blocks'] = HomeBlockType::all();
+
+        return view('frontend.block-show', $this->data);
+    }
     function notices(){
         $this->data['notices'] = Notice::orderBy('id', 'DESC')->paginate(12);
 
@@ -46,7 +63,6 @@ class HomeController extends Controller
     }
     function noticeShow($slug){
         $this->data['notice'] = Notice::where('slug', $slug)->first();
-
         $this->data['notices'] = Notice::orderBy('id', "DESC")->get();
 
         return view('frontend.notice-show', $this->data);
@@ -118,7 +134,6 @@ class HomeController extends Controller
         return view('frontend.institutes.index', $this->data);
     }
 
-
     function programs(Request $request){
         $input = $request->input('name');
         $select = $request->input('department');
@@ -183,6 +198,43 @@ class HomeController extends Controller
         $this->data['researchs'] = Research::take(10)->get();
 
         return view('frontend.research-show', $this->data);
+    }
+    function libraries(){
+        $this->data['libraries'] = Library::paginate(10);
+
+        return view('frontend.libraries', $this->data);
+    }
+
+    function academicCalendar($faculty = null){
+
+        if($faculty){
+            $this->data['faculties'] = Faculty::whereSlug($faculty)->get();
+        }else{
+            $this->data['faculties'] = Faculty::all();
+        }
+
+        return view('frontend.calendars.index', $this->data);
+    }
+    function CalendarsHtml(){
+        $data = AcademicCalendar::where('department_id', request()->id)->get();
+
+        $department = Department::find(request()->id);
+
+        $html = view('frontend.calendars.partials', compact('data', 'department'))->render();
+
+        return response()->json(['status'=>true, 'html' => $html]);
+    }
+
+    function getAdmissions($slug){
+        $this->data['data'] = Admission::whereSlug($slug)->first();
+
+        return view('frontend.admissions', $this->data);
+    }
+
+    public function getNoc(){
+
+        $items=Noc::paginate(25);
+        return view('frontend.noc_list', compact('items'));
     }
 
 }

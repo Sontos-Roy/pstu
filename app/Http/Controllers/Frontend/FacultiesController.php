@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Faculty;
+use App\Models\Image;
 use App\Models\MissionVission;
 use App\Models\News;
 use App\Models\Notice;
@@ -19,17 +20,18 @@ class FacultiesController extends Controller
         $this->data['faculty'] = $faculty;
         $departments = Department::where('faculty_id', $faculty->id);
         $departmentsId = $departments->pluck('id');
+        $this->data['images'] = Image::where('faculty_id', $faculty->id)->get();
 
         $this->data['mission'] = MissionVission::where('faculty_id', $faculty->id)->first();
 
         $this->data['departments'] = $departments->get();
-        $this->data['newses'] = News::orderBy('id', 'DESC')->whereIn('depertment_id', $departmentsId)->take(6)->get();
-        $this->data['researchs'] = Research::orderBy('id', 'DESC')->whereIn('department_id', $departmentsId)->take(6)->get();
+        $this->data['newses'] = News::orderBy('id', 'DESC')->where('faculty_id', $faculty->id)->take(6)->get();
+        $this->data['researchs'] = Research::orderBy('id', 'DESC')->where('faculty_id', $faculty->id)->take(6)->get();
         $this->data['sliders'] = Slider::where('isActive', 1)
         ->where('faculty_id', $faculty->id)
         ->where('select_for', "faculty")
         ->get();
-        $this->data['notices'] = Notice::whereIn('depertment_id', $departmentsId)->get();
+        $this->data['notices'] = Notice::where('faculty_id', $faculty->id)->get();
 
         return view('frontend.faculties.faculties_show', $this->data);
     }
@@ -39,4 +41,25 @@ class FacultiesController extends Controller
 
         return view('frontend.faculties.introduction', $this->data);
     }
+
+    function missionShow($slug){
+        $faculty = Faculty::whereSlug($slug)->first();
+        $data['item'] = $faculty;
+        $data['data'] = MissionVission::where('faculty_id', $faculty->id)->first();
+
+        return view('frontend.faculty_mission', $data);
+    }
+
+    function getDepartments($slug){
+        $faculty= Faculty::whereSlug($slug)->first();
+        $this->data['faculty'] = $faculty;
+        $this->data['departments'] = Department::where('faculty_id', $faculty->id)->get();
+
+        return view('frontend.faculties.departments', $this->data);
+    }
+
+    function getCalendar($slug){
+
+    }
 }
+

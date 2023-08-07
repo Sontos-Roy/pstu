@@ -118,32 +118,5 @@
 </div>
 @endsection
 @push('script')
-<script>
-    $(document).ready(function(){
-        $('#faculties').on('change', function() {
-        var facultyId = $(this).val();
 
-        // Make an AJAX request to fetch departments based on the selected faculty_id
-        $.ajax({
-            url: '{{ route("admin.get.departments")}}',
-            type: 'GET',
-            dataType: 'json',
-            data:{
-                id: facultyId
-            },
-            success: function(data) {
-                // Populate the departments select element with the fetched data
-                var departmentsSelect = $('#departments');
-                departmentsSelect.empty();
-                $.each(data, function(index, department) {
-                    departmentsSelect.append($('<option>', {
-                        value: department.id,
-                        text: department.name
-                    }));
-                });
-            }
-        });
-    })
-})
-</script>
 @endpush

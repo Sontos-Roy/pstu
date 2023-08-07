@@ -23,6 +23,7 @@
                             <tr>
                                 <th>no</th>
                                 <th>Title</th>
+                                <th>Menu</th>
                                 <th>slug</th>
                                 <th>details</th>
                                 <th>file</th>
@@ -35,6 +36,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ StrLimit($item->title, 100) }}</td>
+                                <td>{{ StrLimit($item->menu, 100) }}</td>
                                 <td>{{ StrLimit($item->slug, 100) }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
 

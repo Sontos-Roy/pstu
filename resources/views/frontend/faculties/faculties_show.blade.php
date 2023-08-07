@@ -67,7 +67,7 @@
                     <div class="item brilliantrose">
                         <a href="{{ route('front.faculties.intro', $faculty->slug) }}">
                             <div style="height: 220px;" class="info">
-                                <h4>Introduction to the faculty</h4>
+                              
                                 {{ $faculty->short }}
                                 <strong class="text-info">Read More</strong>
                             </div>
@@ -84,7 +84,7 @@
        <div class="row">
           <div class="site-heading text-center">
              <div class="col-md-8 col-md-offset-2">
-                <h2>Departments of this Faculty</h2>
+                <h2>Departments List</h2>
              </div>
           </div>
        </div>
@@ -111,9 +111,7 @@
                                 <h4 class="text-left " style="height: 50px; word-spacing: 5px">
                                     <a href="{{ route('front.departments.show', $department->slug) }}">{{ StrLimit($department->name, 70) }}</a>
                                 </h4>
-                                <p style="height: 100px">
-                                    {{ StrLimit($department->short, 150) }}
-                                </p>
+                                
                                 <div class="bottom" style="margin-top: 20px">
                                     <div class="col-sm-12">
                                         <a href="{{ route('front.departments.show', $department->slug) }}" class="btn circle btn-dark border btn-sm text-center">
@@ -261,24 +259,17 @@
                     <!-- End Mixitup Nav-->
                     <div class="row magnific-mix-gallery masonary text-light">
                         <div id="portfolio-grid" class="portfolio-items col-3" style="position: relative; height: 283.656px;">
+                            @foreach ($images as $image)
                             <div class="pf-item other" style="position: absolute; left: 0%; top: 0px;">
                                 <div class="item-effect">
-                                    <img src="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691022.jpg" alt="thumb">
+                                    <img src="{{ getImage('images', $image->image) }}" alt="thumb">
                                     <div class="overlay">
-                                        <h4>Curzon Hall</h4>
-                                        <a href="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691022.jpg" class="item popup-link"><i class="fa fa-plus"></i></a>
+                                        <a href="{{ getImage('images', $image->image) }}" class="item popup-link"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pf-item other" style="position: absolute; left: 33.2489%; top: 0px;">
-                                <div class="item-effect">
-                                    <img src="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691089.jpg" alt="thumb">
-                                    <div class="overlay">
-                                        <h4>Curzon Exam Hall</h4>
-                                        <a href="https://ssl.du.ac.bd/fontView/assets/gallary/faculty/FACSCI-1671691089.jpg" class="item popup-link"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
