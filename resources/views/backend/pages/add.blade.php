@@ -18,6 +18,7 @@
                                     <div class="form-line">
                                         <label>Select Page Type</label>
                                         <select class="form-control select2" name="page_slug">
+                                            <option value="">Select One</option>
                                             @foreach($types as $key=>$type)
                                             <option value="{{ $key}}">{{ $type}}</option>
                                             @endforeach
@@ -31,6 +32,7 @@
                                     <div class="form-line">
                                         <label>Select Faculty</label>
                                         <select class="form-control select2" name="faculty_id">
+                                            <option value="">Select One</option>
                                             @foreach($faculties as $key=>$faculty)
                                             <option value="{{ $faculty->id}}">{{ $faculty->title}}</option>
                                             @endforeach
@@ -44,6 +46,7 @@
                                     <div class="form-line">
                                         <label>Select Department</label>
                                         <select class="form-control select2" name="department_id">
+                                            <option value="">Select One</option>
                                             @foreach($departments as $key=>$department)
                                             <option value="{{ $department->id}}">{{ $department->name}}</option>
                                             @endforeach
