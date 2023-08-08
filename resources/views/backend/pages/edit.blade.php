@@ -17,6 +17,46 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <label>Select Page Type</label>
+                                        <select class="form-control select2" name="page_slug">
+                                            @foreach($types as $key=>$type)
+                                            <option value="{{ $key}}" {{ $key==$item->page_slug?'selected':''}}>{{ $type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <label>Select Faculty</label>
+                                        <select class="form-control select2" name="faculty_id">
+                                            @foreach($faculties as $key=>$faculty)
+                                            <option value="{{ $faculty->id}}" {{ $faculty->id==$item->faculty_id?'selected':''}}>{{ $faculty->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <label>Select Department</label>
+                                        <select class="form-control select2" name="department_id">
+                                            @foreach($departments as $key=>$department)
+                                            <option value="{{ $department->id}}" {{ $department->id==$item->department_id?'selected':''}}>{{ $department->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
                                         <input type="text" name="title" value="{{ $item->title }}" class="form-control" placeholder="Page Title">
                                     </div>
                                 </div>
@@ -47,12 +87,20 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                    <label for="">Image</label>
-                                    <div style="border: 1px solid black;">
-                                        <input type="file" class="" {{ $item->is_active == 1 ? 'checked' : '' }} id="image-input" name="image">
-                                        <img src="#" alt="" width="100" id="image-preview">
-                                    </div>
+                                <label for="">Image</label>
+                                <div style="border: 1px solid black;">
+                                    <input type="file" class="" {{ $item->is_active == 1 ? 'checked' : '' }} id="image-input" name="image">
+                                    <img src="#" alt="" width="100" id="image-preview">
+                                </div>
                             </div>
+
+                            <div class="col-sm-12">
+                                <label for="">Pdf File Upload</label>
+                                <div style="border: 1px solid black;">
+                                    <input type="file" class="" name="pdf_file">
+                                </div>
+                            </div>
+                            
                             <div class="mt-3 col-sm-12">
                                 <label for="inputName" class="col-4 col-form-label">Page Active Or Not</label>
                                 <div class="switch p-3">

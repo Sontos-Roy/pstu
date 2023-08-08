@@ -174,9 +174,18 @@ function getDepartment(){
     return $query->get();
 }
 
+function getPageType(){
+    $array = [
+                ''=>'Main',
+                'faculty'=>'Faculty',
+                'department'=>'Department',
+    ];
+    return $array;
+}
 
 
 function getAdmissions(){
+
     $admissions = Admission::all();
 
     return $admissions;

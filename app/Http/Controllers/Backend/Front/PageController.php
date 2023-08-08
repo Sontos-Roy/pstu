@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class PageController extends Controller
+class PageController extends Controller  
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,11 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.add');
+        $types=getPageType();
+        $departments=getDepartment();
+        $faculties=getFaculty();
+
+        return view('backend.pages.add', compact('types','departments','faculties'));
     }
 
     /**
@@ -38,14 +42,15 @@ class PageController extends Controller
             'details' => '',
             'is_active' => '',
             'video_link' => '',
+            'page_slug' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'image' => 'image',
         ]);
 
         $data['slug'] = Str::slug($request->input('title'));
         $isChecked = $request->has('is_active');
-
         $data['user_id'] = Auth::id();
-
         if($isChecked){
             $data['is_active'] = 1;
         }else{
@@ -58,27 +63,35 @@ class PageController extends Controller
             $data['image'] = $filename;
         }
 
-        Pages::create($data);
+        if ($request->hasFile('pdf_file')) {
+            $pdf_file = $request->file('pdf_file');
+            $filename = time().'_'.$pdf_file->getClientOriginalName();
+            $pdf_file->storeAs('public/files/pages', $filename);
+            $data['pdf_file'] = $filename;
+        }
 
+        Pages::create($data);
         return response()->json(['status' => true, 'msg' => 'Slider Created Successfully', 'url' => route('admin.pages.index')]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $this->data['item'] = Pages::find($id);
+    public function show(string $id){
 
+        $this->data['item'] = Pages::find($id);
         return view('backend.pages.view', $this->data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id){
+
         $this->data['item'] = Pages::find($id);
+        $data['types']=getPageType();
+        $data['departments']=getDepartment();
+        $data['faculties']=getFaculty();
 
         return view('backend.pages.edit', $this->data);
     }
@@ -94,6 +107,9 @@ class PageController extends Controller
             'details' => '',
             'is_active' => '',
             'video_link' => '',
+            'page_slug' => '',
+            'faculty_id' => '',
+            'department_id' => '',
             'image' => 'image',
         ]);
 
@@ -107,6 +123,7 @@ class PageController extends Controller
         }else{
             $data['is_active'] = 0;
         }
+
         if ($request->hasFile('image')) {
             if($update->image){
                 deleteImage('pages', $update->image);
@@ -116,10 +133,20 @@ class PageController extends Controller
             $image->storeAs('public/images/pages', $filename);
             $data['image'] = $filename;
         }
+
+        if ($request->hasFile('pdf_file')) {
+            if($update->pdf_file){
+                deleteFile('pages', $update->pdf_file);
+            }
+            $pdf_file = $request->file('pdf_file');
+            $filename = time().'_'.$pdf_file->getClientOriginalName();
+            $pdf_file->storeAs('public/files/pages', $filename);
+            $data['pdf_file'] = $filename;
+        }
+
+
         $update->fill($data);
-
         $update->save();
-
 
         return response()->json(['status' => true, 'msg' => 'Slider Updated Successfully', 'url' => route('admin.pages.index')]);
     }
@@ -134,7 +161,6 @@ class PageController extends Controller
         if($slider->image){
             deleteImage("pages", $slider->image);
         }
-
         $slider->delete();
 
         return response()->json(['status' => true, 'msg' => 'Pages Deleted Successfully']);
