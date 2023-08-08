@@ -14,4 +14,12 @@ class Pages extends Model
     function user(){
         return $this->belongsTo(User::class);
     }
+
+    function faculty(){
+        return $this->belongsTo(Faculty::class);
+    }
+
+    function department(){
+        return $this->belongsTo(Department::class);
+    }
 }
