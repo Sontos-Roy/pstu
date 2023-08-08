@@ -17,6 +17,32 @@
     </div>
     <!-- Basic Examples -->
     <div class="row clearfix">
+        <div class="col-lg-8 ml-auto">
+            <form action="{{ route('admin.department.index') }}" method="GET">
+                <div class="row align-items-center mb-2">
+                    <div class="col-lg-4 col-12 mb-2">
+                        <input type="text" class="form-control p-2 m-0" value="{{ $name }}" name="name" placeholder="Search By Department Name" style="border: 1px solid gray;">
+                    </div>
+                    <div class="col-lg-4 col-12 mb-2">
+                        <select name="faculty_id" id="" class="form-control p-2 m-0" style="border: 1px solid gray;">
+                            <option value="">Select Faculty</option>
+                            @foreach ($faculties as $faculty)
+                                <option value="{{ $faculty->id }}">{{ $faculty->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-7 d-flex mb-2">
+                        <button class="btn m-0" type="submit">Search</button>
+                        <a href="{{ route('admin.department.index') }}" class="btn m-0 ml-1">Reset</a>
+                    </div>
+                </div>
+                @if (!empty($name))
+                <small>Search Result : {{ $departments->count() }}</small>
+                @else
+                <small>Total Departments : {{ $departments->count() }}</small>
+                @endif
+            </form>
+        </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="body table-responsive">
@@ -35,7 +61,9 @@
                         <tbody>
                             @foreach ($departments as $key=>$item)
                             <tr>
-                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    {{ getKey($departments, $loop) }}
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->faculty? $item->faculty->title : '' }}</td>
@@ -70,6 +98,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $departments->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

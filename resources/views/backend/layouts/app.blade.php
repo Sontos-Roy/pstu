@@ -17,6 +17,8 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@stack('css')
+<link rel="stylesheet" href="{{ asset('backend/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -153,80 +155,6 @@
 <section>
     <!-- Left Sidebar -->
     @include('backend.layouts.partials.sidebar')
-    <!-- #END# Left Sidebar -->
-    <!-- Right Sidebar -->
-    <!--<aside id="rightsidebar" class="right-sidebar">-->
-    <!--    <ul class="nav nav-tabs tab-nav-right" role="tablist">-->
-    <!--        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>-->
-    <!--        {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li> --}}-->
-    <!--        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Setting</a></li>-->
-    <!--    </ul>-->
-    <!--    <div class="tab-content">-->
-    <!--        <div role="tabpanel" class="tab-pane in active in active" id="skins">-->
-    <!--            <ul class="demo-choose-skin">-->
-    <!--                <li data-theme="red"><div class="red"></div><span>Red</span> </li>-->
-    <!--                <li data-theme="purple"><div class="purple"></div><span>Purple</span> </li>-->
-    <!--                <li data-theme="blue"><div class="blue"></div><span>Blue</span> </li>-->
-    <!--                <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span> </li>-->
-    <!--                <li data-theme="green"><div class="green"></div><span>Green</span> </li>-->
-    <!--                <li data-theme="deep-orange"><div class="deep-orange"></div><span>Deep Orange</span> </li>-->
-    <!--                <li data-theme="blue-grey"><div class="blue-grey"></div><span>Blue Grey</span> </li>-->
-    <!--                <li data-theme="black"><div class="black"></div><span>Black</span> </li>-->
-    <!--                <li data-theme="blush"  class="active"><div class="blush"></div><span>Blush</span> </li>-->
-    <!--            </ul>-->
-    <!--        </div>-->
-    <!--        <div role="tabpanel" class="tab-pane" id="settings">-->
-    <!--            <div class="demo-settings">-->
-    <!--                <p>GENERAL SETTINGS</p>-->
-    <!--                <ul class="setting-list">-->
-    <!--                    <li>-->
-    <!--                        <span>Report Panel Usage</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                    <li>-->
-    <!--                        <span>Email Redirect</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox"><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                </ul>-->
-    <!--                <p>SYSTEM SETTINGS</p>-->
-    <!--                <ul class="setting-list">-->
-    <!--                    <li>-->
-    <!--                        <span>Notifications</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                    <li>-->
-    <!--                        <span>Auto Updates</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                </ul>-->
-    <!--                <p>ACCOUNT SETTINGS</p>-->
-    <!--                <ul class="setting-list">-->
-    <!--                    <li>-->
-    <!--                        <span>Offline</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox"><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                    <li>-->
-    <!--                        <span>Location Permission</span>-->
-    <!--                        <div class="switch">-->
-    <!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
-    <!--                        </div>-->
-    <!--                    </li>-->
-    <!--                </ul>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</aside>-->
-    <!-- #END# Right Sidebar -->
 </section>
 <!--Side menu and right menu -->
 
@@ -277,12 +205,14 @@
 <script src="{{ asset('backend/bundles/libscripts.bundle.js') }}"></script> <!-- Lib Scripts Plugin Js -->
 <script src="{{ asset('backend/bundles/vendorscripts.bundle.js') }}"></script> <!-- Lib Scripts Plugin Js -->
 <script src="{{ asset('backend/bundles/morphingsearchscripts.bundle.js') }}"></script> <!-- Main top morphing search -->
+<script src="{{ asset('backend/bundles/datatablescripts.bundle.js') }}"></script> <!-- Main top morphing search -->
 
 <script src="{{ asset('backend/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script> <!-- Sparkline Plugin Js -->
 <script src="{{ asset('backend/plugins/chartjs/Chart.bundle.min.js') }}"></script> <!-- Chart Plugins Js -->
 
 <script src="{{ asset('backend/bundles/mainscripts.bundle.js') }}"></script><!-- Custom Js -->
 <script src="{{ asset('backend/js/pages/charts/sparkline.min.js') }}"></script>
+<script src="{{ asset('backend/js/pages/tables/jquery-datatable.js') }}"></script>
 <script src="{{ asset('backend/js/pages/ui/modals.js') }}"></script>
 <script src="{{ asset('backend/js/pages/index.js') }}"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>

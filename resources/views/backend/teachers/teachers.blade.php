@@ -20,6 +20,7 @@
             @endcan
         </div>
     </div>
+
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
@@ -100,12 +101,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $teachers->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
     </div>
 
-    
+
 </div>
 @endsection

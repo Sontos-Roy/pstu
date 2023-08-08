@@ -39,10 +39,13 @@ if (!function_exists('getSetting')) {
 
 
 
-function getImage($folder=null,$file=null){
+function getImage($folder=null,$file=null, $type=null){
 
-
-    $defaultImage = 'images/nothing.png';
+    if(empty($type)){
+        $defaultImage = 'images/nothing.png';
+    }else{
+        $defaultImage = '';
+    }
 
     if (!empty($folder) && !empty($file)) {
         $path = 'images/' . $folder . '/' . $file;
@@ -179,3 +182,7 @@ function getAdmissions(){
     return $admissions;
 }
 
+function getKey($items, $loop){
+    $serialNumber = ($items->currentPage() - 1) * $items->perPage() + $loop->iteration;
+    return $serialNumber;
+}

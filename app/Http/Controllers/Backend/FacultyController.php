@@ -14,9 +14,15 @@ class FacultyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $this->data['faculties'] = Faculty::orderBy('id', 'DESC')->get();
+        $title = $request->title;
+        if(!empty($title)){
+            $this->data['faculties'] = Faculty::where('title','LIKE', '%'.$title.'%')->orderBy('id', 'DESC')->get();
+        }else{
+            $this->data['faculties'] = Faculty::orderBy('id', 'DESC')->get();
+        }
+        $this->data['title'] = $title;
 
         return view('backend.faculties.index', $this->data);
     }

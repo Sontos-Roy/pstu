@@ -17,6 +17,24 @@
     </div>
     <!-- Basic Examples -->
     <div class="row clearfix">
+        <div class="col-lg-7 ml-auto">
+            <form action="{{ route('admin.faculties.index') }}" method="GET">
+                <div class="row align-items-center mb-2">
+                    <div class="col-lg-8 col-5">
+                        <input type="text" class="form-control p-2 m-0" value="{{ $title }}" name="title" placeholder="Search By Faculty Name" style="border: 1px solid gray;">
+                    </div>
+                    <div class="col-lg-4 col-7 d-flex">
+                        <button class="btn m-0" type="submit">Search</button>
+                        <a href="{{ route('admin.faculties.index') }}" class="btn m-0 ml-1">Reset</a>
+                    </div>
+                </div>
+                @if (!empty($title))
+                <small>Search Result : {{ $faculties->count() }}</small>
+                @else
+                <small>Total Faculties : {{ $faculties->count() }}</small>
+                @endif
+            </form>
+        </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="body table-responsive">
@@ -29,6 +47,7 @@
                                 <th>Dean of Faculty</th>
                                 <th>Introduction</th>
                                 <th>Faculty Image</th>
+                                <th>Banner</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -41,6 +60,7 @@
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
                                 <td><img src="{{ getImage('faculties', $item->image) }}" alt="" width="100"></td>
+                                <td><img src="{{ getImage('faculties', $item->banner, 'banner') }}" alt="" width="100"></td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('admin.faculties.show', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
