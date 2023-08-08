@@ -14,14 +14,17 @@ class DepertmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $name = $request->name;
+
         $query= Department::orderBy("id", "DESC");
                 if(auth()->user()->hasRole('faculty')){
                     $query->where('faculty_id', auth()->user()->faculty_id);
                 }
-        $this->data['departments'] =$query->get();
-        
+        $this->data['departments'] =$query->paginate(20);
+        $this->data['faculties'] = Faculty::all();
+        $this->data['name'] = $name;
         return view("backend.depertments.departments", $this->data);
     }
 

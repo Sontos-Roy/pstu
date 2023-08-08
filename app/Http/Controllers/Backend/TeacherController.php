@@ -23,7 +23,7 @@ class TeacherController extends Controller
      */
     public function index(){
 
-        $this->data['teachers'] = User::orderBy('name')->paginate(20);
+        $this->data['teachers'] = User::orderBy('name')->get();
         return view('backend.teachers.teachers', $this->data);
     }
 
@@ -121,7 +121,7 @@ class TeacherController extends Controller
             return response()->json(['status'=>false, 'msg'=>$e->getMessage()]);
         }
 
-        
+
 
     }
 
@@ -197,9 +197,9 @@ class TeacherController extends Controller
             $teacher->department_id = $request->input('department_id');
             $teacher->faculty_id = $request->input('faculty_id');
             $teacher->designation_id = $request->input('designation_id');
-   
+
             $teacher->save();
-   
+
 
             if(isset($teacher->userDetails)){
                 $details = $teacher->userDetails;
