@@ -16,6 +16,19 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <select class="form-control" name="page_slug">
+                                            @foreach($types as $key=>$type)
+                                            <option value="{{ $key}}">{{ $type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
                                         <input type="text" name="title" class="form-control" placeholder="Page Title">
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class PageController extends Controller
+class PageController extends Controller 
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,9 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.add');
+        $types=getPageType();
+
+        return view('backend.pages.add', compact('types'));
     }
 
     /**
@@ -43,9 +45,7 @@ class PageController extends Controller
 
         $data['slug'] = Str::slug($request->input('title'));
         $isChecked = $request->has('is_active');
-
         $data['user_id'] = Auth::id();
-
         if($isChecked){
             $data['is_active'] = 1;
         }else{
@@ -59,27 +59,24 @@ class PageController extends Controller
         }
 
         Pages::create($data);
-
         return response()->json(['status' => true, 'msg' => 'Slider Created Successfully', 'url' => route('admin.pages.index')]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $this->data['item'] = Pages::find($id);
+    public function show(string $id){
 
+        $this->data['item'] = Pages::find($id);
         return view('backend.pages.view', $this->data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $this->data['item'] = Pages::find($id);
+    public function edit(string $id){
 
+        $this->data['item'] = Pages::find($id);
         return view('backend.pages.edit', $this->data);
     }
 
@@ -117,9 +114,7 @@ class PageController extends Controller
             $data['image'] = $filename;
         }
         $update->fill($data);
-
         $update->save();
-
 
         return response()->json(['status' => true, 'msg' => 'Slider Updated Successfully', 'url' => route('admin.pages.index')]);
     }
@@ -134,7 +129,6 @@ class PageController extends Controller
         if($slider->image){
             deleteImage("pages", $slider->image);
         }
-
         $slider->delete();
 
         return response()->json(['status' => true, 'msg' => 'Pages Deleted Successfully']);

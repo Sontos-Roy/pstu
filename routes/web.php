@@ -68,6 +68,7 @@ use App\Http\Controllers\Frontend\StudentControler;
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
 
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
+    
     Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
     Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);
     Route::resource('user-experience', UserExperienceController::class,['names'=>'user_experience']);
