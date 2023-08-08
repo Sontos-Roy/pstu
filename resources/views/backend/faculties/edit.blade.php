@@ -50,12 +50,26 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
+                                    @if ($item->image)
+                                    <img src="{{ getImage('faculties', $item->image) }}" alt="" width="100">
+                                    @endif
                                     <label for="">Image</label>
                                     <div style="border: 1px solid black;">
                                         <input type="file" class="" id="image-input" name="image">
                                         <img src="#" alt="" width="100" id="image-preview">
                                     </div>
                             </div>
+                            <div class="col-sm-12">
+                                @if ($item->banner)
+                                    <img src="{{ getImage('faculties', $item->banner) }}" alt="" width="100">
+                                    @endif
+                                    <label for="">Banner</label>
+                                    <div style="border: 1px solid black;">
+                                        <input type="file" class="" id="image-input2" name="banner">
+                                        <img src="#" alt="" width="100" id="image-preview2">
+                                    </div>
+                            </div>
+
 
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-raised g-bg-blush2">Submit</button>
