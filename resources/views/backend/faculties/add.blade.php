@@ -54,6 +54,13 @@
                                         <img src="#" alt="" width="100" id="image-preview">
                                     </div>
                             </div>
+                            <div class="col-sm-12">
+                                    <label for="">banner</label>
+                                    <div style="border: 1px solid black;">
+                                        <input type="file" class="" id="image-input2" name="banner">
+                                        <img src="#" alt="" width="100" id="image-preview2">
+                                    </div>
+                            </div>
 
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-raised g-bg-blush2">Submit</button>

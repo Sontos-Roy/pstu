@@ -507,6 +507,27 @@ $(document).ready(function() {
             $('#image-preview').removeAttr('src');
             }
         });
+        $('#image-input2').change(function(e) {
+            var file = e.target.files[0];
+
+            // Check if file is an image
+            if (file && file.type.includes('image')) {
+            var reader = new FileReader();
+
+            // Read the image file
+            reader.onload = function() {
+                var imageData = reader.result;
+
+                // Display the image preview
+                $('#image-preview2').attr('src', imageData);
+            };
+
+            reader.readAsDataURL(file);
+            } else {
+            // File is not an image
+            $('#image-preview2').removeAttr('src');
+            }
+        });
         });
 
         $(document).ready(function(){

@@ -43,7 +43,8 @@ class FacultyController extends Controller
             'user_id' => 'required',
             'short' => 'required',
             'introduction' => 'required',
-            'image' => 'required | image'
+            'image' => 'required | image',
+            'banner' => 'image'
         ]);
         $data['created_by'] = Auth::id();
 
@@ -52,6 +53,12 @@ class FacultyController extends Controller
             $filename = time().'_'.$image->getClientOriginalName();
             $image->storeAs('public/images/faculties', $filename);
             $data['image'] = $filename;
+        }
+        if($request->hasFile('banner')){
+            $banner = $request->file('banner');
+            $filename2 = time().'_'.$banner->getClientOriginalName();
+            $banner->storeAs('public/images/faculties', $filename2);
+            $data['banner'] = $filename2;
         }
 
         $data['slug'] = Str::slug($request->input('title'));
@@ -107,6 +114,16 @@ class FacultyController extends Controller
             $filename = time().'_'.$image->getClientOriginalName();
             $image->storeAs('public/images/faculties', $filename);
             $data['image'] = $filename;
+        }
+
+        if($request->hasFile('banner')){
+            if($update->banner){
+                deleteImage('faculties', $update->banner);
+            }
+                $banner = $request->file('banner');
+                $filename2 = time().'_'.$banner->getClientOriginalName();
+                $banner->storeAs('public/images/faculties', $filename2);
+                $data['banner'] = $filename2;
         }
         $data['slug'] = Str::slug($request->input('title'));
         $update->fill($data);
