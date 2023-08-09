@@ -23,8 +23,15 @@ class TeacherController extends Controller
      */
     public function index(){
 
-        $this->data['teachers'] = User::orderBy('name')->get();
-        return view('backend.teachers.teachers', $this->data);
+        $data['teachers'] = User::whereHas('roles', function($role) {
+                                                $role->where('name', '=', 'teacher');
+                                            })->with(['roles' => function($role) {
+                                                $role->where('name', '=', 'teacher');
+                                            }])
+                                            ->orderBy('name')
+                                            ->get();
+
+        return view('backend.teachers.teachers', $data);
     }
 
     /**
@@ -45,7 +52,8 @@ class TeacherController extends Controller
     public function store(Request $request){
 
 
-       $request->validate([
+        $roles=['teacher'];
+        $request->validate([
             'name' => 'required',
             'date_of_birth' => '',
             'gender' => 'required',
@@ -65,7 +73,6 @@ class TeacherController extends Controller
             'google_plus' => '',
             'email' => 'email|required',
             'password' => 'required|min:6',
-            'roles' => 'required'
         ]);
 
         DB::beginTransaction();
@@ -80,7 +87,7 @@ class TeacherController extends Controller
                 'password' => bcrypt($request->input('password')),
             ]);
 
-            $teacher->assignRole($request->input('roles'));
+            $teacher->assignRole($roles);
 
 
             $details = new UserDetail();
@@ -113,7 +120,7 @@ class TeacherController extends Controller
 
             $teacher->userDetails()->save($details);
             DB::commit();
-            return response()->json(['status'=>true, 'msg'=>'User Created Successfuly', 'url'=>route('admin.users.index')]);
+            return response()->json(['status'=>true, 'msg'=>'User Created Successfuly', 'url'=>route('admin.teachers.index')]);
 
             // all good
         } catch (\Exception $e) {
@@ -161,8 +168,9 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    
+    public function update(Request $request, string $id){
+        $roles=['teacher'];
         $request->validate([
             'name' => 'required',
             'date_of_birth' => '',
@@ -183,7 +191,6 @@ class TeacherController extends Controller
             'linkedin' => '',
             'google_plus' => '',
             'email' => 'email|required',
-            'roles' => 'required'
         ]);
 
 
@@ -217,7 +224,7 @@ class TeacherController extends Controller
                 $details->google_plus = $request->input('google_plus');
                 DB::table('model_has_roles')->where('model_id',$id)->delete();
 
-                $teacher->assignRole($request->input('roles'));
+                $teacher->assignRole($roles);
 
 
                 if ($request->hasFile('image')) {
@@ -286,9 +293,9 @@ class TeacherController extends Controller
 
             DB::commit();
             if(Auth::id() == $teacher->id){
-                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.show', Auth::id())]);
+                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.teachers.show', Auth::id())]);
             }else{
-                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.users.index')]);
+                return response()->json(['status'=>true, 'msg'=>'User Updated Successfully', 'url'=>route('admin.teachers.index')]);
             }
         } catch (\Exception $e) {
             DB::rollback();
@@ -319,6 +326,6 @@ class TeacherController extends Controller
         $user->delete();
 
 
-        return response()->json(['status'=>true, 'msg'=>'Teachers Deleted Successfuly', 'url'=>route('admin.users.index')]);
+        return response()->json(['status'=>true, 'msg'=>'Teachers Deleted Successfuly', 'url'=>route('admin.teachers.index')]);
     }
 }

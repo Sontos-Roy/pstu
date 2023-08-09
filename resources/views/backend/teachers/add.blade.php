@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Add User</h2>
+        <h2>Add Teacher</h2>
         <small class="text-muted">Patuakhali Science &amp; Technology University</small>
     </div>
-    <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data" id="ajax_form">
+    <form action="{{ route('admin.teachers.store') }}" method="POST" enctype="multipart/form-data" id="ajax_form">
         @csrf
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -71,19 +71,7 @@
                                     </select>
                                 </div>
                             </div>
-
-
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group drop-custum">
-                                    <label for="">Select Role</label>
-                                    <select class="form-control show-tick p-2 select2 border-none" multiple name="roles[]">
-                                        <option value="">-- Role Select --</option>
-                                        @foreach ($roles as $item)
-                                            <option value="{{ $item }}" class="p-2">{{ $item }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">

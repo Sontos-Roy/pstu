@@ -10,7 +10,7 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Users</h2>
+                <h2>All Teachers</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
             @can('teachers.create')
