@@ -21,6 +21,18 @@
 
                 <div class="col-sm-6">
                     <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control show-tick p-2" name="type"> 
+                            @foreach(getPublicationType() as $key=>$type)
+                            <option value="{{ $key}}"> {{$type}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
                         <label>Description </label>
                         <textarea name="info" class="form-control" style="border: 1px solid #ccc"></textarea>
                     </div>

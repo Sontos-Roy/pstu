@@ -34,6 +34,7 @@ class UserProjectController extends Controller
             'info' => 'required',
             'link' => '',
             'date' => '',
+            'type' => '',
             'pdf_file' => 'nullable|mimes:pdf',
             'user_id' => '',
         ]);

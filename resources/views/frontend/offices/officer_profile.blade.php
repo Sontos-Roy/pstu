@@ -254,7 +254,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @forelse($item->user->publications as $pub)
+                                                    @forelse($item->user->projects as $pub)
                                                     <tr>
                                                         <td>{{$pub->subject}}</td>
                                                         <td>{{$pub->project_name}}</td>
@@ -328,16 +328,18 @@
                                         <table class="table  width100per">
                                             <tbody>
                                                 <tr>
-                                                    <th class="width10per" nowrap="">Name</th>
+                                                    <th class="width10per">Name</th>
+                                                    <th class="width10per">Type</th>
                                                     <th class="width25per">Info</th>
                                                     <th class="width7per">Date</th>
                                                     <th class="width7per">Link</th>
                                                     <th>Pdf view</th>
                                                 </tr>
 
-                                                @forelse($item->user->projects as $mem)
+                                                @forelse($item->user->publications as $mem)
                                                 <tr>
                                                     <td>{{ $mem->name}}</td>
+                                                    <td>{{ getPublicationType()[$mem->type]}}</td>
                                                     <td>{{ $mem->info}}</td>
                                                     <td>{{ $mem->date}}</td>
                                                     <td><a href="{{ $mem->link}}"> View </a>Link</td>

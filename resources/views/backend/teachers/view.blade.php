@@ -371,7 +371,8 @@
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-striped table-hover">
                                                     <tr>
-                                                        <th class="width10per" nowrap="">Name</th>
+                                                        <th class="width10per">Name</th>
+                                                        <th class="width10per">Type</th>
                                                         <th class="width25per">Info</th>
                                                         <th class="width7per"> Date</th>
                                                         <th class="width7per"> Link</th>
@@ -382,6 +383,7 @@
                                                     @foreach($teacher->publications as $cour)
                                                     <tr>
                                                         <td>{{ $cour->name}}</td>
+                                                        <td>{{ getPublicationType()[$cour->type]}}</td>
                                                         <td>{{ $cour->info}}</td>
                                                         <td>{{ $cour->date}}</td>
                                                         <td>{{ $cour->link}}</td>

@@ -91,8 +91,8 @@
                                         <a class="dropdown-item modal_btn" href="{{ route('admin.user_memberships.create')}}?user_id={{$teacher->id}}">Membership Add</a>
                                         <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_interest.create')}}?user_id={{$teacher->id}}">Research Interest Add</a>
                                         <a class="dropdown-item modal_btn" href="{{ route('admin.user_research_supervision.create')}}?user_id={{$teacher->id}}">Research Supervision Add</a>
-                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_projects.create')}}?user_id={{$teacher->id}}">Project Add</a>
-                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_publications.create')}}?user_id={{$teacher->id}}">Publication Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_projects.create')}}?user_id={{$teacher->id}}">Publication Add</a>
+                                        <a class="dropdown-item modal_btn" href="{{ route('admin.user_publications.create')}}?user_id={{$teacher->id}}">Project Add</a>
                                         <a class="dropdown-item modal_btn" href="{{ route('admin.user_course.create')}}?user_id={{$teacher->id}}">Course Add</a>
                                       </div>
                                     </div>
