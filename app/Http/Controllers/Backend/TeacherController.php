@@ -23,8 +23,15 @@ class TeacherController extends Controller
      */
     public function index(){
 
-        $this->data['teachers'] = User::orderBy('name')->get();
-        return view('backend.teachers.teachers', $this->data);
+        $data['teachers'] = User::whereHas('roles', function($role) {
+                                                $role->where('name', '=', 'teacher');
+                                            })->with(['roles' => function($role) {
+                                                $role->where('name', '=', 'teacher');
+                                            }])
+                                            ->orderBy('name')
+                                            ->get();
+
+        return view('backend.teachers.teachers', $data);
     }
 
     /**

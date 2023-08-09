@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>Edit User</h2>
+        <h2>Edit Teacher</h2>
         <small class="text-muted">Patuakhali Science &amp; Technology University</small>
     </div>
     <form action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data" id="ajax_form">
@@ -78,14 +78,15 @@
 
 
                             <div class="col-md-4 col-sm-12">
-                                    <label for="">Select Role</label>
-                                    <select class="form-control show-tick p-2 select2 border-none" multiple name="roles[]">
-                                        <option value="">-- Role Select --</option>
-                                        @foreach ($roles as $item)
-                                            <option value="{{ $item }}" {{ in_array($item, $userRole) ? 'selected': '' }} class="p-2">{{ $item }}</option>
-                                        @endforeach
-                                    </select>
+                                <label for="">Select Role</label>
+                                <select class="form-control show-tick p-2 select2 border-none" multiple name="roles[]">
+                                    <option value="">-- Role Select --</option>
+                                    @foreach ($roles as $item)
+                                        <option value="{{ $item }}" {{ in_array($item, $userRole) ? 'selected': '' }} class="p-2">{{ $item }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
