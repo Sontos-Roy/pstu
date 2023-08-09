@@ -26,7 +26,23 @@
                             <div class="info">
                                 <h4>{{ $item->user->name }}</h4>
                                 <span>(Professor &amp; Chairman)</span>
-                                {{-- <p>Department of Physics</p> --}}
+                                <h5>{{ $item->user->department ? $item->user->department->name : "" }}</h5>
+                                <h4>Research Group</h4>
+                                {{-- @if ($user->userDetails->)
+
+                                @endif --}}
+                                <a href=""><img src="{{ getImage('others', 'googlesc.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'reser.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'scopus.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <p style="padding-top: 15px;">Personal Website And CV</p>
+                                <a href=""><img src="{{ getImage('others', 'website.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'file.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <p>Social</p>
+                                <a href=""><img src="{{ getImage('others', 'facebook.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'twiter.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'in.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'youtube.png') }}" alt="" style="width: 40px; height: 40px;"></a>
+                                <a href=""><img src="{{ getImage('others', 'insta.png') }}" alt="" style="width: 40px; height: 40px;"></a>
                             </div>
                         </div>
                     </div>
