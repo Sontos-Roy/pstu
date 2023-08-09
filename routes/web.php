@@ -50,6 +50,7 @@ use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 
 
+use App\Http\Controllers\Backend\UserCourseController;
 use App\Http\Controllers\Backend\UserAwardController;
 use App\Http\Controllers\Backend\UserEducationController;
 use App\Http\Controllers\Backend\UserMembershipController;
@@ -68,6 +69,7 @@ use App\Http\Controllers\Frontend\StudentControler;
 
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
 
+    Route::resource('user-course', UserCourseController::class, ['names'=>'user_course']);
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
     Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
     Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);

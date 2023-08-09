@@ -159,33 +159,35 @@
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                       <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#Educations" aria-expanded="true" aria-controls="Educations">
-                                            Educations
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#Projects" aria-expanded="true" aria-controls="Projects">
+                                            Projects Work
                                         </button>
                                       </h5>
                                     </div>
 
-                                    <div id="Educations" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div id="Projects" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                       <div class="card-body">
                                         <div class="col-md-12">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-striped table-hover">
                                                     <tr>
-                                                        <th> Degree Name</th>
-                                                        <th> Mejor Subject </th>
-                                                        <th> Institute </th>
-                                                        <th> Country </th>
-                                                        <th> Passing Year </th>
+                                                        <th> Subject Name</th>
+                                                        <th> Project Name</th>
+                                                        <th> Source </th>
+                                                        <th> From Date </th>
+                                                        <th> To Date </th>
+                                                        <th> Collaboration </th>
                                                         <th> Action </th>
                                                     </tr>
 
-                                                    @foreach($teacher->educations as $edu)
+                                                    @foreach($teacher->projects as $pro)
                                                     <tr>
-                                                        <td>{{ $edu->degree_name}}</td>
-                                                        <td>{{ $edu->mejor_subject}}</td>
-                                                        <td>{{ $edu->institute}}</td>
-                                                        <td>{{ $edu->country}}</td>
-                                                        <td>{{ $edu->passing_year}}</td>
+                                                        <td>{{ $pro->subject}}</td>
+                                                        <td>{{ $edu->project_name}}</td>
+                                                        <td>{{ $edu->source}}</td>
+                                                        <td>{{ $edu->from_date}}</td>
+                                                        <td>{{ $edu->to_date}}</td>
+                                                        <td>{{ $edu->collaboration}}</td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -304,6 +306,92 @@
                                                         <td>{{ $edu->year}}</td>
                                                         <td>{{ $edu->country}}</td>
                                                         <td>{{ $edu->description}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#courses" aria-expanded="true" aria-controls="courses">
+                                            Course Materials
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="courses" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th class="width10per" nowrap="">Code</th>
+                                                        <th class="width25per">Title</th>
+                                                        <th class="width7per">File Uploaded Date</th>
+                                                        <th class="width7per">File Download Link</th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->courses as $cour)
+                                                    <tr>
+                                                        <td>{{ $cour->code}}</td>
+                                                        <td>{{ $cour->title}}</td>
+                                                        <td>{{ $cour->date}}</td>
+                                                        <td>
+                                                            @if($cour->document)
+                                                            <a target="_blank" href="{{getPdf('courses',$cour->document)}}">File Download</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#publications" aria-expanded="true" aria-controls="publications">
+                                            Publications
+                                        </button>
+                                      </h5>
+                                    </div>
+
+                                    <div id="publications" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                      <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th class="width10per">Name</th>
+                                                        <th class="width10per">Type</th>
+                                                        <th class="width25per">Info</th>
+                                                        <th class="width7per"> Date</th>
+                                                        <th class="width7per"> Link</th>
+                                                        <th class="width7per">Pdf View</th>
+                                                        <th> Action </th>
+                                                    </tr>
+
+                                                    @foreach($teacher->publications as $cour)
+                                                    <tr>
+                                                        <td>{{ $cour->name}}</td>
+                                                        <td>{{ getPublicationType()[$cour->type]}}</td>
+                                                        <td>{{ $cour->info}}</td>
+                                                        <td>{{ $cour->date}}</td>
+                                                        <td>{{ $cour->link}}</td>
+                                                        <td>
+                                                            @if($cour->pdf_file)
+                                                            <a target="_blank" href="{{getPdf('projects',$cour->pdf_file)}}">File Download</a>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </table>

@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\UserProject;
+use App\Models\UserCourse;
 use App\Models\User;
 
-class UserProjectController extends Controller
+
+class UserCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class UserProjectController extends Controller
     public function create(){
         $user=User::find(request('user_id'));
 
-        $view=view('backend.teachers.add_project', compact('user'))->render();
+        $view=view('backend.teachers.add_course', compact('user'))->render();
         return response()->json(['html'=>$view]);
     }
 
@@ -30,25 +31,23 @@ class UserProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'info' => 'required',
-            'link' => '',
+            'code' => 'required',
+            'title' => 'required',
             'date' => '',
-            'type' => '',
-            'pdf_file' => 'nullable|mimes:pdf',
+            'document' => 'nullable|mimes:pdf',
             'user_id' => '',
         ]);
 
-        if ($request->hasFile('pdf_file')) {
-            $image = $request->file('pdf_file');
-            $filename = time().'_'.$image->getClientOriginalName();
-            $image->storeAs('public/files/projects', $filename);
-            $data['pdf_file'] = $filename;
+        if ($request->hasFile('document')) {
+            $document = $request->file('document');
+            $filename = time().'_'.$document->getClientOriginalName();
+            $document->storeAs('public/files/courses', $filename);
+            $data['document'] = $filename;
         }
 
 
         $data['created_by'] = \Auth::id();
-        $create = UserProject::create($data);
+        $create = UserCourse::create($data);
 
         return response()->json(['status'=> true, 'msg'=> 'User Education Created Successful']);
 

@@ -184,6 +184,17 @@ function getPageType(){
     return $array;
 }
 
+function getPublicationType(){
+    $array = [
+                ''=>'',
+                'journal'=>'Journal Article',
+                'conference'=>'Conference Proceedings',
+                'book'=>'Book Chapter/book',
+    ];
+    return $array;
+}
+
+
 
 function getAdmissions(){
 

@@ -105,15 +105,21 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class,'department_id');
     }
 
-    public function publications(){
+    public function projects(){
 
         return $this->hasMany(UserPublication::class,'user_id');
     }
 
-    public function projects(){
+    public function publications(){
         
         return $this->hasMany(UserProject::class,'user_id');
     }
+
+    public function courses(){
+        
+        return $this->hasMany(UserCourse::class,'user_id');
+    }
+
 
     
 

@@ -88,11 +88,21 @@
                                         Award
                                         </a>
                                     </li>
+
+                                    
+
                                     <li>
                                         <a data-toggle="tab" href="#contactInfo" aria-expanded="false">
                                         Contact
                                         </a>
                                     </li>
+
+                                    <li>
+                                        <a data-toggle="tab" href="#course" aria-expanded="false">
+                                            Course Materials
+                                        </a>
+                                    </li>
+
                                 </ul>
                                 <div class="tab-content tab-content-info">
                                     <div id="educationInfo" class="tab-pane fade active in">
@@ -244,7 +254,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @forelse($item->user->publications as $pub)
+                                                    @forelse($item->user->projects as $pub)
                                                     <tr>
                                                         <td>{{$pub->subject}}</td>
                                                         <td>{{$pub->project_name}}</td>
@@ -318,16 +328,18 @@
                                         <table class="table  width100per">
                                             <tbody>
                                                 <tr>
-                                                    <th class="width10per" nowrap="">Name</th>
+                                                    <th class="width10per">Name</th>
+                                                    <th class="width10per">Type</th>
                                                     <th class="width25per">Info</th>
                                                     <th class="width7per">Date</th>
                                                     <th class="width7per">Link</th>
                                                     <th>Pdf view</th>
                                                 </tr>
 
-                                                @forelse($item->user->projects as $mem)
+                                                @forelse($item->user->publications as $mem)
                                                 <tr>
                                                     <td>{{ $mem->name}}</td>
+                                                    <td>{{ getPublicationType()[$mem->type]}}</td>
                                                     <td>{{ $mem->info}}</td>
                                                     <td>{{ $mem->date}}</td>
                                                     <td><a href="{{ $mem->link}}"> View </a>Link</td>
@@ -374,6 +386,42 @@
                                             </table>
                                         </div>
                                     </div>
+
+                                    <div id="course" class="tab-pane fade">
+                                        <table class="table  width100per">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="width10per">SL</th>
+                                                    <th class="width10per">Code</th>
+                                                    <th class="width25per">Title</th>
+                                                    <th class="width7per">File Uploaded Date</th>
+                                                    <th class="width7per">File Download Link</th>
+                                                </tr>
+
+                                                @forelse($item->user->courses as $key=>$cour)
+                                                <tr>
+                                                    <td>{{ $key+1}}</td>
+                                                    <td>{{ $cour->code}}</td>
+                                                    <td>{{ $cour->title}}</td>
+                                                    <td>{{ $cour->date}}</td>
+                                                    <td>
+                                                        @if($cour->document)
+                                                        <a target="_blank" href="{{getPdf('courses',$cour->document)}}">File Download</a>
+                                                        @endif
+                                                    </td>
+
+                                                </tr>
+                                                @empty
+
+                                                <tr>
+                                                    <td colspan="6" class="text-center"> No Course is found.</td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
                                     <div id="contactInfo" class="tab-pane fade">
                                         <div class="info title">
                                             <div class="col-lg-10 col-md-9 col-sm-6 col-xs-12">

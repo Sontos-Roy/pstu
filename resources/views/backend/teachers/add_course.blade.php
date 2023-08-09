@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-lg" role="document">
-  <form method="post" action="{{ route('admin.user_projects.store')}}" id="ajax_form">
+  <form method="post" action="{{ route('admin.user_course.store')}}" id="ajax_form">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
@@ -14,34 +14,15 @@
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control" style="border: 1px solid #ccc">
+                        <label>Code</label>
+                        <input type="text" name="code" class="form-control" style="border: 1px solid #ccc">
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Type</label>
-                        <select class="form-control show-tick p-2" name="type"> 
-                            @foreach(getPublicationType() as $key=>$type)
-                            <option value="{{ $key}}"> {{$type}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Description </label>
-                        <textarea name="info" class="form-control" style="border: 1px solid #ccc"></textarea>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input type="text" name="link" class="form-control" style="border: 1px solid #ccc">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control" style="border: 1px solid #ccc">
                     </div>
                 </div>
 
@@ -55,7 +36,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Pdf</label>
-                        <input type="file" class="form-control" name="pdf_file" style="border: 1px solid #ccc">
+                        <input type="file" class="form-control" name="document" style="border: 1px solid #000">
                     </div>
                 </div>
 
