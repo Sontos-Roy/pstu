@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('user-projects', UserProjectController::class,['names'=>'user_projects']);
     Route::resource('designations', DesignationController::class);
     Route::resource('noces', NocController::class);
+    Route::resource('users', UserController::class);
 
 });
 
@@ -195,7 +196,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::put('/permissions/update/{id}', [RoleController::class, 'updatePermission'])->name('permissions.update');
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
 
-    Route::resource('/users', TeacherController::class);
+    Route::resource('/teachers', TeacherController::class);
     Route::post('/user-profile/{id}', [TeacherController::class, 'userProfile'])->name('user.userProfile');
     Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);

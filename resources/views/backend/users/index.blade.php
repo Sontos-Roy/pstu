@@ -13,9 +13,9 @@
                 <h2>All Users</h2>
                 <small class="text-muted">Patuakhali Science &amp; Technology University</small>
             </div>
-            @can('teachers.create')
+            @can('users.create')
             <div>
-                <a href="{{ route('admin.teachers.create') }}" class="btn btn-raised btn-primary">Add Teacher</a>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-raised btn-primary">Add User</a>
             </div>
             @endcan
         </div>
@@ -59,15 +59,15 @@
                                 <td>{{ Str::limit($teacher->userDetails ? $teacher->userDetails->website : '', 20, '...') }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('admin.teachers.show', $teacher->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">
+                                        <a href="{{ route('admin.users.show', $teacher->id) }}" class="btn btn-info waves-effect pull-right btn-xs" style="color: white;">
                                             show
                                         </a>
-                                        @can('teachers.edit')
-                                        <a href="{{ route('admin.teachers.edit', $teacher->id) }}" class="btn btn-primary waves-effect pull-right btn-xs" style="color: white;">edit
+                                        @can('users.edit')
+                                        <a href="{{ route('admin.users.edit', $teacher->id) }}" class="btn btn-primary waves-effect pull-right btn-xs" style="color: white;">edit
                                         </a>
                                         @endcan
-                                        @can('teachers.delete')
-                                        <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" class="delete_form" method="POST">
+                                        @can('users.delete')
+                                        <form action="{{ route('admin.users.destroy', $teacher->id) }}" class="delete_form" method="POST">
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
                                         </form>
