@@ -148,6 +148,7 @@ Route::group(['as'=>'front.'], function(){
             Route::get('/intro/{slug}', 'departmentShow')->name('intro');
             Route::get('/{slug}/mission', 'missionShow')->name('mission');
             Route::get('/{slug}/calendar', 'calendarShow')->name('calendar');
+            Route::get('/{slug}/peoples', 'peoples')->name('peoples');
 
         });
     });

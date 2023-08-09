@@ -84,8 +84,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">People</a>
                         <ul class="dropdown-menu animated">
-                            <li><a href="">Faculty Members</a></li>
-                            <li><a href="">Officers and Staff</a></li>
+                            <li><a href="{{ route('front.departments.peoples', [request()->segment(2)]) }}">Faculty Members</a></li>
+                            <li><a href="{{ route('front.departments.peoples', [request()->segment(2)]) }}">Officers and Staff</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

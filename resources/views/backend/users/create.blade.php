@@ -185,13 +185,6 @@
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="google_plus" placeholder="Google Plus">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
                                         <input type="text" class="form-control" name="linkedin" placeholder="LinkedIN ">
                                     </div>
                                 </div>

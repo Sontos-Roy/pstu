@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role; 
+use Spatie\Permission\Models\Role;
 
 class TeacherController extends Controller
 {
@@ -77,7 +77,6 @@ class TeacherController extends Controller
             'youtube' => '',
             'twitter' => '',
             'linkedin' => '',
-            'google_plus' => '',
             'email' => 'email|required',
             'password' => 'required|min:6',
         ]);
@@ -110,7 +109,6 @@ class TeacherController extends Controller
             $details->youtube = $request->input('youtube');
             $details->twitter = $request->input('twitter');
             $details->linkedin = $request->input('linkedin');
-            $details->google_plus = $request->input('google_plus');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -175,7 +173,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    
+
     public function update(Request $request, string $id){
         $roles=['teacher'];
         $request->validate([
@@ -196,7 +194,6 @@ class TeacherController extends Controller
             'youtube' => '',
             'twitter' => '',
             'linkedin' => '',
-            'google_plus' => '',
             'email' => 'email|required',
         ]);
 
@@ -228,7 +225,6 @@ class TeacherController extends Controller
                 $details->youtube = $request->input('youtube');
                 $details->twitter = $request->input('twitter');
                 $details->linkedin = $request->input('linkedin');
-                $details->google_plus = $request->input('google_plus');
                 DB::table('model_has_roles')->where('model_id',$id)->delete();
 
                 $teacher->assignRole($roles);
@@ -277,7 +273,6 @@ class TeacherController extends Controller
                 $details->youtube = $request->input('youtube');
                 $details->twitter = $request->input('twitter');
                 $details->linkedin = $request->input('linkedin');
-                $details->google_plus = $request->input('google_plus');
 
                 $teacher->assignRole($request->input('roles'));
                 if ($request->hasFile('image')) {

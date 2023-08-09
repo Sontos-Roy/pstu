@@ -44,9 +44,9 @@
                                 <div class="form-group drop-custum">
                                     <select class="form-control show-tick p-2 select2" name="faculty_id">
                                         <option value="">-- Faculty Select --</option>
-                      
+
                                         @foreach ($faculties as $item)
-                                            <option value="{{ $item->id }}" 
+                                            <option value="{{ $item->id }}"
                                                 {{ $item->id == $user->faculty_id ? 'selected': '' }} class="p-2">{{ $item->title }}
                                             </option>
                                         @endforeach
@@ -57,7 +57,7 @@
                                 <div class="form-group drop-custum">
                                     <select class="form-control show-tick p-2 select2" name="department_id">
                                         <option value="">-- Department Select --</option>
-                                       
+
                                         @foreach ($departments as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $user->department_id ? 'selected': '' }} class="p-2">{{ $item->name }}</option>
                                         @endforeach
@@ -189,13 +189,6 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="twitter" placeholder="Twitter" value="{{$user->userDetails ? $user->userDetails->twitter : ''}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="google_plus" placeholder="Google Plus" value="{{$user->userDetails ? $user->userDetails->google_plus : ''}}">
                                     </div>
                                 </div>
                             </div>

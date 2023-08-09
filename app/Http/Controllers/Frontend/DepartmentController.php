@@ -12,6 +12,7 @@ use App\Models\Notice;
 use App\Models\Program;
 use App\Models\Research;
 use App\Models\Slider;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -43,6 +44,14 @@ class DepartmentController extends Controller
         $this->data['data'] = AcademicCalendar::where('department_id', $department->id)->get();
         $this->data['department'] = $department;
         return view('frontend.departments.calendar', $this->data);
+
+    }
+    function peoples($slug){
+        $department = Department::whereSlug($slug)->first();
+        $peoples = User::role('staff')->get();
+
+
+        return view('frontend.departments.peoples', compact('department', 'peoples'));
 
     }
 }

@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -162,13 +162,6 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="twitter" placeholder="Twitter">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="google_plus" placeholder="Google Plus">
                                     </div>
                                 </div>
                             </div>

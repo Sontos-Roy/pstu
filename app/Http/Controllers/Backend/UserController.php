@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role; 
+use Spatie\Permission\Models\Role;
 
 
 class UserController extends Controller
@@ -60,7 +60,6 @@ class UserController extends Controller
             'youtube' => '',
             'twitter' => '',
             'linkedin' => '',
-            'google_plus' => '',
             'email' => 'email|required',
             'password' => 'required|min:6',
             'roles' => 'required'
@@ -94,7 +93,6 @@ class UserController extends Controller
             $details->youtube = $request->input('youtube');
             $details->twitter = $request->input('twitter');
             $details->linkedin = $request->input('linkedin');
-            $details->google_plus = $request->input('google_plus');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -179,7 +177,6 @@ class UserController extends Controller
             'youtube' => '',
             'twitter' => '',
             'linkedin' => '',
-            'google_plus' => '',
             'email' => 'email|required',
             'roles' => 'required'
         ]);
@@ -212,7 +209,6 @@ class UserController extends Controller
                 $details->youtube = $request->input('youtube');
                 $details->twitter = $request->input('twitter');
                 $details->linkedin = $request->input('linkedin');
-                $details->google_plus = $request->input('google_plus');
                 DB::table('model_has_roles')->where('model_id',$id)->delete();
 
                 $teacher->assignRole($request->input('roles'));
@@ -261,7 +257,6 @@ class UserController extends Controller
                 $details->youtube = $request->input('youtube');
                 $details->twitter = $request->input('twitter');
                 $details->linkedin = $request->input('linkedin');
-                $details->google_plus = $request->input('google_plus');
 
                 $teacher->assignRole($request->input('roles'));
                 if ($request->hasFile('image')) {
