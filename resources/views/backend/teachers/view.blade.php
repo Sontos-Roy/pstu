@@ -393,10 +393,16 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <form action="{{ route('admin.user_course.destroy', $cour->id) }}" method="POST">
+
+                                                            <div class="d-flex">
+                                                                <form action="{{ route('admin.user_course.destroy', $cour->id) }}" class="delete_form" method="POST">
                                                                 @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
-                                                            </form>
+                                                                <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                                </form>
+                                                             
+                                                            </div>
+
+                                                            
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -445,10 +451,12 @@
                                                         </td>
 
                                                         <td>
-                                                            <form action="{{ route('admin.user_publications.destroy', $cour->id) }}" class="delete_form" method="POST">
-                                                                @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
-                                                            </form>
+                                                            <div class="d-flex">
+                                                                <form action="{{ route('admin.user_publications.destroy', $cour->id) }}" class="delete_form" method="POST">
+                                                                    @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                                </form>
+                                                            </div>
                                                         </td>
                                                         
                                                     </tr>
