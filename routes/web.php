@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AcademicCalendarController;
 use App\Http\Controllers\Backend\AcademicCouncilController;
 use App\Http\Controllers\Backend\AdmissionController;
+use App\Http\Controllers\Backend\AssignFacultyController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FacultyController;
@@ -60,6 +61,7 @@ use App\Http\Controllers\Backend\UserPublicationController;
 use App\Http\Controllers\Backend\UserProjectController;
 use App\Http\Controllers\Backend\DesignationController;
 use App\Http\Controllers\Backend\NocController;
+use App\Http\Controllers\Backend\PageSectionManageController;
 use App\Http\Controllers\Frontend\CommitteeController;
 use App\Http\Controllers\Frontend\ResearchController as FrontendResearchController;
 use App\Http\Controllers\Frontend\StudentControler;
@@ -203,7 +205,9 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);
+    Route::get('assign-faculty', [AssignFacultyController::class, 'AssignDeanIndex'])->name('assign.faculty.index');
     Route::resource('/settings', SettingController::class);
+    Route::resource('/page-section-manage', PageSectionManageController::class, ['names' => 'page_sections']);
     Route::post('/change-slider-status/{id}', [SliderController::class, 'changeStatus'])->name('change.slider.status');
     Route::resource('/leadership', LeaderShipController::class);
     Route::resource('/news', NewsController::class);
@@ -237,6 +241,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('change-page-status/{id}', [PageController::class, 'changeStatus'])->name('change.page.status');
     Route::get('get-departments', [BackendHomeController::class, 'getDepartments'])->name('get.departments');
     Route::resource('/admissions', AdmissionController::class);
+
 
 });
 

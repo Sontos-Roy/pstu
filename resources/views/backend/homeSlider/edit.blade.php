@@ -44,12 +44,12 @@
                                         <select class="form-control shadow-none" name="select_for" id="select_for">
                                             <option selected>Select one</option>
                                             <option value="main" {{ $data->select_for == 'main' ? 'selected' : ''}}>Main Page</option>
-                                            <option value="faculty" {{ $data->select_for == 'faculty' ? 'selected' : ''}}>Faculty Section</option>
-                                            <option value="department" {{ $data->select_for == 'department' ? 'selected' : ''}}>Department Section</option>
+                                            {{-- <option value="faculty" {{ $data->select_for == 'faculty' ? 'selected' : ''}}>Faculty Section</option>
+                                            <option value="department" {{ $data->select_for == 'department' ? 'selected' : ''}}>Department Section</option> --}}
                                         </select>
                                 </div>
                             </div>
-                            <div class="mb-3 row faculty">
+                            <div class="mb-3 row faculty d-none">
                                 <label for="" class="col-4 col-form-label">Select Faculty</label>
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="faculty_id" id="">
@@ -60,7 +60,7 @@
                                         </select>
                                 </div>
                             </div>
-                            <div class="mb-3 row department">
+                            <div class="mb-3 row department d-none">
                                 <label for="" class="col-4 col-form-label">Select Department</label>
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="department_id" id="">

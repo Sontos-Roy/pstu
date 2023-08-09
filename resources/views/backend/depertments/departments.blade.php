@@ -55,6 +55,7 @@
                                 <th>Faculty</th>
                                 <th>Brief</th>
                                 <th>Image</th>
+                                <th>Banner</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -69,6 +70,7 @@
                                 <td>{{ $item->faculty? $item->faculty->title : '' }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
                                 <td><img src="{{ getImage('departments', $item->image) }}" alt="" width="100"></td>
+                                <td><img src="{{ getImage('departments', $item->banner, 'banner') }}" alt="" width="100"></td>
                                 <td>
                                     <div class="d-flex">
                                         @can('department.view')

@@ -52,7 +52,8 @@ class DepertmentController extends Controller
             'faculty_id' => 'required',
             'short' => 'required',
             'brief' => 'required',
-            'image' => 'image'
+            'image' => 'image',
+            'banner' => 'image'
         ]);
 
         if($request->hasFile('image')){
@@ -60,6 +61,12 @@ class DepertmentController extends Controller
             $filename = time().'_'.$image->getClientOriginalName();
             $image->storeAs('public/images/departments', $filename);
             $data['image'] = $filename;
+        }
+        if($request->hasFile('banner')){
+            $banner = $request->file('banner');
+            $filename2 = time().'_'.$banner->getClientOriginalName();
+            $banner->storeAs('public/images/departments', $filename2);
+            $data['banner'] = $filename2;
         }
         $data['slug'] = Str::slug($request->input('name'));
 
@@ -101,7 +108,8 @@ class DepertmentController extends Controller
             'faculty_id' => 'required',
             'short' => 'required',
             'brief' => 'required',
-            'image' => 'image'
+            'image' => 'image',
+            'banner' => 'image'
         ]);
         $deparment = Department::find($id);
         if($request->hasFile('image')){
@@ -112,6 +120,15 @@ class DepertmentController extends Controller
             $filename = time().'_'.$image->getClientOriginalName();
             $image->storeAs('public/images/departments', $filename);
             $data['image'] = $filename;
+        }
+        if($request->hasFile('banner')){
+            if($deparment->banner){
+                deleteImage("departments", $deparment->banner);
+            }
+                $banner = $request->file('banner');
+                $filename2 = time().'_'.$banner->getClientOriginalName();
+                $banner->storeAs('public/images/departments', $filename2);
+                $data['banner'] = $filename2;
         }
         $data['slug'] = Str::slug($request->input('name'));
         $deparment->fill($data);
