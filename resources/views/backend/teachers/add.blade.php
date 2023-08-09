@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
-                                    <select class="form-control show-tick p-2" name="faculty_id">
+                                    <select class="form-control show-tick p-2 select2" name="faculty_id">
                                         <option value="">-- Faculty Select --</option>
                                         @foreach ($faculties as $faculty)
                                             <option value="{{ $faculty->id }}" class="p-2">{{ $faculty->title }}</option>
@@ -52,7 +52,7 @@
 
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
-                                    <select class="form-control show-tick p-2" name="department_id">
+                                    <select class="form-control show-tick p-2 select2" name="department_id">
                                         <option value="">-- Department Select --</option>
                                         @foreach ($departments as $item)
                                             <option value="{{ $item->id }}" class="p-2">{{ $item->name }}</option>
@@ -63,7 +63,7 @@
 
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group drop-custum">
-                                    <select class="form-control show-tick p-2" name="designation_id">
+                                    <select class="form-control show-tick p-2 select2" name="designation_id">
                                         <option value="">-- Designation Select --</option>
                                         @foreach ($designations as $item)
                                             <option value="{{ $item->id }}" class="p-2">{{ $item->name }}</option>
