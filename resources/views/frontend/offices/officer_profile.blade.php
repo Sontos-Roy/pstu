@@ -88,11 +88,21 @@
                                         Award
                                         </a>
                                     </li>
+
+                                    
+
                                     <li>
                                         <a data-toggle="tab" href="#contactInfo" aria-expanded="false">
                                         Contact
                                         </a>
                                     </li>
+
+                                    <li>
+                                        <a data-toggle="tab" href="#course" aria-expanded="false">
+                                            Course Materials
+                                        </a>
+                                    </li>
+
                                 </ul>
                                 <div class="tab-content tab-content-info">
                                     <div id="educationInfo" class="tab-pane fade active in">
@@ -374,6 +384,42 @@
                                             </table>
                                         </div>
                                     </div>
+
+                                    <div id="course" class="tab-pane fade">
+                                        <table class="table  width100per">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="width10per">SL</th>
+                                                    <th class="width10per">Code</th>
+                                                    <th class="width25per">Title</th>
+                                                    <th class="width7per">File Uploaded Date</th>
+                                                    <th class="width7per">File Download Link</th>
+                                                </tr>
+
+                                                @forelse($item->user->courses as $key=>$cour)
+                                                <tr>
+                                                    <td>{{ $key+1}}</td>
+                                                    <td>{{ $cour->code}}</td>
+                                                    <td>{{ $cour->title}}</td>
+                                                    <td>{{ $cour->date}}</td>
+                                                    <td>
+                                                        @if($cour->document)
+                                                        <a target="_blank" href="{{getPdf('courses',$cour->document)}}">File Download</a>
+                                                        @endif
+                                                    </td>
+
+                                                </tr>
+                                                @empty
+
+                                                <tr>
+                                                    <td colspan="6" class="text-center"> No Course is found.</td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
                                     <div id="contactInfo" class="tab-pane fade">
                                         <div class="info title">
                                             <div class="col-lg-10 col-md-9 col-sm-6 col-xs-12">
