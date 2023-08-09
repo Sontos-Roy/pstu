@@ -42,7 +42,7 @@
 
             @can('users.view')
             <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Users</span> 
+                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Users</span>
                 </a>
                 <ul class="ml-menu">
                     @can('users.view')
@@ -272,6 +272,10 @@
                 </ul>
             </li>
             @endif
+            @if(auth()->user()->can('settings.view') || auth()->user()->can('settings.create'))
+            <li class="{{ in_array($currentUrl, ['admin.settings.index']) ? 'active' : '' }}">
+                <a href="{{ route('admin.settings.index') }}"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
+            @endif
             @php
                 $programs = ['admin.programs.index', 'admin.programs.create'];
             @endphp
@@ -461,6 +465,10 @@
             <li class="{{ in_array($currentUrl, ['admin.images.index']) ? 'active' : '' }}"><a href="{{ route('admin.images.index') }}"><i class="zmdi zmdi-view-web"></i><span>Images</span></a></li>
             @endif
 
+            @if(auth()->user()->can('page.sections.view') || auth()->user()->can('page.sections.create'))
+            <li class="{{ in_array($currentUrl, ['admin.page_sections.index']) ? 'active' : '' }}">
+                <a href="{{ route('admin.page_sections.index') }}"><i class="zmdi zmdi-settings"></i><span>Page Section Manager</span></a></li>
+            @endif
             @if(auth()->user()->can('settings.view') || auth()->user()->can('settings.create'))
             <li class="{{ in_array($currentUrl, ['admin.settings.index']) ? 'active' : '' }}">
                 <a href="{{ route('admin.settings.index') }}"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>

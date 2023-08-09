@@ -3,46 +3,17 @@
     {{ $department->name }}
 @endpush
 @section('content')
-<div class="banner-area">
-    <div id="bootcarousel" class="carousel text-center content-less text-light top-pad-30 text-dark slide animate_text" data-ride="carousel">
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner carousel-zoom">
-            @foreach ($sliders as $key => $slide)
-            <div class="item {{ $key == 0 ? 'active': '' }} bg-cover" style="background-image: url('{{ getImage('sliders', $slide->image) }}');">
-                <div class="box-table">
-                    <div class="box-cell shadow dark">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="content">
-                                        <h2 data-animation="animated fadeInLeft">{{ $slide->head }}</h2>
-                                        @if ($slide->first_btn)
-                                        <a data-animation="animated fadeInDown" class="btn btn-light border btn-md" href="{{ $slide->first_btn_link }}">{{ $slide->first_btn }}</a>
-                                        @endif
-                                        @if ($slide->second_btn)
-                                        <a data-animation="animated fadeInUp" class="btn btn-light effect btn-md" href="{{ $slide->second_btn_link }}">{{ $slide->second_btn }}</a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="breadcrumb-area shadow dark text-center text-light" style="background-image: url('{{ $department->banner ? getImage('departments', $department->banner) : getImage('settings', getSetting('pagebanner1')) }}'); background-size: cover; background-repeat: no-repeat;padding: 103px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <h2>{{ $department->name }}</h2>
+                <ul class="breadcrumb">
+                    <li><a href="{{ route('front.home') }}"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="active">{{ $department->name }}</li>
+                </ul>
             </div>
-            @endforeach
         </div>
-        <!-- End Wrapper for slides -->
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control shadow" href="#bootcarousel" data-slide="prev">
-            <i class="fa fa-angle-left"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control shadow" href="#bootcarousel" data-slide="next">
-            <i class="fa fa-angle-right"></i>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
 </div>
 <div class="features-area bottom-less" style="margin-top: 15px;">

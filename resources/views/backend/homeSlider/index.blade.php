@@ -24,8 +24,8 @@
                                 <th>no</th>
                                 <th>Heading</th>
                                 <th>For</th>
-                                <th>Faculty</th>
-                                <th>Department</th>
+                                {{-- <th>Faculty</th>
+                                <th>Department</th> --}}
                                 <th>First Button</th>
                                 <th>Second Button</th>
                                 <th>Is Active</th>
@@ -39,8 +39,8 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->head }}</td>
                                 <td>{{ $item->select_for }}</td>
-                                <td>{{ $item->faculty ? $item->faculty->title: '' }}</td>
-                                <td>{{ $item->department ? $item->department->name: '' }}</td>
+                                {{-- <td>{{ $item->faculty ? $item->faculty->title: '' }}</td>
+                                <td>{{ $item->department ? $item->department->name: '' }}</td> --}}
                                 <td>{{ $item->first_btn }}</td>
                                 <td>{{ $item->second_btn }}</td>
                                 <td>
@@ -125,13 +125,13 @@
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="select_for" id="select_for">
                                             <option selected>Select one</option>
-                                            <option value="main">Main Page</option>
-                                            <option value="faculty">Faculty Section</option>
-                                            <option value="department">Department Section</option>
+                                            <option value="main" selected>Main Page</option>
+                                            {{-- <option value="faculty">Faculty Section</option>
+                                            <option value="department">Department Section</option> --}}
                                         </select>
                                 </div>
                             </div>
-                            <div class="mb-3 row faculty">
+                            <div class="mb-3 row faculty d-none">
                                 <label for="" class="col-4 col-form-label">Select Faculty</label>
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="faculty_id" id="">
@@ -142,7 +142,7 @@
                                         </select>
                                 </div>
                             </div>
-                            <div class="mb-3 row department">
+                            <div class="mb-3 row department d-none">
                                 <label for="" class="col-4 col-form-label">Select Department</label>
                                 <div class="col-8">
                                         <select class="form-control shadow-none" name="department_id" id="">
