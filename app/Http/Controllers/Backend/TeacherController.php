@@ -31,6 +31,11 @@ class TeacherController extends Controller
                                             if(auth()->user()->hasRole('department')){
                                                 $query->where('department_id', auth()->user()->department_id);
                                             }
+
+                                            if(auth()->user()->hasRole('teacher')){
+                                                $query->where('id', auth()->user()->id);
+                                            }
+
         $data['teachers'] =$query->orderBy('name')->get();
 
         return view('backend.teachers.teachers', $data);

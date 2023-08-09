@@ -77,6 +77,8 @@ class UserEducationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserEducation::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserEducation Deleted Successfuly']);
+        
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserProject;
+use App\Models\UserPublication;
 use App\Models\User;
 
 class UserProjectController extends Controller
@@ -84,6 +85,9 @@ class UserProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserPublication::find($id)->delete();
+        
+        return response()->json(['status'=>true, 'msg'=>'UserPublication Deleted Successfuly']);
+        
     }
 }

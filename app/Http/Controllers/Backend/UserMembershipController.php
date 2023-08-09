@@ -75,6 +75,8 @@ class UserMembershipController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserMembership::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserMembership Deleted Successfuly']);
+        
     }
 }

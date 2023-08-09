@@ -71,6 +71,12 @@
                                                         <td>{{ $edu->institute}}</td>
                                                         <td>{{ $edu->country}}</td>
                                                         <td>{{ $edu->passing_year}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_educations.destroy', $edu->id) }}" class="delete_form" method="POST">
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -110,6 +116,12 @@
                                                         <td>{{ $edu->location}}</td>
                                                         <td>{{ $edu->from_date}}</td>
                                                         <td>{{ $edu->to_date}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_experience.destroy', $edu->id) }}" class="delete_form" method="POST">
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -147,6 +159,12 @@
                                                         <td>{{ $mem->type}}</td>
                                                         <td>{{ $mem->membership_year}}</td>
                                                         <td>{{ $mem->expire_year}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_memberships.destroy', $mem->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -183,11 +201,17 @@
                                                     @foreach($teacher->projects as $pro)
                                                     <tr>
                                                         <td>{{ $pro->subject}}</td>
-                                                        <td>{{ $edu->project_name}}</td>
-                                                        <td>{{ $edu->source}}</td>
-                                                        <td>{{ $edu->from_date}}</td>
-                                                        <td>{{ $edu->to_date}}</td>
-                                                        <td>{{ $edu->collaboration}}</td>
+                                                        <td>{{ $pro->project_name}}</td>
+                                                        <td>{{ $pro->source}}</td>
+                                                        <td>{{ $pro->from_date}}</td>
+                                                        <td>{{ $pro->to_date}}</td>
+                                                        <td>{{ $pro->collaboration}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_projects.destroy', $pro->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -223,6 +247,13 @@
                                                         <td>{{ $edu->subject}}</td>
                                                         <td>{{ $edu->description}}</td>
                                                         <td>{{ $edu->research}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_research_interest.destroy', $edu->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
+
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -266,6 +297,13 @@
                                                         <td>{{ $edu->no_of_student}}</td>
                                                         <td>{{ $edu->area_research}}</td>
                                                         <td>{{ $edu->current_completion}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_research_supervision.destroy', $edu->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
+
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -306,6 +344,13 @@
                                                         <td>{{ $edu->year}}</td>
                                                         <td>{{ $edu->country}}</td>
                                                         <td>{{ $edu->description}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_awards.destroy', $edu->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
+
                                                     </tr>
                                                     @endforeach
                                                 </table>
@@ -346,6 +391,12 @@
                                                             @if($cour->document)
                                                             <a target="_blank" href="{{getPdf('courses',$cour->document)}}">File Download</a>
                                                             @endif
+                                                        </td>
+                                                        <td>
+                                                            <form action="{{ route('admin.user_course.destroy', $cour->id) }}" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -392,6 +443,14 @@
                                                             <a target="_blank" href="{{getPdf('projects',$cour->pdf_file)}}">File Download</a>
                                                             @endif
                                                         </td>
+
+                                                        <td>
+                                                            <form action="{{ route('admin.user_publications.destroy', $cour->id) }}" class="delete_form" method="POST">
+                                                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger waves-effect pull-right btn-xs" style="color: white;">delete</button>
+                                                            </form>
+                                                        </td>
+                                                        
                                                     </tr>
                                                     @endforeach
                                                 </table>
