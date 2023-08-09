@@ -272,10 +272,11 @@
                 </ul>
             </li>
             @endif
-            @if(auth()->user()->can('settings.view') || auth()->user()->can('settings.create'))
-            <li class="{{ in_array($currentUrl, ['admin.settings.index']) ? 'active' : '' }}">
-                <a href="{{ route('admin.settings.index') }}"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
-            @endif
+            @can('faculty.dean.assign')
+            <li class="{{ in_array($currentUrl, ['admin.assign.faculty.index']) ? 'active' : '' }}">
+                <a href="{{ route('admin.assign.faculty.index') }}"><i class="zmdi zmdi-settings"></i><span>Assign Facult Dean</span></a></li>
+            @endcan
+
             @php
                 $programs = ['admin.programs.index', 'admin.programs.create'];
             @endphp

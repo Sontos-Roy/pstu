@@ -5,11 +5,11 @@
     <div class="block-header">
         <div class="d-sm-flex justify-content-between">
             <div>
-                <h2>All Library                        </h2>
+                <h2>Assign Dean For Faculty</h2>
                 <small class="text-muted">Patuakhali Science & Technology University</small>
             </div>
             <div>
-                <a href="{{ route('admin.libraries.create') }}" class="btn btn-raised btn-defualt">Add Library</a>
+                <a href="{{ route('admin.assign.faculty.edit', 0) }}" class="btn modal_btn btn-info waves-effect pull-right btn-sm" style="color: white;">Assign Dean</a>
             </div>
         </div>
     </div>
@@ -22,36 +22,23 @@
                         <thead>
                             <tr>
                                 <th>no</th>
-                                <th>Name</th>
-                                <th>Website</th>
-                                <th>Details</th>
-                                <th>User</th>
-                                <th>Image</th>
-                                <th>Action</th>
+                                <th>Faculty</th>
+                                <th>Dean</th>
+                                <th>Assign</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($news as $key=>$item)
+                            @foreach ($faculties as $key=>$item)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ StrLimit($item->name, 100) }}</td>
-                                <td>{{ $item->website }}</td>
-                                <td>{{ StrLimit($item->short, 100) }}</td>
+                                <td>{{ StrLimit($item->title, 100) }}</td>
                                 <td>{{ $item->user->name }}</td>
-
-                                <td><img src="{{ getImage('libraries', $item->image) }}" width="100" alt=""></td>
                                 <td>
                                     <div class="d-flex">
-                                        
-                                        <a href="{{ route('admin.libraries.edit', $item->id) }}" class="btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
+
+                                        <a href="{{ route('admin.assign.faculty.edit', $item->id) }}" class="btn modal_btn btn-info waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
                                             edit_note
                                             </span></a>
-                                    <form action="{{ route('admin.libraries.destroy', $item->id) }}" class="delete_form" method="POST">
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger waves-effect pull-right btn-sm" style="color: white;"><span class="material-symbols-outlined">
-                                            delete
-                                            </span></button>
-                                    </form>
                                     </div>
                                 </td>
                             </tr>

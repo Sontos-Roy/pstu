@@ -205,7 +205,9 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);
     Route::resource('/faculties', FacultyController::class);
-    Route::get('assign-faculty', [AssignFacultyController::class, 'AssignDeanIndex'])->name('assign.faculty.index');
+    Route::get('/assign-faculty', [AssignFacultyController::class, 'AssignDeanIndex'])->name('assign.faculty.index');
+    Route::get('/assign-faculty/{id?}', [AssignFacultyController::class, 'AssignDeanEdit'])->name('assign.faculty.edit');
+    Route::post('/assign-faculty', [AssignFacultyController::class, 'AssignDeanStore'])->name('assign.faculty.store');
     Route::resource('/settings', SettingController::class);
     Route::resource('/page-section-manage', PageSectionManageController::class, ['names' => 'page_sections']);
     Route::post('/change-slider-status/{id}', [SliderController::class, 'changeStatus'])->name('change.slider.status');

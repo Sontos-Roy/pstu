@@ -66,7 +66,7 @@
                                     {{ getKey($departments, $loop) }}
                                 </td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->user ? $item->user->name : "" }}</td>
                                 <td>{{ $item->faculty? $item->faculty->title : '' }}</td>
                                 <td>{{ StrLimit($item->short, 100) }}</td>
                                 <td><img src="{{ getImage('departments', $item->image) }}" alt="" width="100"></td>

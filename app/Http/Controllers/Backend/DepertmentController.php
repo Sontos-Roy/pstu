@@ -48,7 +48,7 @@ class DepertmentController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'user_id' => 'required',
+            'user_id' => '',
             'faculty_id' => 'required',
             'short' => 'required',
             'brief' => 'required',
@@ -104,7 +104,7 @@ class DepertmentController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'user_id' => 'required',
+            'user_id' => '',
             'faculty_id' => 'required',
             'short' => 'required',
             'brief' => 'required',
