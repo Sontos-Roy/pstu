@@ -3,7 +3,6 @@
 use App\Models\UniversityOrdinance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Backend\AcademicCalendarController;
 use App\Http\Controllers\Backend\AcademicCouncilController;
 use App\Http\Controllers\Backend\AdmissionController;
@@ -68,7 +67,6 @@ use App\Http\Controllers\Frontend\StudentControler;
 Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], function(){
 
     Route::resource('user-awards', UserAwardController::class, ['names'=>'user_awards']);
-    
     Route::resource('user-educations', UserEducationController::class,['names'=>'user_educations']);
     Route::resource('user-memberships', UserMembershipController::class,['names'=>'user_memberships']);
     Route::resource('user-experience', UserExperienceController::class,['names'=>'user_experience']);
@@ -78,7 +76,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::resource('user-projects', UserProjectController::class,['names'=>'user_projects']);
     Route::resource('designations', DesignationController::class);
     Route::resource('noces', NocController::class);
-
+    Route::resource('users', UserController::class);
 
 });
 
@@ -114,6 +112,11 @@ Route::group(['as'=>'front.'], function(){
         Route::get('get-calendars', 'CalendarsHtml')->name('get.calendars');
         Route::get('admission/{slug}', 'getAdmissions')->name('get.admissions');
         Route::get('/noc-list', 'getNoc')->name('noc.list');
+
+        Route::get('/page-view/{slug}', 'pageView')->name('pageView');
+        Route::get('/faculty/page-view/{slug}', 'facultyPageView')->name('facultyPageView');
+        Route::get('/department/page-view/{slug}', 'departmentPageView')->name('departmentPageView');
+
     });
 
     Route::controller(FacultiesController::class)->group(function(){
@@ -193,7 +196,7 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::put('/permissions/update/{id}', [RoleController::class, 'updatePermission'])->name('permissions.update');
     Route::delete('/permissions/{id}/delete', [RoleController::class, 'deletePermission'])->name('permissions.delete');
 
-    Route::resource('/users', TeacherController::class);
+    Route::resource('/teachers', TeacherController::class);
     Route::post('/user-profile/{id}', [TeacherController::class, 'userProfile'])->name('user.userProfile');
     Route::post('password_change', [TeacherController::class, 'changePassword'])->name('changePass');
     Route::resource('/department', DepertmentController::class);

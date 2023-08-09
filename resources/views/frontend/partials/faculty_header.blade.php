@@ -73,6 +73,23 @@
                     <li class="dropdown">
                         <a href="">Contact</a>
                     </li>
+
+                    @php
+                    $items=DB::table('pages')->where('page_slug','faculty')->select('title','slug')->get();
+                    @endphp
+
+                    @if($items->count())
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other</a>
+                            <ul class="dropdown-menu animated">
+                                @foreach($items as $item)
+                                <li><a href="{{ route('front.facultyPageView',[$item->slug])}}"> {{$item->title}} </a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+
+                    @endif
+
                 </ul>
             </div>
         </div>

@@ -237,4 +237,24 @@ class HomeController extends Controller
         return view('frontend.noc_list', compact('items'));
     }
 
+    public function pageView($slug){
+
+        $item=Pages::whereSlug($slug)->first();
+        return view('frontend.page_view', compact('item'));
+    }
+
+    public function facultyPageView($slug){
+
+        $item=Pages::whereSlug($slug)->first();
+        return view('frontend.page_view', compact('item'));
+
+    }
+
+    public function departmentPageView($slug){
+
+        $item=Pages::whereSlug($slug)->first();
+        return view('frontend.page_view', compact('item'));
+
+    }
+
 }

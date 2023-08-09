@@ -41,14 +41,44 @@
             @endphp
 
             @can('users.view')
-            <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Users</span> </a>
+            <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Users</span> 
+                </a>
                 <ul class="ml-menu">
                     @can('users.view')
-                    <li class="{{ in_array($currentUrl, ['admin.users.index']) ? 'active' : '' }}"><a href="{{ route('admin.users.index') }}">All Users</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.users.index']) ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}">All Users</a>
+                    </li>
                     @endcan
 
                     @can('users.create')
-                    <li class="{{ in_array($currentUrl, ['admin.users.create']) ? 'active' : '' }}"><a href="{{ route('admin.users.create') }}">Add Users</a></li>
+                    <li class="{{ in_array($currentUrl, ['admin.users.create']) ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.create') }}">Add Users</a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+
+
+            @php
+                $teacher = ['admin.teachers.index', 'admin.teachers.create'];
+            @endphp
+
+            @can('teachers.view')
+            <li class="{{ in_array($currentUrl, $teacher) ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span> Teachers</span> </a>
+                <ul class="ml-menu">
+                    @can('teachers.view')
+                    <li class="{{ in_array($currentUrl, ['admin.teachers.index']) ? 'active' : '' }}">
+                        <a href="{{ route('admin.teachers.index') }}">All Teacher</a>
+                    </li>
+                    @endcan
+
+                    @can('teachers.create')
+                    <li class="{{ in_array($currentUrl, ['admin.teachers.create']) ? 'active' : '' }}">
+                        <a href="{{ route('admin.teachers.create') }}">Add Teacher</a>
+                    </li>
                     @endcan
                 </ul>
             </li>

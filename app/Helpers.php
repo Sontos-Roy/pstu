@@ -176,7 +176,8 @@ function getDepartment(){
 
 function getPageType(){
     $array = [
-                ''=>'Main',
+                ''=>'',
+                'main'=>'Main',
                 'faculty'=>'Faculty',
                 'department'=>'Department',
     ];

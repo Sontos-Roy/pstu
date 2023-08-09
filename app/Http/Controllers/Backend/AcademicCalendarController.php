@@ -14,7 +14,7 @@ class AcademicCalendarController extends Controller
     {
         $this->data['items'] = AcademicCalendar::orderBy('id', 'DESC')->get();
 
-        return view('backend.academic_calendars.index', $this->data);
+        return view('backend.academic_calendars.index', $this->data); 
     }
 
     /**

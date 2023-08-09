@@ -88,12 +88,12 @@ class PageController extends Controller
      */
     public function edit(string $id){
 
-        $this->data['item'] = Pages::find($id);
+        $data['item'] = Pages::find($id);
         $data['types']=getPageType();
         $data['departments']=getDepartment();
         $data['faculties']=getFaculty();
 
-        return view('backend.pages.edit', $this->data);
+        return view('backend.pages.edit', $data);
     }
 
     /**
