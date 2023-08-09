@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserPublication;
 use App\Models\User;
+use App\Models\UserProject;
 
 class UserPublicationController extends Controller
 {
@@ -75,8 +76,12 @@ class UserPublicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $id){
+        $item=UserProject::find($id);
+        deleteFile('projects', $item->pdf_file);
+        $item->delete();
+
+        return response()->json(['status'=>true, 'msg'=>'UserProject Deleted Successfuly']);
+        
     }
 }

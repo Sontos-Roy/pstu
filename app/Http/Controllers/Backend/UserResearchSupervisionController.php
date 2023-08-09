@@ -41,5 +41,12 @@ class UserResearchSupervisionController extends Controller
 
     }
 
+    public function delete($id){
+
+        UserResearchSupervision::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserResearchSupervision Deleted Successfuly']);
+
+    }
+
 
 }

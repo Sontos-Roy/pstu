@@ -78,6 +78,7 @@ class UserExperienceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserExperience::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserExperience Deleted Successfuly']);
     }
 }

@@ -47,7 +47,7 @@ class UserCourseController extends Controller
 
 
         $data['created_by'] = \Auth::id();
-        $create = UserCourse::create($data);
+        $create = UserCourse::create($data); 
 
         return response()->json(['status'=> true, 'msg'=> 'User Education Created Successful']);
 
@@ -81,8 +81,14 @@ class UserCourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $id){
+
+        $item=UserCourse::find($id);
+        
+
+        deleteFile('courses', $item->document);
+        $item->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserCourse Deleted Successfuly']);
+        
     }
 }

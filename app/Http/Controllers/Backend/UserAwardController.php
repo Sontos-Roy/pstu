@@ -75,6 +75,7 @@ class UserAwardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserAward::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserAward Deleted Successfuly']);
     }
 }

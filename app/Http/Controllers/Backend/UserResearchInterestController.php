@@ -74,6 +74,7 @@ class UserResearchInterestController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        UserResearchInterest::find($id)->delete();
+        return response()->json(['status'=>true, 'msg'=>'UserResearchInterest Deleted Successfuly']);
     }
 }

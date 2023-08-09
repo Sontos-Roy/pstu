@@ -114,27 +114,22 @@
                     </div>
                     <div class="body">
                         <div class="row clearfix">
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="phone" placeholder="Phone">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-4 col-md-4 ">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="email" placeholder="Email">
+                                        <input type="hidden" class="form-control" name="password" value="123456">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="password" placeholder="Password">
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
