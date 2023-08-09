@@ -23,13 +23,15 @@ class TeacherController extends Controller
      */
     public function index(){
 
-        $data['teachers'] = User::whereHas('roles', function($role) {
+        $query= User::whereHas('roles', function($role) {
                                                 $role->where('name', '=', 'teacher');
                                             })->with(['roles' => function($role) {
                                                 $role->where('name', '=', 'teacher');
-                                            }])
-                                            ->orderBy('name')
-                                            ->get();
+                                            }]);
+                                            if(auth()->user()->hasRole('department')){
+                                                $query->where('department_id', auth()->user()->department_id);
+                                            }
+        $data['teachers'] =$query->orderBy('name')->get();
 
         return view('backend.teachers.teachers', $data);
     }
@@ -40,7 +42,7 @@ class TeacherController extends Controller
     public function create()
     {
         $this->data['roles'] = Role::pluck('name','name')->all();
-        $this->data['departments'] = Department::all();
+        $this->data['departments'] = getDepartment();
         $this->data['faculties'] = Faculty::all();
         $this->data['designations'] = Designation::all();
         return view('backend.teachers.add', $this->data);
@@ -157,7 +159,7 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         $user = User::find($id);
-        $departments = Department::all();
+        $departments = getDepartment();
         $faculties= Faculty::all();
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
