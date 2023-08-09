@@ -276,6 +276,10 @@
             <li class="{{ in_array($currentUrl, ['admin.assign.faculty.index']) ? 'active' : '' }}">
                 <a href="{{ route('admin.assign.faculty.index') }}"><i class="zmdi zmdi-settings"></i><span>Assign Facult Dean</span></a></li>
             @endcan
+            @can('dept.head.assign')
+            <li class="{{ in_array($currentUrl, ['admin.assign.department.head.index']) ? 'active' : '' }}">
+                <a href="{{ route('admin.assign.department.head.index') }}"><i class="zmdi zmdi-settings"></i><span>Assign Department Head</span></a></li>
+            @endcan
 
             @php
                 $programs = ['admin.programs.index', 'admin.programs.create'];

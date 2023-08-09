@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AcademicCalendarController;
 use App\Http\Controllers\Backend\AcademicCouncilController;
 use App\Http\Controllers\Backend\AdmissionController;
+use App\Http\Controllers\Backend\AssignDepartmentController;
 use App\Http\Controllers\Backend\AssignFacultyController;
 use App\Http\Controllers\Backend\DepertmentController;
 use App\Http\Controllers\Backend\EventController;
@@ -208,6 +209,9 @@ Route::group(['middleware' => 'auth', 'as' => 'admin.', 'prefix'=>'admin'], func
     Route::get('/assign-faculty', [AssignFacultyController::class, 'AssignDeanIndex'])->name('assign.faculty.index');
     Route::get('/assign-faculty/{id?}', [AssignFacultyController::class, 'AssignDeanEdit'])->name('assign.faculty.edit');
     Route::post('/assign-faculty', [AssignFacultyController::class, 'AssignDeanStore'])->name('assign.faculty.store');
+    Route::get('/assign-department-head', [AssignDepartmentController::class, 'AssignDeptIndex'])->name('assign.department.head.index');
+    Route::get('/assign-department-head/{id?}', [AssignDepartmentController::class, 'AssignDeptEdit'])->name('assign.department.head.edit');
+    Route::post('/assign-department-head', [AssignDepartmentController::class, 'AssignDeptStore'])->name('assign.department.head.store');
     Route::resource('/settings', SettingController::class);
     Route::resource('/page-section-manage', PageSectionManageController::class, ['names' => 'page_sections']);
     Route::post('/change-slider-status/{id}', [SliderController::class, 'changeStatus'])->name('change.slider.status');
